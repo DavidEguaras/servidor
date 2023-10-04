@@ -5,7 +5,3 @@
     <p>Path del archivo: <?php echo __FILE__; ?></p>
     <!-- Resto del contenido del ejercicio 1 -->
 </div>
-<div class="container">
-    <h2>Enlace al archivo actual</h2>
-    <p><a href="ver_archivo.php?archivo=pagina1_content.php">Ver Contenido del Archivo</a></p>
-</div>

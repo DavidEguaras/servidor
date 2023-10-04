@@ -17,7 +17,7 @@
     justify-content: center; /* Center items vertically */
 }
 
-
+/*==========================================================HEADER==========================================================*/
 nav{
 	display: flex;
 	justify-content: space-around;
@@ -26,7 +26,6 @@ nav{
 	font-family:'SF Mono','Fira Code','Fira Mono','Roboto Mono',monospace;
 	background-color:  #000000;
 }
-
 .logo{
 	color: #ffffff ;
 	text-transform: uppercase;
@@ -39,7 +38,6 @@ nav{
 	letter-spacing: 3px;
 	font-size: 16px;
 }
-
 /*here goes the style of the links*/
 .nav-links{
 	display: flex;
@@ -65,9 +63,6 @@ nav{
 .links:hover{
 	color: #4cb495;
 }
-
-
-
 .burger{
 	display: none;
 	cursor: pointer;
@@ -116,14 +111,10 @@ nav{
 	}
 
 }
-
-
 /*HERE GOES THE NAV ANIMATIONS*/
 .nav-active{
 	transform: translateX(0%);
 }
-
-
 @keyframes navLinkFade{
 	from{
 		opacity: 0;
@@ -134,8 +125,6 @@ nav{
 		transform: translateX(0px);
 	}
 }
-
-
 .toggle .line1{
 	transform: rotate(-45deg) translate(-5px,6px);
 }
@@ -145,4 +134,4 @@ nav{
 .toggle .line3{
 	transform: rotate(45deg) translate(-5px,-6px);
 }
-
+/*==========================================================HEADER==========================================================*/
