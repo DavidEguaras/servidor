@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Actividades PHP</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php include 'header.php'; ?>
-    <?php include 'pagina1_content.php'; ?>
+    <?php include 'fragments/header.php'; ?>
+    <?php include 'content/pagina1_content.php'; ?>
+    <script src="JS/index.js"></script>
 </body>
 </html>
