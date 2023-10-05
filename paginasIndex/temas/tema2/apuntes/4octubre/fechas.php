@@ -65,4 +65,9 @@ $diferencia = strtotime($fecha2) - strtotime($fecha1);
 // Calcular la diferencia en días a partir de la diferencia en segundos
 $diasDiferencia = floor($diferencia / (60 * 60 * 24));
 echo "Diferencia en días entre $fecha1 y $fecha2: " . $diasDiferencia . " días";
+
+
+$ruta = $_SERVER['SCRIPT_FILENAME'];
+echo "<br>";
+echo "<a href='http://".$_SERVER['SERVER_ADDR']."/verCodigo.php?fichero=".$_SERVER['SCRIPT_FILENAME']."'>para ver codigo </a>";
 ?>
