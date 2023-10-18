@@ -9,7 +9,7 @@
       <ul class="nav-links">
         <li><a class="numbers">01.</a><a class="links" href="#">Temas</a></li>
         <li><a class="numbers">02.</a><a class="links" href="/tareas/tareasTema2/tarea03/indexTarea03.php">Tareas</a></li>
-        <li><a class="numbers">03.</a><a class="links" href="#">Proyectos Personales</a></li>
+        <li><a class="numbers">03.</a><a class="links" href="#">Proyectos</a></li>
       </ul>
 
       <div class="burger">

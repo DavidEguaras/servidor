@@ -23,8 +23,7 @@ function letraDni($dniSinLetra) {
     return $letra;
 }
 
-function generarNumerosAleatorios($min, $max, $cantidad, $puedenRepetirse) {
-    $numerosAleatorios = [];
+function generarNumerosAleatorios($numerosAleatorios, $min, $max, $cantidad, $puedenRepetirse) {
     if($puedenRepetirse){
         for($i = 0; $i < $cantidad; $i++){
             $numerosAleatorios[] = rand($min, $max);
@@ -40,12 +39,5 @@ function generarNumerosAleatorios($min, $max, $cantidad, $puedenRepetirse) {
             array_push($numerosAleatorios, $numeroGenerado);
         }
     }
-    return $numerosAleatorios;
 }
-?>
-
-
-
-<?php
-    
 ?>
