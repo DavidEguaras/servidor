@@ -1,4 +1,13 @@
-
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Establece la altura del cuerpo al 100% de la ventana de visualización */
+    background-image: url('fondo.jpg'); /* Ruta de tu imagen */
+    background-size: cover; /* La imagen se ajusta al tamaño de la ventana de visualización manteniendo su relación de aspecto */
+    background-position: center; /* Centra la imagen en la ventana de visualización */
+	font-family: 'Poppins', sans-serif;
+	
+}
 
 *{
 	margin: 0px;
@@ -6,14 +15,13 @@
 	box-sizing: border-box;
 }
 
-
 nav{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	min-height: 10vh;
-	font-family:'SF Mono','Fira Code','Fira Mono','Roboto Mono',monospace;
-	background-color:  #000000;
+	min-height: 8vh;
+	background-color:  rgba(255, 255, 255, .2);
+	backdrop-filter: blur(10px);
 }
 
 .logo{
@@ -22,11 +30,12 @@ nav{
 	letter-spacing: 5px;
 	font-size: 20px;
 }
+
 .logo p{
-	color:#4cb495  ;
-	text-transform: lowercase;
+	color:#ecd657  ;
 	letter-spacing: 3px;
-	font-size: 16px;
+	font-size: 18px;
+	text-transform: lowercase;
 }
 
 /*here goes the style of the links*/
@@ -38,23 +47,25 @@ nav{
 .nav-links li{
 	list-style: none;
 }
+
 .nav-links a{
 	text-decoration: none;
 	letter-spacing: 2px;
-	font-family:'SF Mono','Fira Code','Fira Mono','Roboto Mono',monospace;
 	font-weight: 200;
 	font-size: 17px;
-}
-.numbers{
-	color:#4cb495;
+	padding: 10px 20px;
+	border-radius: 45%;
 }
 .links{
-	color:#ffffff;
+	color:#ecd657;
+	transition:all 0.4s ease;
 }
 .links:hover{
-	color: #4cb495;
+	color: #ffffff;
+	backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px 18px #ecd657;
+	transition:all 0.4s ease;
 }
-
 
 
 .burger{
@@ -64,15 +75,16 @@ nav{
 .burger div{
 	width: 25px;
 	height: 3px;
-	background-color:#ffffff ;
+	background-color:#ecd657 ;
 	margin: 5px;
 	transition:all 0.4s ease;
 }
 .burger div:hover{
-	background-color: #4cb495;
+	background-color: #ecd657;
 }
 
 @media screen and (max-width: 1024px){
+
 	.nav-links{
 		width: 60%;
 	}
@@ -80,28 +92,31 @@ nav{
 @media screen and (max-width: 768px){
 	body{
 		overflow-x: hidden;
+		backdrop-filter: blur(0px);
 	}
+
 	.nav-links{
 		position: absolute;
 		right: 0px;
 		height: 92vh;
 		top: 8vh;
-		background-color: #000000;
-;
+		background-color: rgba(255, 255, 255, .2);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
 		transform: translateX(100%);
-		transition: transform 0.4s ease-in ;
+		transition: transform 0.s ease-in ;
 		
 	}
+
+
 	.nav-links li{
-		opacity: 0;
+		opacity: 0;	
 	}
 	.burger{
-	display: block;
-	color: #ffffff;
+		display: block;
+		color: #ffffff;
 	}
 
 }
