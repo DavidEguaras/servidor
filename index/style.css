@@ -6,7 +6,7 @@ body {
     background-size: cover; /* La imagen se ajusta al tamaño de la ventana de visualización manteniendo su relación de aspecto */
     background-position: center; /* Centra la imagen en la ventana de visualización */
 	font-family: 'Poppins', sans-serif;
-	
+	font-size: 10px;
 }
 
 *{
