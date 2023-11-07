@@ -3,8 +3,30 @@
 // Inicializar variables para almacenar errores
 $errores = [];
 
-// Incluir o requerir el archivo que contiene la función validarDNI
-require_once('/var/www/servidor/librerias/funciones.php'); // Ajusta la ruta según la ubicación real de funciones.php
+// Función para validar el DNI
+function validarDNI($dni) {
+    // Definir un patrón regex para un DNI válido (8 dígitos seguidos de una letra)
+    $patron = '/^\d{8}[A-Za-z]$/';
+    // Verificar si el DNI cumple con el patrón
+    if (!preg_match($patron, $dni)) {
+        return false;
+    }
+
+    // Extraer los 8 primeros dígitos del DNI
+    $numero = substr($dni, 0, 8);
+    // Extraer la letra del DNI y convertirla a mayúscula
+    $letra = strtoupper(substr($dni, 8, 1));
+    // Definir las letras válidas para el cálculo de la letra del DNI
+    $letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+    // Calcular el índice de la letra esperada basado en los dígitos del número
+    $indice = $numero % 23;
+    // Obtener la letra esperada del array de letras válidas
+    $letraCalculada = $letrasValidas[$indice];
+
+    // Comparar la letra del DNI con la letra calculada
+    return ($letra === $letraCalculada);
+}
 
 
 
@@ -15,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apellidos = $_POST["apellidos"];
     $contrasena = $_POST["contrasena"];
     $repetirContrasena = $_POST["repetir_contrasena"];
-    $fechaNacimiento = $_POST["fecha_nacimiento"];
     $dni = $_POST["dni"];
     $correo = $_POST["correo"];
+    $dni = $_POST["dni"];
 
     // Validación del nombre
     if (empty($nombre) || strlen($nombre) < 3) {
@@ -62,12 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Procesar los datos, guardar en la base de datos, etc.
 
         // Mostrar los datos incluida la foto
-        echo "Datos válidos:";
-        echo "Nombre: " . $nombre;
-        echo "Apellidos: " . $apellidos;
-        echo "Fecha de Nacimiento: " . $fechaNacimiento;
-        echo "DNI: " . $dni;
-        echo "Correo Electrónico: " . $correo;
+        echo "Datos válidos:<br>";
+        echo "<br>Nombre: " . $nombre;
+        echo "<br>Apellidos: " . $apellidos;
+        echo "<br>DNI: " . $dni;
+        echo "<br>Correo Electrónico: " . $correo;
 
         // Procesar y guardar la imagen
     } else {
