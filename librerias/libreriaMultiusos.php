@@ -35,17 +35,31 @@ function validarContrasenaSegura($contrasena) {
 }
 
 
-// Función para validar un DNI español
+// Función para validar el DNI
 function validarDNI($dni) {
+    // Definir un patrón regex para un DNI válido (8 dígitos seguidos de una letra)
     $patron = '/^\d{8}[A-Za-z]$/';
+    // Verificar si el DNI cumple con el patrón
     if (!preg_match($patron, $dni)) {
         return false;
     }
 
-    // Lógica de validación del DNI (cálculo de la letra)
+    // Extraer los 8 primeros dígitos del DNI
+    $numero = substr($dni, 0, 8);
+    // Extraer la letra del DNI y convertirla a mayúscula
+    $letra = strtoupper(substr($dni, 8, 1));
+    // Definir las letras válidas para el cálculo de la letra del DNI
+    $letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-    return true; // O false si no es válido
+    // Calcular el índice de la letra esperada basado en los dígitos del número
+    $indice = $numero % 23;
+    // Obtener la letra esperada del array de letras válidas
+    $letraCalculada = $letrasValidas[$indice];
+
+    // Comparar la letra del DNI con la letra calculada
+    return ($letra === $letraCalculada);
 }
+
 
 
 // Función para validar un correo electrónico
@@ -70,4 +84,10 @@ function validarCadenaAlfanumerica($cadena) {
 function validarURL($url) {
     return filter_var($url, FILTER_VALIDATE_URL) !== false;
 }
+
+
+
+
+
+
 ?>
