@@ -19,7 +19,7 @@ if(file_exists('fichero.txt')){
 }
 
 //Escribir el anterior. w
-echo "<h1>Escribir ficherocon w borra lo anteior</h1>";
+echo "<h1>Escribir fichero con w borra lo anteior</h1>";
 if(file_exists('fichero.txt')){
     echo "Existe";
     if(!$fp=fopen('fichero.txt','w'))
@@ -37,7 +37,7 @@ if(file_exists('fichero.txt')){
     echo "No existe";
 }
 
-echo "<h1>Escribir ficherocon a al final del fichero</h1>";
+echo "<h1>Escribir fichero con a al final del fichero</h1>";
 if(file_exists('fichero.txt')){
     echo "Existe";
     if(!$fp=fopen('fichero.txt','a'))
@@ -55,7 +55,7 @@ if(file_exists('fichero.txt')){
     echo "No existe";
 }
 
-echo "<h1>Escribir ficherocon a al final del fichero</h1>";
+echo "<h1>Escribir fichero con a al final del fichero</h1>";
 if(file_exists('fichero.txt')){
     echo "Existe";
     if(!$fp=fopen('fichero.txt','c'))

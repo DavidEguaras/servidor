@@ -7,23 +7,16 @@ $errores = [];
 function validarDNI($dni) {
     // Definir un patrón regex para un DNI válido (8 dígitos seguidos de una letra)
     $patron = '/^\d{8}[A-Za-z]$/';
-    // Verificar si el DNI cumple con el patrón
     if (!preg_match($patron, $dni)) {
         return false;
     }
-
     // Extraer los 8 primeros dígitos del DNI
     $numero = substr($dni, 0, 8);
     // Extraer la letra del DNI y convertirla a mayúscula
     $letra = strtoupper(substr($dni, 8, 1));
-    // Definir las letras válidas para el cálculo de la letra del DNI
     $letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
-
-    // Calcular el índice de la letra esperada basado en los dígitos del número
     $indice = $numero % 23;
-    // Obtener la letra esperada del array de letras válidas
     $letraCalculada = $letrasValidas[$indice];
-
     // Comparar la letra del DNI con la letra calculada
     return ($letra === $letraCalculada);
 }
@@ -41,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
     $dni = $_POST["dni"];
 
+
     // Validación del nombre
     if (empty($nombre) || strlen($nombre) < 3) {
         $errores[] = "El nombre no puede estar vacío y debe tener al menos 3 caracteres.";
@@ -52,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (count($apellidosArray) != 2 || strlen($apellidosArray[0]) < 3 || strlen($apellidosArray[1]) < 3) {
         $errores[] = "Por favor, ingresa ambos apellidos con al menos 3 caracteres cada uno.";
     }
+
 
     // Validación de contraseña
     if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/', $contrasena)) {
@@ -66,31 +61,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Validación de fecha de nacimiento (debe validarse para asegurarse de que sea una fecha válida y mayor de edad)
+    if (!preg_match('/^\d{2}-\d{2}-\d{4}$/', $fecha)) {
+        $errores[] = "La fecha no es valida.";
+        $fecha = "";
+
+    }
 
     // Validación del DNI
     if (!validarDNI($dni)) {
         $errores[] = "El DNI no es válido.";
     }
 
+
     // Validación del correo electrónico
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
         $errores[] = "El correo electrónico no es válido.";
     }
 
+
     // Validación de la imagen (tipo y que no esté vacía)
+
+
 
     // Si no hay errores, los datos son válidos
     if (empty($errores)) {
-        // Procesar los datos, guardar en la base de datos, etc.
-
         // Mostrar los datos incluida la foto
         echo "Datos válidos:<br>";
         echo "<br>Nombre: " . $nombre;
         echo "<br>Apellidos: " . $apellidos;
         echo "<br>DNI: " . $dni;
         echo "<br>Correo Electrónico: " . $correo;
-
-        // Procesar y guardar la imagen
+        //falta la imagen
     } else {
         // Mostrar los errores
         foreach ($errores as $error) {
