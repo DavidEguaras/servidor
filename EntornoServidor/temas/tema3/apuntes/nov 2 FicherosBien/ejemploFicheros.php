@@ -90,8 +90,6 @@ if(file_exists('fichero.txt')){
 }else{
     echo "No existe";
 }
-*/
-/*
 echo "<h1>Leer un fichero por lineas</h1>";
 if(file_exists('ficheroLineas.txt')){
     echo "Existe";
@@ -143,7 +141,7 @@ if(file_exists('ficheroLineas.txt')){
                     fputs($ft,$texto,strlen($texto));
                     fputs($ft,"\n",strlen('\n'));
                     $contador++;
-                 }
+                }
         }
         fclose($fp);
         fclose($ft);

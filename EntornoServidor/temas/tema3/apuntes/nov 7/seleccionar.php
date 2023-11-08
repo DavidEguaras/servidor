@@ -1,19 +1,16 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //Si el usuario pulsa escribir le dirigimos a escribir.php
     if (isset($_POST['escribir'])) {
-        // El usuario eligió escribir, redirige a escribir.php
-        header('Location: escribir.php');
+        header('Location: escribir.php?fichero=' . $_POST['file']);
         exit();
-        
     } elseif (isset($_POST['leer'])) {
         $file = $_POST['file'];
-        // Comprueba si el archivo existe
-        if (file_exists($file)) {
-            // Redirige a leer.php con el nombre del archivo como parámetro
-            header('Location: leer.php?fichero=' . $file);
+        if(file_exists($file)) {
+            header('Location: leer.php?fichero=' .  $_POST['file']);
             exit();
         } else {
-            echo "Error: El archivo no existe.";
+            echo "Error: No se a proporcianado el nombre de un archivo o este no existe";
         }
     }
 }
