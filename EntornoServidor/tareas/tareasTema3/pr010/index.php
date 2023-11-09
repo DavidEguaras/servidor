@@ -1,4 +1,12 @@
-
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //Si el usuario pulsa escribir le dirigimos a escribir.php
+    if (isset($_POST['editar'])) {
+        header('Location: editar.php?alumno=' . $_POST['alumno']);
+        exit();
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,18 +39,10 @@
         echo '<th>Eliminar</th>';
         echo '</tr>';
 
-        $row = 1;
+        $alumno = 0;
         if (($handle = fopen("notas.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-                
-                $data = array_filter($data, function($value) {
-                    return !empty($value);
-                });
 
-                if (empty($data)) {
-                    continue;
-                }
-                
                 foreach ($data as $cell) {
                     echo '<td>' . htmlspecialchars($cell) . '</td>';
                 }
@@ -50,18 +50,18 @@
                 //Boton1
                 echo '<td>';
                 echo '<form method="post" action="">'; 
-                    echo '<button type="submit" value="Modificar" name="modificar">Modificar</button>';
-                echo '</form>';
+                    echo '<button type="submit" value="editar" name="editar">Editar</button>';
+                    echo '<input type="hidden" value="' . $alumno . '" name="alumno">';
                 echo '</td>';
 
                 //Boton 2
                 echo '<td>';
-                echo '<form method="post" action="">';
-                    echo '<button type="submit" value="Eliminar"  name="eliminar">Eliminar</button>';
+                    echo '<button type="submit" value="Eliminar" name="eliminar">Eliminar</button>';
                 echo '</form>';
                 echo '</td>';
 
                 echo '</tr>';
+                $alumno++;
             }
             fclose($handle);
         }
