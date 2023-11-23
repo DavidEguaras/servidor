@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $alumno = 0;
         if (($handle = fopen("notas.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-
+                
                 foreach ($data as $cell) {
                     echo '<td>' . htmlspecialchars($cell) . '</td>';
                 }

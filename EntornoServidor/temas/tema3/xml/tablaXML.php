@@ -24,6 +24,7 @@ if (file_exists('juegos.xml')) {
     echo "<table>";
     echo '<th>Nombre del Juego</th>';
     echo '<th>Dispositivos</th>';
+    //detecta los elementos del xml, en este caso estamos tratando con
     foreach ($xml as $juego){
         echo '<tr>';
         echo '<td>' . $juego->nombre .'</td>';
