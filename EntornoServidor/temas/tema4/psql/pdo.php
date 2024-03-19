@@ -48,7 +48,7 @@ try {
     }
     
     
-} catch (PDOException $e) {
+}catch (PDOException $e) {
     echo $e -> getMessage();
 }finally{
     unset ($con);
@@ -69,4 +69,3 @@ try {
 } catch (PDOException $e) {
     echo $e -> getMessage();
 }
-
