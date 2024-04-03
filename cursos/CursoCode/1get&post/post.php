@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+</head>hola
 <body>
     <form action="practica1.php" method="post">
         <label for="username">username</label>
