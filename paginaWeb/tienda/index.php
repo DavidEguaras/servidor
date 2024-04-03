@@ -42,7 +42,7 @@
         <div class="headerBot d-flex flex-row">
             <div class="botLeft">
                 <form class="searchBox" action="#" method="post">
-                    <input type="text" name="clothing" placeholder="Search here...">
+                    <input type="text" n+ame="clothing" placeholder="Search here...">
                     <a href="#" class=""><i class="fas fa-search"></i></a>
                 </form>
             </div>

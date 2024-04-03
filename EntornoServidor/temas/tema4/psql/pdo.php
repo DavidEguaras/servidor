@@ -50,6 +50,7 @@ try {
     
 }catch (PDOException $e) {
     echo $e -> getMessage();
+    $con = null;
 }finally{
     unset ($con);
 }
