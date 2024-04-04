@@ -1,3 +1,9 @@
+<?
+    require_once ('')
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,9 +68,44 @@
     <main>
         <div class="breadCrumbs"></div>
 
-        <div class="seasonClothing"></div>
-        <div class="sales"></div>
-        <div class="sneakers"></div>
+        <div class="promos">
+
+
+            <div class="seasonClothing">
+                <div>
+                    <h2>SUMMER SEASON</h2>
+                    <button>see here</button>
+                </div>
+                <div class="summerImg">
+                    <img src="" alt="">
+                </div>
+            </div>
+
+            <div class="sales">
+                <div class="salesImg1">
+                    <img src="" alt="">
+                </div>
+                <div class="salesImg2">
+                    <img src="" alt="">
+                </div>
+                <div>
+                    <h2>SALES UP TO 75%</h2>
+                    <button>see here</button>
+                </div>
+                
+            </div>
+
+            <div class="sneakers">
+                <div class="topSneakers">
+                    <h2>new in</h2>
+                    <button>SNKRS</button>
+                </div>
+                <div class="sneakersCarrousel">
+
+                </div>
+            </div>
+        </div>
+
     </main>
 
 
