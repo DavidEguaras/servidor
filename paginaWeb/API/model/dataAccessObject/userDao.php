@@ -1,20 +1,48 @@
 <?php
+
 require_once('../config/configBD.php');
 require_once('../factory.php');
+require_once('../models/UserModel.php'); // Incluir la definición de la clase UserModel
 
 class UserDAO extends Factory
 {
-    public function createUser($username, $name, $rol, $password, $email)
+
+    private function buildUserModel($userData)
+    {
+        if ($userData) {
+            // Crear un objeto UserModel con los datos del resultado
+            return new UserModel(
+                $userData['username'],
+                $userData['name'],
+                $userData['rol'],
+                $userData['password'],
+                $userData['email'],
+                $userData['activo']
+            );
+        } else {
+            return null;
+        }
+    }
+
+    
+    public function createUser(UserModel $user)
     {
         // Consulta SQL para insertar un nuevo usuario
-        $query = "INSERT INTO USER (username, name, rol, password, email) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO USER (username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
         // Parámetros de la consulta
-        $params = array($username, $name, $rol, $password, $email);
+        $params = array(
+            $user->userName,
+            $user->name,
+            $user->rol,
+            $user->password,
+            $user->email,
+            $user->activo
+        );
         
         try {
             // Ejecutar la consulta
-            $this->executeStatement($query, $params);
-            return true; // Devolver true si la inserción es exitosa
+            $this->select($query, $params);
+            return $user; // Devolver el objeto UserModel creado
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
@@ -30,8 +58,8 @@ class UserDAO extends Factory
         try {
             // Ejecutar la consulta y devolver el resultado
             $result = $this->select($query, $params);
-            return $result;
-            
+            // Construir un objeto UserModel con los datos del resultado
+            return $this->buildUserModel($result);
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
@@ -47,10 +75,32 @@ class UserDAO extends Factory
         try {
             // Ejecutar la consulta y devolver el resultado
             $result = $this->select($query, $params);
-            return $result;
+            // Construir un objeto UserModel con los datos del resultado
+            return $this->buildUserModel($result);
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
     }
+
+    public function validateUser($username, $password)
+    //TAMBIEN HAY QUE TENER EN CUENTA SI ESTA ACTIVO O NO
+    {
+        // Consulta SQL para buscar un usuario con el nombre de usuario y contraseña proporcionados
+        $query = "SELECT * FROM USER WHERE username = ? AND password = ?";
+        // Parámetros de la consulta
+        $params = array($username, $password);
+
+        try {
+            // Ejecutar la consulta y devolver el resultado
+            $result = $this->select($query, $params);
+            // Construir un objeto UserModel con los datos del resultado
+            return $this->buildUserModel($result);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    
 }
+
 ?>

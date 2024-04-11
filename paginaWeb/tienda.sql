@@ -1,14 +1,15 @@
 DROP DATABASE tienda;
 CREATE DATABASE tienda;
 USE tienda;
-
+--agregar variables booleanas
 CREATE TABLE USER (
     USER_ID INT PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
     rol VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL
+    email VARCHAR(255) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 

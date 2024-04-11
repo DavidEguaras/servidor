@@ -1,10 +1,28 @@
 <?php
 
-require_once ('./config/config.php');
-require_once ('./config/configBD.php');
+// Incluir los archivos de configuración
+require_once 'Config/configBD.php';
+require_once 'Config/config.php';
 
-//ver la uri para saber a que controlador hay que llamar
-// index.php/usuarios/1 -> Get del usuario con id 1 -> Llamar a UserController
-//index.php/factur?fecha=2024-12-12 -> Avisar al usuario de que se ha confundido
+// Incluir los controladores y modelos necesarios
+require_once 'Controllers/UserController.php';
+require_once 'Controllers/ProductController.php';
 
+// Obtener la acción solicitada, generalmente a través de parámetros GET o POST
+$action = isset($_GET['action']) ? $_GET['action'] : 'index'; // Por ejemplo, acción index por defecto
 
+// Dependiendo de la acción solicitada, dirigir la solicitud al controlador correspondiente
+switch ($action) {
+    case 'user':
+        $userController = new UserController();
+        // Lógica para manejar las acciones relacionadas con usuarios
+        break;
+    case 'product':
+        $productController = new ProductController();
+        // Lógica para manejar las acciones relacionadas con productos
+        break;
+    case 'order':
+        $orderController = new OrderController();
+        // Lógica para manejar las acciones relacionadas con pedidos
+        break;
+}

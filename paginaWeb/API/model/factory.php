@@ -17,7 +17,7 @@ class Factory{
 
     public function select($query = "", $params = []){
         try{
-            $stmt = this->executeStatement($query, $params);
+            $stmt = $connection->executeStatement($query, $params);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }catch(PDOException $e){
