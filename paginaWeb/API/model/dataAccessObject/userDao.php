@@ -2,16 +2,18 @@
 
 require_once('../config/configBD.php');
 require_once('../factory.php');
-require_once('../models/UserModel.php'); // Incluir la definición de la clase UserModel
+require_once('../models/UserModel.php');
 
 class UserDAO extends Factory
 {
 
     private function buildUserModel($userData)
     {
+        //ver como se tratan los datos, uno o varios
         if ($userData) {
             // Crear un objeto UserModel con los datos del resultado
             return new UserModel(
+                $userData['userID'],
                 $userData['username'],
                 $userData['name'],
                 $userData['rol'],
@@ -28,9 +30,10 @@ class UserDAO extends Factory
     public function createUser(UserModel $user)
     {
         // Consulta SQL para insertar un nuevo usuario
-        $query = "INSERT INTO USER (username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO USER (userID, username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
         // Parámetros de la consulta
         $params = array(
+            $userID->userID,
             $user->userName,
             $user->name,
             $user->rol,
