@@ -1,5 +1,5 @@
 <?php
-require_once ('../config/configBD.php');
+
 
 class Factory{
     protected $connection = null;

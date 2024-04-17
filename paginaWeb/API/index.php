@@ -1,18 +1,18 @@
 <?php
 
 // Incluir los archivos de configuración
-require_once 'Config/configBD.php';
-require_once 'Config/config.php';
+require_once 'config/configBD.php';
+require_once 'config/config.php';
 
-// Incluir los controladores y modelos necesarios
-require_once 'Controllers/UserController.php';
-require_once 'Controllers/ProductController.php';
+
 
 // Obtener la acción solicitada, generalmente a través de parámetros GET o POST
-$action = isset($_GET['action']) ? $_GET['action'] : 'index'; // Por ejemplo, acción index por defecto
+
+$accion = BaseController::getUriSegments();
+
 
 // Dependiendo de la acción solicitada, dirigir la solicitud al controlador correspondiente
-switch ($action) {
+switch ($accion[1]) {
     case 'user':
         $userController = new UserController();
         // Lógica para manejar las acciones relacionadas con usuarios

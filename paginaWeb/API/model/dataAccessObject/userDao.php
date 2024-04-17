@@ -1,8 +1,8 @@
 <?php
 
-require_once('../config/configBD.php');
-require_once('../factory.php');
-require_once('../models/UserModel.php');
+
+
+
 
 class UserDAO extends Factory
 {
@@ -102,8 +102,6 @@ class UserDAO extends Factory
             throw new Exception($e->getMessage());
         }
     }
-
-    
 }
 
 ?>
