@@ -83,7 +83,7 @@ class UserDAO extends Factory
         }
     }
 
-    public static function validateUser($username, $password)
+    public static function login($username, $password)
     {
         $query = "SELECT * FROM USER WHERE username = ? AND password = ? AND activo = 1";
         $params = array($username, $password);
