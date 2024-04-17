@@ -16,12 +16,13 @@ class Factory{
 
 
     public function select($query = "", $params = []){
-        try{
-            $stmt = $connection->executeStatement($query, $params);
+        try {
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute($params);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
-        }catch(PDOException $e){
-            throw new Exception($e -> getMessage());
+        } catch(PDOException $e) {
+            throw new Exception($e->getMessage());
         }
     }
 }
