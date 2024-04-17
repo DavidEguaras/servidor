@@ -1,9 +1,4 @@
 <?php
-
-
-
-
-
 class UserDAO extends Factory
 {
 
@@ -30,7 +25,7 @@ class UserDAO extends Factory
     public function createUser(UserModel $user)
     {
         // Consulta SQL para insertar un nuevo usuario
-        $query = "INSERT INTO USER (userID, username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO USER (username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
         // Parámetros de la consulta
         $params = array(
             $userID->userID,

@@ -11,6 +11,13 @@ class UserController extends BaseController
     -Si un email tiene formato de email, 
     -Si el nombre de usuario es valido (contiene letras y numeros, sin caracteres especiales (solo barrabaja))
     -Si la contraseña es entre 10 y 20 caracteres, con mayusculas, minusculas, caracteres espciales y numeros
+
+Metodos:
+    -logout
+    -changePassword
+    -forgotPassword
+    -resetPassword
+    -deleteUserAccount (activar o desactivar)
 */
 {
     private $userDAO;
@@ -21,7 +28,7 @@ class UserController extends BaseController
         
     }
 
-    public function metodo(){
+    public function method(){
         // SWTICH METHOD
         //get
          // index.php/user toods
