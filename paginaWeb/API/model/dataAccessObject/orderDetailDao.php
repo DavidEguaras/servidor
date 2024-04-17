@@ -51,8 +51,6 @@ class OrderDetailDAO extends Factory {
             throw new Exception($e->getMessage());
         }
     }
-
-    // Otros métodos según sea necesario para tu proyecto de clase
 }
 
 ?>
