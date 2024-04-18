@@ -66,50 +66,42 @@ class UserController extends BaseController
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
 
-        // Definir los parámetros requeridos para crear un nuevo usuario
         $requiredParams = ['username', 'name', 'rol', 'password', 'email'];
 
-        // Validar los parámetros
         if (!ParamValidator::validateParams($data, $requiredParams)) {
             self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        // Validar la contraseña
         if (!ParamValidator::validatePassword($data['password'])) {
             self::sendOutput('Password must contain at least one special character', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        // Validar el email
         if (!ParamValidator::validateEmail($data['email'])) {
             self::sendOutput('Invalid email format', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        // Validar el nombre
         if (!ParamValidator::validateName($data['name'])) {
             self::sendOutput('Name must not contain numbers', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        // Validar el rol
         if (!ParamValidator::validateRole($data['rol'])) {
             self::sendOutput('Invalid role', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        // Obtener los datos necesarios para crear un nuevo usuario
         $username = $data['username'];
         $name = $data['name'];
         $rol = $data['rol'];
         $password = $data['password'];
         $email = $data['email'];
 
-        // Crear un nuevo objeto UserModel con los datos proporcionados
+
         $newUser = new UserModel($username, $name, $rol, $password, $email, true);
 
-        // Llamar al método createUser en UserDAO para agregar el nuevo usuario a la base de datos
         try {
             $result = self::$userDAO->createUser($newUser);
             if ($result) {
