@@ -1,57 +1,110 @@
 <?php
 require_once 'model/dataAccessObject/userDao.php'; // Incluir la definición de la clase UserDAO
 require_once 'model/objectModels/userModel.php'; // Incluir la definición de la clase UserModel
+require_once 'paramValidator.php'; // Incluir el validador de parámetros
 
 class UserController extends BaseController
 {
     private static $userDAO;
 
+
     public static function method()
     {
-        // SWITCH METHOD
-        // !!!!!!function validate parameters
+        // Obtener el método de la solicitud
         $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        // Realizar la acción correspondiente según el método de solicitud
         switch ($requestMethod) {
             case 'GET':
-                $resources = self::getUriSegments();
-                $filters = self::getQueryStringParams();
-
-                if (count($resources) == 2 && count($filters) == 0) {
-                    self::getAllUsers();
-                } elseif (count($resources) == 3 && count($filters) == 0) {
-                    self::getUserById($resources[2]);
-                }else {
-                    self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
-                }
+                self::handleGetRequest();
                 break;
 
             case 'POST':
-                self::createUser();
+                self::handlePostRequest();
                 break;
 
-            case 'PUT':
-                break;
-
-            case 'DELETE':
-                break;
-
+            // case 'PUT':
+            //     self::handlePutRequest();
+            //     break;
+            
             default:
                 self::sendOutput('Invalid request method', array('HTTP/1.1 405 Method Not Allowed'));
                 break;
         }
     }
 
+    private static function handleGetRequest()
+    {
+        // Obtener los segmentos de la URI y los parámetros de la cadena de consulta
+        $resources = self::getUriSegments();
+        $filters = self::getQueryStringParams();
+    
+        // Realizar acciones según los recursos y los filtros
+        if (count($resources) == 2 && count($filters) == 0) {
+            self::getAllUsers();
+        } elseif (count($resources) == 3 && count($filters) == 0) {
+            self::getUserById($resources[2]);
+        } else {
+            self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
+        }
+    }
+    
+    private static function handlePostRequest()
+    {
+        self::createUser();
+    }
+    
+    /*
+    private static function handlePutRequest()
+    {
+        //Si agregamos un metodo put, implementamos aqui la logica
+    }
+    */
+
     public static function createUser()
     {
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
-        
+
+        // Definir los parámetros requeridos para crear un nuevo usuario
+        $requiredParams = ['username', 'name', 'rol', 'password', 'email'];
+
+        // Validar los parámetros
+        if (!ParamValidator::validateParams($data, $requiredParams)) {
+            self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
+        // Validar la contraseña
+        if (!ParamValidator::validatePassword($data['password'])) {
+            self::sendOutput('Password must contain at least one special character', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
+        // Validar el email
+        if (!ParamValidator::validateEmail($data['email'])) {
+            self::sendOutput('Invalid email format', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
+        // Validar el nombre
+        if (!ParamValidator::validateName($data['name'])) {
+            self::sendOutput('Name must not contain numbers', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
+        // Validar el rol
+        if (!ParamValidator::validateRole($data['rol'])) {
+            self::sendOutput('Invalid role', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
         // Obtener los datos necesarios para crear un nuevo usuario
-        $username = isset($data['username']) ? $data['username'] : null;
-        $name = isset($data['name']) ? $data['name'] : null;
-        $rol = isset($data['rol']) ? $data['rol'] : null;
-        $password = isset($data['password']) ? $data['password'] : null;
-        $email = isset($data['email']) ? $data['email'] : null;
+        $username = $data['username'];
+        $name = $data['name'];
+        $rol = $data['rol'];
+        $password = $data['password'];
+        $email = $data['email'];
 
         // Crear un nuevo objeto UserModel con los datos proporcionados
         $newUser = new UserModel($username, $name, $rol, $password, $email, true);
@@ -91,14 +144,22 @@ class UserController extends BaseController
 
     public static function loginUser()
     {
-        $data = self::getUriSegments();
-        // Obtener los datos necesarios para iniciar sesión
-        $username = isset($data[2]) ? $data[2] : null;
-        $password = isset($data[3]) ? $data[3] : null;
+        $data = file_get_contents('php://input');
+        $data = json_decode($data, true);
+
+        // Validar los parámetros
+        $requiredParams = ['username', 'password'];
+        if (!ParamValidator::validateParams($data, $requiredParams)) {
+            self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
+        $username = $data['username'];
+        $password = $data['password'];
 
         try {
             $user = self::$userDAO->login($username, $password);
-            
+
             if ($user && $user->isActive()) {
                 self::sendOutput('Login exitoso', array('HTTP/1.1 200 OK'));
             } else {
@@ -108,6 +169,7 @@ class UserController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
+
 
     public static function changePassword($userId, $newPassword)
     {
@@ -151,6 +213,4 @@ class UserController extends BaseController
         }
     }
 }
-
-
 ?>
