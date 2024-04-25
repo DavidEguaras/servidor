@@ -8,7 +8,6 @@ class UserDAO extends Factory
         if ($userData) {
             // Crear un objeto UserModel con los datos del resultado
             return new UserModel(
-                $userData['userID'],
                 $userData['username'],
                 $userData['name'],
                 $userData['rol'],
@@ -28,7 +27,6 @@ class UserDAO extends Factory
         $query = "INSERT INTO USER (username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
         // Parámetros de la consulta
         $params = array(
-            $userID->userID,
             $user->userName,
             $user->name,
             $user->rol,
