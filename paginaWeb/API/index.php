@@ -3,22 +3,24 @@
 // Incluir los archivos de configuración
 require_once 'config/configBD.php';
 require_once 'config/config.php';
-require_once 'controllers/UserController.php';
-require_once 'controllers/ProductController.php';
-require_once 'controllers/ProductTypeController.php';
-require_once 'controllers/OrderController.php';
-require_once 'controllers/OrderDetailController.php';
-require_once 'controllers/CartController.php';
+require_once 'controllers/userController.php';
+require_once 'controllers/productController.php';
+require_once 'controllers/productTypeController.php';
+require_once 'controllers/ordersController.php';
+require_once 'controllers/orderDetailController.php';
+require_once 'controllers/cartController.php';
+require_once 'controllers/baseController.php';
 
 
 
 // Obtener la acción solicitada, generalmente a través de parámetros GET o POST
-$accion = isset($_GET['action']) ? $_GET['action'] : null;
+$accion = BaseController::getUriSegments();
 
-// Dependiendo de la acción solicitada, dirigir la solicitud al controlador correspondiente
-switch ($accion) {
+
+switch ($accion[1]) {
     case 'user':
         $userController = new UserController();
+        $userController -> method();
         // Lógica para manejar las acciones relacionadas con usuarios
         break;
     case 'product':

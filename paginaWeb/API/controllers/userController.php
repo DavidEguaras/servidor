@@ -37,16 +37,34 @@ Metodos:
 
          //post
          //llamo a la funcion que valide
-
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        switch ($requestMethod) {
+            case 'GET':
+               
+                break;
+            case 'POST':
+                
+                break;
+            case 'PUT':
+                
+                break;
+            case 'DELETE':
+                
+                break;
+            default:
+                // Manejar cualquier otro método de solicitud
+                break;
+        }
+        
         
     
     }
 
     public function createUser()
     {
-        $datos = file_get_contents('php://input');
-        $datos = json_decode($datos,true);
-        print_r($datos);
+        $data = file_get_contents('php://input');
+        $data = json_decode($data,true);
+        print_r($data);
         // Obtener los datos necesarios para crear un nuevo usuario
         // Validar los datos(array asociativo)
         $username = isset($data[2]) ? $data[2] : null;
