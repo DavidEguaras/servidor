@@ -14,12 +14,12 @@ class BaseController
         return $uri;
     }
 
-    protected function getQueryStringParams()
+    public static function getQueryStringParams()
     {
         return parse_str($_SERVER['QUERY_STRING'], $query);
     }
 
-    protected function sendOutput($data, $httpHeaders=array())
+    public static function sendOutput($data, $httpHeaders=array())
     {
         header_remove('Set-Cookie');
         if (is_array($httpHeaders) && count($httpHeaders)) {

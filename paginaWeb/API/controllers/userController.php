@@ -19,13 +19,12 @@ Metodos:
     -resetPassword
     -deleteUserAccount (activar o desactivar)
 */
+
 {
     private $userDAO;
 
     public function __construct()
     {
-        //$userDAO = new UserDAO();
-        
     }
 
     public function method(){
@@ -40,19 +39,30 @@ Metodos:
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         switch ($requestMethod) {
             case 'GET':
-               
+                $resources = $this->getUriSegments();
+                $filters = $this->getQueryStringParams();
+                
+                if(count($resources) == 2 && count($filters) == 0){
+                    UserDAO::getAllUsers();
+                }elseif(count($resources) == 3 && filters == 2){
+                    UserDao::getUserById();
+                }
                 break;
+
             case 'POST':
-                
+
                 break;
-            case 'PUT':
-                
+
+            case 'PUT': 
+
                 break;
+
             case 'DELETE':
-                
+
                 break;
+
             default:
-                // Manejar cualquier otro método de solicitud
+                echo('ERROR')
                 break;
         }
         
