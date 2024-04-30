@@ -17,7 +17,7 @@ class OrderDetailDAO extends Factory {
     }
 
     // Método para crear un nuevo detalle de orden en la base de datos
-    public static function createOrderDetail(orderDetail $orderDetail) {
+    public static function createOrderDetail($orderDetail) {
         $query = "INSERT INTO OrderDetail (detailID, quantity, totalPrice, orderID, productID) VALUES (?, ?, ?, ?, ?)";
         $params = array(
             $orderDetail->detailID,

@@ -17,7 +17,7 @@ class OrderDAO extends Factory {
     }
 
     // Método para crear una nueva orden en la base de datos
-    public static function createOrder(Order $order) {
+    public static function createOrder($order) {
         $query = "INSERT INTO `Order` (orderID, orderDate, direction, payment, userID) VALUES (?, ?, ?, ?, ?)";
         $params = array(
             $order->orderID,

@@ -19,7 +19,7 @@ class UserDAO extends Factory
     }
 
     
-    public static function createUser(UserModel $user)
+    public static function createUser($user)
     {
         $query = "INSERT INTO USER (username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
         $params = array(
@@ -95,13 +95,6 @@ class UserDAO extends Factory
             throw new Exception($e->getMessage());
         }
     }
-
-    public static function logout()
-    {
-            // Lógica para cerrar sesión del usuario
-            // Esto puede incluir la eliminación de cookies o datos de sesión
-    }
-
     public static function changePassword($userId, $newPassword)
     {
         $query = "UPDATE USER SET password = ? WHERE USER_ID = ?";
@@ -110,20 +103,6 @@ class UserDAO extends Factory
         try {
             self::select($query, $params);
             // Devuelve true si la contraseña se cambió correctamente
-            return true;
-        } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
-
-    public static function resetPassword($userId, $newPassword)
-    {
-        $query = "UPDATE USER SET password = ? WHERE USER_ID = ?";
-        $params = array($newPassword, $userId);
-        
-        try {
-            self::select($query, $params);
-            // Devuelve true si la contraseña se restableció correctamente
             return true;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
