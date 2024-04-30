@@ -1,0 +1,7 @@
+-Pantallas:
+    Agregar a figma 
+    -pantalla de producto
+    -pantalla de perfil usuario (con sus pedidos, direccion etc)
+    -pantalla de pedido (pedido realizado!)
+    -terminar el carrito
+    
