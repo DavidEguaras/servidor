@@ -9,6 +9,7 @@ class UserController extends BaseController
     public static function method()
     {
         // SWITCH METHOD
+        // !!!!!!function validate parameters
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         switch ($requestMethod) {
             case 'GET':
@@ -106,12 +107,6 @@ class UserController extends BaseController
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
-    }
-
-    public static function logout()
-    {
-        // Lógica para cerrar sesión del usuario
-        // Esto puede incluir la eliminación de cookies o datos de sesión
     }
 
     public static function changePassword($userId, $newPassword)

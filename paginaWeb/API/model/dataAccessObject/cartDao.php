@@ -61,6 +61,7 @@ class CartDAO extends Factory {
         }
     }
 
+    //revisar
     public static function deleteCart($cartID) {
         $query = "DELETE FROM Cart WHERE cartID = ?";
         $params = array($cartID);
