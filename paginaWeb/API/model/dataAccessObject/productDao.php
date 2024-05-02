@@ -18,7 +18,7 @@ class ProductDAO extends Factory {
     }
 
     // Método para crear un nuevo producto en la base de datos
-    public static function createProduct(Product $product) {
+    public static function createProduct($product) {
         $query = "INSERT INTO Product (productID, color, size, stock, imageRoute, productTypeID) VALUES (?, ?, ?, ?, ?, ?)";
         $params = array(
             $product->productID,

@@ -18,7 +18,7 @@ class ProductTypeDAO extends Factory {
     }
 
     // Método para crear un nuevo tipo de producto en la base de datos
-    public static function createProductType(productTypeModel $productType) {
+    public static function createProductType($productType) {
         $query = "INSERT INTO ProductType (ptID, category, name, price, brand, description) VALUES (?, ?, ?, ?, ?, ?)";
         $params = array(
             $productType->ptID,
@@ -51,7 +51,7 @@ class ProductTypeDAO extends Factory {
     }
 
     // Método para actualizar la información de un tipo de producto en la base de datos
-    public static function updateProductType(productTypeModel $productType) {
+    public static function updateProductType($productType) {
         $query = "UPDATE ProductType SET category = ?, name = ?, price = ?, brand = ?, description = ? WHERE ptID = ?";
         $params = array(
             $productType->category,
