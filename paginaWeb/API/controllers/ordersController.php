@@ -52,13 +52,13 @@ class OrderController extends BaseController
         self::createOrder();
     }
  
-    private static function handlePutRequest(){
+    // private static function handlePutRequest(){
  
-    }
+    // }
  
-    private static function handlePatchRequest(){
+    // private static function handlePatchRequest(){
  
-    }
+    // }
  
     private static function handleDeleteRequest(){
         $resources = self::getUriSegments();
