@@ -1,8 +1,7 @@
 <?php
 require_once 'model/dataAccessObject/userDao.php'; // Incluir la definición de la clase UserDAO
 require_once 'model/objectModels/userModel.php'; // Incluir la definición de la clase UserModel
-require_once 'validators/generalValidator.php'; // Incluir el validador de parámetros
-require_once 'validators/userValidator.php'; // Incluir el validador de parámetros
+require_once 'validators/paramValidator.php'; // Incluir el validador de parámetros
 
 class UserController extends BaseController
 {
@@ -70,27 +69,27 @@ class UserController extends BaseController
         $error = "";
         $requiredParams = ['username', 'name', 'rol', 'password', 'email'];
 
-        if (!GeneralValidator::validateParams($data, $requiredParams, $error)) {
+        if (!ParamValidator::validateParams($data, $requiredParams, $error)) {
             self::sendOutput('Missing required parameters "' . $error .'"', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!UserValidator::validatePassword($data['password'])) {
+        if (!ParamValidator::validatePassword($data['password'])) {
             self::sendOutput('Password must contain at least one special character', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!UserValidator::validateEmail($data['email'])) {
+        if (!ParamValidator::validateEmail($data['email'])) {
             self::sendOutput('Invalid email format', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!UserValidator::validateName($data['name'])) {
+        if (!ParamValidator::validateName($data['name'])) {
             self::sendOutput('Name must not contain numbers', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!UserValidator::validateRole($data['rol'])) {
+        if (!ParamValidator::validateRole($data['rol'])) {
             self::sendOutput('Invalid role', array('HTTP/1.1 400 Bad Request'));
             return;
         }
@@ -143,7 +142,7 @@ class UserController extends BaseController
 
         // Validar los parámetros
         $requiredParams = ['username', 'password'];
-        if (!UserValidator::validateParams($data, $requiredParams)) {
+        if (!ParamValidator::validateParams($data, $requiredParams)) {
             self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
             return;
         }
