@@ -1,7 +1,7 @@
 <?php
 require_once 'model/dataAccessObject/ordersDao.php'; // Incluir la definición de la clase OrderDAO
 require_once 'model/objectModels/ordersModel.php'; // Incluir la definición de la clase OrderModel
-
+require_once 'paramValidators/paramValidator.php';
 class OrderController extends BaseController
 {
     private static $orderDAO;
@@ -11,52 +11,87 @@ class OrderController extends BaseController
         // SWITCH METHOD
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         switch ($requestMethod) {
+
             case 'GET':
-                $resources = self::getUriSegments();
-                $filters = self::getQueryStringParams();
-
-                if (count($resources) == 3 && count($filters) == 0) {
-                    self::getOrderById($resources[2]);
-                } elseif (count($resources) == 4 && count($filters) == 0 && $resources[3] == 'user') {
-                    self::getOrdersByUserId($resources[2]);
-                } else {
-                    self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
-                }
+                self::handleGetRequest();
                 break;
-
             case 'POST':
-                self::createOrder();
+                self::handlePostRequest();
                 break;
-
+            case 'PUT':
+                self::handlePutRequest();
+                break;
+            case 'PATCH':
+                self::handlePatchRequest();
+                break;
             case 'DELETE':
-                $resources = self::getUriSegments();
-                if (count($resources) == 3) {
-                    self::deleteOrderById($resources[2]);
-                } else {
-                    self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
-                }
-                break;
-
+                self::handleDeleteRequest();
+                break;  
             default:
                 self::sendOutput('Invalid request method', array('HTTP/1.1 405 Method Not Allowed'));
                 break;
         }
     }
 
+
+    //=============================REQUEST HANDLERS=============================
+     private static function handleGetRequest(){
+        $resources = self::getUriSegments();
+        $filters = self::getQueryStringParams();
+
+        if (count($resources) == 3 && count($filters) == 0) {
+            self::getOrderById($resources[2]);
+        } elseif (count($resources) == 4 && count($filters) == 0 && $resources[3] == 'user') {
+            self::getOrdersByUserId($resources[2]);
+        } else {
+            self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
+        }
+     }
+ 
+    private static function handlePostRequest(){
+        self::createOrder();
+    }
+ 
+    private static function handlePutRequest(){
+ 
+    }
+ 
+    private static function handlePatchRequest(){
+ 
+    }
+ 
+    private static function handleDeleteRequest(){
+        $resources = self::getUriSegments();
+        if (count($resources) == 3) {
+            self::deleteOrderById($resources[2]);
+        } else {
+            self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
+        }
+    }
+    //=============================!REQUEST HANDLERS=============================
+
+
+
     public static function createOrder()
     {
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
+        $error = "";
+
+        $requiredParams = ['orderDate', 'direction','payment', 'userID'];
+
+        if(!ParamValidator::validateParams($data, $requiredParams, $error)){
+            self::sendOutput('Missing required paramaters "' .$error . '"', array('HTTP/1.1 400 Bad Request'));
+        }
         
         // Obtener los datos necesarios para crear una nueva orden
-        $orderID = isset($data['orderID']) ? $data['orderID'] : null;
-        $orderDate = isset($data['orderDate']) ? $data['orderDate'] : null;
-        $direction = isset($data['direction']) ? $data['direction'] : null;
-        $payment = isset($data['payment']) ? $data['payment'] : null;
-        $userID = isset($data['userID']) ? $data['userID'] : null;
+        $orderDate = $data['orderDate'];
+        $direction = $data['direction'];
+        $payment = $data['payment'];
+        $userID = $data['userID'];
 
         // Crear un nuevo objeto OrderModel con los datos proporcionados
-        $newOrder = new OrderModel($orderID, $orderDate, $direction, $payment, $userID);
+        $newOrder = new OrderModel($orderDate, $direction, $payment, $userID);
 
         // Llamar al método createOrder en OrderDAO para agregar la nueva orden a la base de datos
         try {
