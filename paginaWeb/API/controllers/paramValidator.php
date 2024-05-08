@@ -20,15 +20,7 @@ class ParamValidator
         return true;
     }
 
-
-    public static function validateEmail($email)
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return false;
-        }
-        return true;
-    }
-
+    //validarEmail
 
     public static function validateName($name)
     {
