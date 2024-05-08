@@ -1,17 +1,6 @@
 <?php
-class ParamValidator
+class UserValidator 
 {
-    public static function validateParams($data, $requiredParams)
-    {
-        foreach ($requiredParams as $param) {
-            if (!isset($data[$param]) || empty($data[$param])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
     public static function validatePassword($password)
     {
         if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
@@ -20,7 +9,7 @@ class ParamValidator
         return true;
     }
 
-    //validarEmail
+    //validateEmail
 
     public static function validateName($name)
     {
@@ -38,5 +27,6 @@ class ParamValidator
         }
         return true;
     }
+
 }
 ?>

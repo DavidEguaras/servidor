@@ -1,7 +1,8 @@
 <?php
 require_once 'model/dataAccessObject/userDao.php'; // Incluir la definición de la clase UserDAO
 require_once 'model/objectModels/userModel.php'; // Incluir la definición de la clase UserModel
-require_once 'paramValidator.php'; // Incluir el validador de parámetros
+require_once 'validators/generalValidator.php'; // Incluir el validador de parámetros
+require_once 'validators/userValidator.php'; // Incluir el validador de parámetros
 
 class UserController extends BaseController
 {
@@ -66,29 +67,30 @@ class UserController extends BaseController
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
 
+        $error = "";
         $requiredParams = ['username', 'name', 'rol', 'password', 'email'];
 
-        if (!ParamValidator::validateParams($data, $requiredParams)) {
-            self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
+        if (!GeneralValidator::validateParams($data, $requiredParams, $error)) {
+            self::sendOutput('Missing required parameters "' . $error .'"', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!ParamValidator::validatePassword($data['password'])) {
+        if (!UserValidator::validatePassword($data['password'])) {
             self::sendOutput('Password must contain at least one special character', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!ParamValidator::validateEmail($data['email'])) {
+        if (!UserValidator::validateEmail($data['email'])) {
             self::sendOutput('Invalid email format', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!ParamValidator::validateName($data['name'])) {
+        if (!UserValidator::validateName($data['name'])) {
             self::sendOutput('Name must not contain numbers', array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        if (!ParamValidator::validateRole($data['rol'])) {
+        if (!UserValidator::validateRole($data['rol'])) {
             self::sendOutput('Invalid role', array('HTTP/1.1 400 Bad Request'));
             return;
         }
@@ -141,7 +143,7 @@ class UserController extends BaseController
 
         // Validar los parámetros
         $requiredParams = ['username', 'password'];
-        if (!ParamValidator::validateParams($data, $requiredParams)) {
+        if (!UserValidator::validateParams($data, $requiredParams)) {
             self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
             return;
         }
