@@ -1,2 +1,9 @@
 -Terminar controllers
 -Repasar el codigo
+
+
+https://www.youtube.com/watch?v=BrUKQ1n7MKQ Requests handling
+
+PDO https://www.youtube.com/watch?v=3PAKPwKJnKM
+
+Curso Completo: https://www.youtube.com/watch?v=fw5ObX8P6as
