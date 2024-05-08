@@ -1,7 +1,6 @@
 <?php
 
 class ProductDAO extends Factory {
-    // Método para construir un objeto Product a partir de los datos obtenidos de la base de datos
     public static function buildProductModel($productData) {
         if ($productData) {
             return new Product(

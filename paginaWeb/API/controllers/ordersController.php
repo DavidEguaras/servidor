@@ -34,7 +34,7 @@ class OrderController extends BaseController
     }
 
 
-    //=============================REQUEST HANDLERS=============================
+    //=====================================REQUEST HANDLERS=====================================
      private static function handleGetRequest(){
         $resources = self::getUriSegments();
         $filters = self::getQueryStringParams();
@@ -68,7 +68,7 @@ class OrderController extends BaseController
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
     }
-    //=============================!REQUEST HANDLERS=============================
+    //=====================================!REQUEST HANDLERS=====================================
 
 
 

@@ -1,56 +1,65 @@
 <?php
 
-class OrderDetailDAO extends Factory {
-    // Método para construir un objeto OrderDetail a partir de los datos obtenidos de la base de datos
-    public static function buildOrderDetailModel($orderDetailData) {
-        if ($orderDetailData) {
-            return new orderDetail(
-                $orderDetailData['detailID'],
-                $orderDetailData['quantity'],
-                $orderDetailData['totalPrice'],
-                $orderDetailData['orderID'],
-                $orderDetailData['productID']
-            );
-        } else {
-            return null;
+require_once 'model/dataAccessObject/orderDetailDao.php'; // Incluir la definición de la clase UserDAO
+require_once 'model/objectModels/orderDetailModel.php'; // Incluir la definición de la clase UserModel
+require_once 'validators/paramValidator.php'; // Incluir el validador de parámetros
+
+
+
+class orderDetailController extends BaseController
+{
+    private static $orderDetailDao;
+
+    public static function method()
+    {
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        switch($requestMethod){
+            case 'GET':
+                self::handleGetRequest();
+                break;
+            case 'POST':
+                self::handlePostRequest();
+                break;
+            /*
+            case 'PUT':
+                self::handlePutRequest();
+                break;
+            case 'PATCH':
+                self::handlePatchRequest();
+                break;
+            case 'DELETE':
+                self::handleDeleteRequest();
+                break;  
+            */
+            default:
+                self::sendOutput('Invalid request method', array('HTTP/1.1 405 Method Not Allowed'));
+                break;
         }
     }
 
-    // Método para crear un nuevo detalle de orden en la base de datos
-    public static function createOrderDetail(orderDetail $orderDetail) {
-        $query = "INSERT INTO OrderDetail (detailID, quantity, totalPrice, orderID, productID) VALUES (?, ?, ?, ?, ?)";
-        $params = array(
-            $orderDetail->detailID,
-            $orderDetail->quantity,
-            $orderDetail->totalPrice,
-            $orderDetail->orderID,
-            $orderDetail->productID
-        );
-        
-        try {
-            self::select($query, $params);
-            return $orderDetail;
-        } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
-        }
+    //=============================REQUEST HANDLERS=============================
+    private static function handleGetRequest(){
+
     }
 
-    // Método para obtener todos los detalles de orden de una orden específica
-    public static function getOrderDetailsByOrderId($orderID) {
-        $query = "SELECT * FROM OrderDetail WHERE orderID = ?";
-        $params = array($orderID);
+    private static function handlePostRequest(){
         
-        try {
-            $result = self::select($query, $params);
-            $orderDetails = array();
-            foreach ($result as $orderDetailData) {
-                $orderDetails[] = self::buildOrderDetailModel($orderDetailData);
-            }
-            return $orderDetails;
-        } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
-        }
     }
+    //=============================!REQUEST HANDLERS=============================
+
+
+
+    public static function createOrderDetail(){
+        
+    }
+
+    public static function getOrderDetailsByOrderId(){
+        
+    }
+
+    
 }
+
+
 
 ?>

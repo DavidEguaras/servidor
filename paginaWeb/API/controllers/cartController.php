@@ -12,14 +12,19 @@ class cartController extends BaseController
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         switch($requestMethod){
             case 'GET':
+                self::handleGetRequest();
                 break;
             case 'POST':
+                self::handlePostRequest();
                 break;
             case 'PUT':
+                self::handlePutRequest();
                 break;
             case 'PATCH':
+                self::handlePatchRequest();
                 break;
             case 'DELETE':
+                self::handleDeleteRequest();
                 break;  
             default:
                 self::sendOutput('Invalid request method', array('HTTP/1.1 405 Method Not Allowed'));
@@ -27,6 +32,29 @@ class cartController extends BaseController
         }
     }
 
+    //=============================REQUEST HANDLERS=============================
+    private static function handleGetRequest(){
+
+    }
+
+    private static function handlePostRequest(){
+        
+    }
+
+    private static function handlePutRequest(){
+
+    }
+
+    private static function handlePatchRequest(){
+
+    }
+
+    private static function handleDeleteRequest(){
+
+    }
+    //=============================!REQUEST HANDLERS=============================
+
+    
     public static function createCart($cart)
     {
 
