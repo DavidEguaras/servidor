@@ -69,8 +69,7 @@ class orderDetailController extends BaseController
 
         
 
-        $newOrderDetail = new orderDetailModel($quantity)
-
+        $newOrderDetail = new orderDetailModel($quantity);
     }
 
     public static function getOrderDetailsByOrderId(){

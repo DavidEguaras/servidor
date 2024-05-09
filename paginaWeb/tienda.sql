@@ -63,35 +63,3 @@ CREATE TABLE ORDER_DETAIL (
     FOREIGN KEY (FK_ORDER_ID) REFERENCES ORDERS(ORDER_ID),
     FOREIGN KEY (FK_PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
 );
-
-
-
--- USER table
-INSERT INTO USER (USER_ID, username, name, rol, password, email) 
-VALUES 
-(1, 'john_doe', 'John Doe', 'customer', 'password123', 'john@example.com');
-
--- PRODUCT_TYPE table
-INSERT INTO PRODUCT_TYPE (PT_ID, category, name, price, brand, description) 
-VALUES 
-(1, 'camiseta', 'Basic T-Shirt', 19.99, 'XYZ Brand', 'A basic cotton t-shirt for everyday wear');
-
--- PRODUCT table
-INSERT INTO PRODUCT (PRODUCT_ID, color, size, stock, image, FK_PT_ID) 
-VALUES 
-(1, 'black', 'M', 50, 'tshirt_black_m.jpg', 1);
-
--- CART table
-INSERT INTO CART (CART_ID, last_update, quantity, FK_USER_ID, FK_PRODUCT_ID) 
-VALUES 
-(1, '2024-04-03', 2, 1, 1);
-
--- ORDERS table
-INSERT INTO ORDERS (ORDER_ID, order_date, direction, payment, total, FK_USER_ID) 
-VALUES 
-(1, '2024-04-03', '123 Street Ave, City, Country', 'Credit Card', 39.98, 1);
-
--- ORDER_DETAIL table
-INSERT INTO ORDER_DETAIL (DETAIL_ID, quantity, total_price, FK_ORDER_ID, FK_PRODUCT_ID) 
-VALUES 
-(1, 2, 39.98, 1, 1);

@@ -11,6 +11,7 @@ class BaseController
     {
         $uri = parse_url($_SERVER['PATH_INFO'], PHP_URL_PATH);
         $uri = explode( '/', $uri );
+        array_shift($uri);
         return $uri;
     }
 

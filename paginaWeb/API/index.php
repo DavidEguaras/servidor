@@ -6,12 +6,15 @@ require_once 'config/config.php';
 
 
 
-// Obtener la acción solicitada, generalmente a través de parámetros GET o POST
-$accion = BaseController::getUriSegments();
+
+
 
 // Verificar accion
-if (isset($accion[1])) {
-    switch ($accion[1]) {
+if (isset($_SERVER['PATH_INFO'])) {
+    // Obtener la accion solicitada a traves de parametros GET, POST...
+    $action = BaseController::getUriSegments();
+
+    switch ($action[0]) {
         case 'user':
             $userController = new UserController();
             $userController->method();
@@ -24,7 +27,7 @@ if (isset($accion[1])) {
             $productTypeController = new ProductTypeController();
             $productTypeController->method();
             break;
-        case 'order':
+        case 'orders':
             $orderController = new OrderController();
             $orderController->method();
             break;
@@ -37,12 +40,11 @@ if (isset($accion[1])) {
             $cartController->method();
             break;
         default:
-            // Acción no válida
-            echo "Acción no válida";
+            echo "Not a valid action";
             break;
     }
 } else {
-    echo "No se especificó ninguna acción";
+    echo "No action was especified";
 }
 
 
