@@ -20,7 +20,13 @@ class ParamValidator
         return true;
     }
 
-    //validateEmail
+    public static function validateEmail($email)
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        return true;
+    }
 
     public static function validateName($name)
     {
@@ -29,7 +35,6 @@ class ParamValidator
         }
         return true;
     }
-    
 
     public static function validateRole($role)
     {
@@ -38,6 +43,13 @@ class ParamValidator
         }
         return true;
     }
-  
+
+    public static function validatePrice($price)
+    {
+        if (!is_numeric($price) || $price <= 0) {
+            return false;
+        }
+        return true;
+    }
 }
 ?>
