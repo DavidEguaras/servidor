@@ -31,7 +31,7 @@ class CartController extends BaseController
         }
     }
 
-    //=============================REQUEST HANDLERS=============================
+    //==========================================================REQUEST HANDLERS==========================================================
     private static function handleGetRequest()
     {
         // Obtener el ID del usuario desde la URL
@@ -44,6 +44,7 @@ class CartController extends BaseController
         }
     }
 
+    
     private static function handlePostRequest()
     {
         $data = file_get_contents('php://input');
@@ -60,7 +61,6 @@ class CartController extends BaseController
 
         // Crear un nuevo objeto CartModel
         $newCart = new CartModel(
-            null, // No es necesario proporcionar cartID ya que es autoincremental
             $data['lastUpdate'],
             $data['quantity'],
             $data['userID'],
@@ -79,6 +79,7 @@ class CartController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
+
 
     private static function handlePutRequest()
     {
@@ -102,17 +103,8 @@ class CartController extends BaseController
             self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
         }
     }
+    //==========================================================!REQUEST HANDLERS==========================================================
 
-    private static function handlePatchRequest()
-    {
-        // Implementar la lógica para manejar una solicitud PATCH
-    }
-
-    private static function handleDeleteRequest()
-    {
-        // Implementar la lógica para manejar una solicitud DELETE
-    }
-    //=============================!REQUEST HANDLERS=============================
 
     public static function createCart($cart)
     {
@@ -157,6 +149,7 @@ class CartController extends BaseController
         }
     }
 
+
     public static function updateCartQuantity($cartID, $newQuantity)
     {
         try {
@@ -170,6 +163,7 @@ class CartController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
+
 
     public static function deleteCart($cartID)
     {
@@ -185,6 +179,7 @@ class CartController extends BaseController
         }
     }
 
+
     public static function clearCartByUserID($userID)
     {
         try {
@@ -199,6 +194,7 @@ class CartController extends BaseController
         }
     }
 
+
     public static function getTotalProductsInCart($userID)
     {
         try {
@@ -209,6 +205,7 @@ class CartController extends BaseController
         }
     }
 
+    
     public static function getAllProductsInCart($userID)
     {
         try {

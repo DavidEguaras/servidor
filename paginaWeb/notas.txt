@@ -7,3 +7,9 @@ https://www.youtube.com/watch?v=BrUKQ1n7MKQ Requests handling
 PDO https://www.youtube.com/watch?v=3PAKPwKJnKM
 
 Curso Completo: https://www.youtube.com/watch?v=fw5ObX8P6as
+
+
+cart -> https://www.youtube.com/watch?v=7_WAwV6ze9A&list=PL-h5aNeRKouEIsAFGeS-yhw97mQumSak-
+
+
+MVC tienda -> https://www.youtube.com/watch?v=TNyRfaRfSXk&list=PLMPZIgg1n4Jmv-SlkAglSj-X_Z1f371eC
