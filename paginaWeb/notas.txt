@@ -2,3 +2,36 @@
 -Revisar todo el codigo
 
 
+MVC DE PHP
+-Config:
+	+Constantes de rutas
+	+Funcionalidades:	
+		ConfigureApi, BD, funciones para validar formularios...
+	+Controllers:
+		User: Login...
+		Admin: Add Product...
+	+Core:
+		Curl
+		Funciones
+		configureAPI
+	+Views
+		User
+		Admin
+	+WebRoot:
+		IMGs
+
+
+
+--Tareas Pendientes
+	-API:
+		+Terminar Controladores
+		+Codificar contrasena sha1
+		+Pedirle a Maria que revise el index
+        +No me funciona las rutas en el config pero no entiendo porque
+	-MVC:	
+		+preguntarle a maria como interactuan los controladores y la vista en php
+		+comprobar controladores
+		
+
+
+
