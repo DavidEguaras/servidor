@@ -1,0 +1,43 @@
+Albaran:
+    -Get para verlos
+    -Post para añadir y detalle
+    -Put para cambiar datos del albaran
+Carrito:
+    -Get para ver lo que tiene en el carrito
+    -Insert para añadir
+    -Put para actualizar
+    -Delete para quitar
+Categiria:
+    -Post para añadir Categoria
+    -Delete para quitar
+DetalleAlbaran:
+    -get para ver
+    -put para actualizar
+DetallePedido:
+    -Get para ver 
+    -put para actualizar
+Pedido:
+    -Get para ver 
+    -Post para crear y detalle 
+    -put para cambiar datos
+Favoritos:
+    -Get para ver 
+    -Post para añadir
+    -Put para actualizar
+    -Delete para borrar
+Producto:
+    -Get para ver
+    -Post para añadir
+    -Put para actualizar
+    -Delete
+Usuario:
+    -Get para login
+    -Post para registrar
+    -Put para actualizar datos personales
+    -Delete para borrar como administrador usuarios
+Rol:
+    -get para ver
+    -post para agregar 
+    -delete para borrar
+
+    
