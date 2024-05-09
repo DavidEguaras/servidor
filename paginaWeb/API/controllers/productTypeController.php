@@ -6,6 +6,7 @@ class ProductTypeController extends BaseController
 {
     private static $productTypeDAO;
 
+
     public static function method()
     {
         // Obtener el método de la solicitud
@@ -34,6 +35,7 @@ class ProductTypeController extends BaseController
         }
     }
 
+    //---------------------------------------------REQUEST HANDLERS---------------------------------------------
     private static function handleGetRequest()
     {
         // Obtener los segmentos de la URI y los parámetros de la cadena de consulta
@@ -73,6 +75,8 @@ class ProductTypeController extends BaseController
     {
         // Implementa la lógica para manejar las solicitudes DELETE
     }
+    //---------------------------------------------REQUEST HANDLERS---------------------------------------------
+
 
     public static function createProductType()
     {
@@ -96,7 +100,6 @@ class ProductTypeController extends BaseController
 
         // Crear un nuevo objeto ProductTypeModel
         $productType = new ProductTypeModel(
-            null,
             $data['category'],
             $data['name'],
             $data['price'],

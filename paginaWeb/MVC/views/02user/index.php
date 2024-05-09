@@ -46,7 +46,9 @@
                 
             </div>
 
-            <div class="sneakers">
+
+            <!-- AGREGAR SI ME DA TIEMPO -->
+            <!-- <div class="sneakers">
                 <div class="topSneakers">
                     <h2>new in</h2>
                     <button>SNKRS</button>
@@ -54,7 +56,7 @@
                 <div class="sneakersCarrousel">
 
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </main>
