@@ -3,7 +3,6 @@
 class CocheDAO{
     function findAllCoches(){
         $ch = curl_init();
-    
         curl_setopt($ch, CURLOPT_URL, URI_API."coches?token=".$_SESSION['token']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
@@ -27,3 +26,4 @@ class CocheDAO{
         return $response;
     }
 }
+

@@ -52,7 +52,6 @@ if(isset($_SERVER['PATH_INFO'])){
     }elseif($recurso[1]==="categoria"){
         CategoriaController::categoria();
     }
-
     
 } else {
     // Si no se ha especificado la información de la ruta, se devuelve un error 400
