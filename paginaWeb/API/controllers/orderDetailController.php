@@ -1,12 +1,10 @@
 <?php
 
-require_once 'model/dataAccessObject/orderDetailDao.php'; // Incluir la definición de la clase UserDAO
-require_once 'model/objectModels/orderDetailModel.php'; // Incluir la definición de la clase UserModel
+require_once 'model/dataAccessObject/orderDetailDao.php'; // Incluir la definición de la clase OrderDetailDAO
+require_once 'model/objectModels/orderDetailModel.php'; // Incluir la definición de la clase OrderDetailModel
 require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
 
-
-
-class orderDetailController extends BaseController
+class OrderDetailController extends BaseController
 {
 
     public static function method()
@@ -48,7 +46,8 @@ class orderDetailController extends BaseController
 
 
 
-    public static function createOrderDetail($orderDetail){
+    //=============================ORDER DETAIL ACTIONS=============================
+    public static function createOrderDetail(){
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
 
@@ -60,19 +59,18 @@ class orderDetailController extends BaseController
             return;
         }
 
-
         $quantity = $data['quantity'];
         $totalPrice = $data['totalPrice'];
         $ORDER_ID = $data['ORDER_ID'];
         $PRODUCT_ID = $data['PRODUCT_ID'];
-        $newOrderDetail = new orderDetailModel($quantity, $totalPrice, $ORDER_ID, $PRODUCT_ID);
+        $newOrderDetail = new OrderDetailModel($quantity, $totalPrice, $ORDER_ID, $PRODUCT_ID);
 
         try {
             $result = OrderDetailDao::createOrderDetail($newOrderDetail);
             if ($result) {
-                self::sendOutput('User created successfully', array('HTTP/1.1 201 Created'));
+                self::sendOutput('Order detail created successfully', array('HTTP/1.1 201 Created'));
             } else {
-                self::sendOutput('Failed to create user', array('HTTP/1.1 500 Internal Server Error'));
+                self::sendOutput('Failed to create order detail', array('HTTP/1.1 500 Internal Server Error'));
             }
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -80,12 +78,38 @@ class orderDetailController extends BaseController
     }
 
     public static function getOrderDetailsByORDER_ID(){
-        
+        $ORDER_ID = $_GET['ORDER_ID'] ?? null;
+        if ($ORDER_ID === null) {
+            self::sendOutput('Missing ORDER_ID parameter', array('HTTP/1.1 400 Bad Request'));
+            return;
+        }
+
+        try {
+            $orderDetails = OrderDetailDao::getOrderDetailsByOrderID($ORDER_ID);
+            if ($orderDetails !== null) {
+                self::sendOutput(json_encode($orderDetails), array('HTTP/1.1 200 OK'));
+            } else {
+                self::sendOutput('No order details found for ORDER_ID ' . $ORDER_ID, array('HTTP/1.1 404 Not Found'));
+            }
+        } catch (Exception $e) {
+            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
+        }
     }
 
+    public static function getOrderDetailByDetailID($DETAIL_ID){
+        try {
+            $orderDetail = OrderDetailDao::getOrderDetailByDetailID($DETAIL_ID);
+            if ($orderDetail !== null) {
+                self::sendOutput(json_encode($orderDetail), array('HTTP/1.1 200 OK'));
+            } else {
+                self::sendOutput('No order detail found for DETAIL_ID ' . $DETAIL_ID, array('HTTP/1.1 404 Not Found'));
+            }
+        } catch (Exception $e) {
+            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
+        }
+    }
     
+    //=============================!ORDER DETAIL ACTIONS=============================
 }
-
-
 
 ?>

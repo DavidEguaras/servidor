@@ -50,6 +50,24 @@ class OrderDetailDAO extends Factory {
             throw new Exception($e->getMessage());
         }
     }
+
+    // Metodo para obtener un detalle de orden por su DETAIL_ID de la base de datos
+    public static function getOrderDetailByDetailID($DETAIL_ID) {
+        $query = "SELECT * FROM OrderDetail WHERE DETAIL_ID = ?";
+        $params = array($DETAIL_ID);
+        
+        try {
+            $result = self::select($query, $params);
+            if (!empty($result)) {
+                return self::buildOrderDetailModel($result[0]);
+            } else {
+                return null; // Retorna null si no se encuentra ningun detalle de orden con el DETAIL_ID proporcionado
+            }
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 ?>

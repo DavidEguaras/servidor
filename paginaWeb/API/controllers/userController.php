@@ -32,6 +32,7 @@ class UserController extends BaseController
         }
     }
 
+    //---------------------------------------------REQUEST HANDLERS---------------------------------------------
     private static function handleGetRequest()
     {
         // Obtener los segmentos de la URI y los parámetros de la cadena de consulta
@@ -59,6 +60,8 @@ class UserController extends BaseController
         //Si agregamos un metodo put, implementamos aqui la logica
     }
     */
+//---------------------------------------------REQUEST HANDLERS---------------------------------------------
+    
 
     public static function createUser()
     {

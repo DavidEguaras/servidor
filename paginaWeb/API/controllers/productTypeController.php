@@ -1,17 +1,17 @@
 <?php
-require_once 'model/dataAccessObject/productTypeDao.php'; // Incluir la definición de la clase ProductTypeDAO
-require_once 'model/objectModels/productTypeModel.php'; // Incluir la definición de la clase ProductTypeModel
-require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
+require_once 'model/dataAccessObject/productTypeDao.php';
+require_once 'model/objectModels/productTypeModel.php';
+require_once 'paramValidators/paramValidator.php';
 
 
 class ProductTypeController extends BaseController
 {
     public static function method()
     {
-        // Obtener el método de la solicitud
+        // Obtener el metodo de la solicitud
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        // Realizar la acción correspondiente según el método de solicitud
+        // Realizar la accion correspondiente segun el método de solicitud
         switch ($requestMethod) {
             case 'GET':
                 self::handleGetRequest();
@@ -37,11 +37,11 @@ class ProductTypeController extends BaseController
     //---------------------------------------------REQUEST HANDLERS---------------------------------------------
     private static function handleGetRequest()
     {
-        // Obtener los segmentos de la URI y los parámetros de la cadena de consulta
+        // Obtener los segmentos de la URI y los parametros de la cadena de consulta
         $resources = self::getUriSegments();
         $filters = self::getQueryStringParams();
 
-        // Realizar acciones según los recursos y los filtros
+        // Realizar acciones segun los recursos y los filtros
         if (count($resources) == 2 && count($filters) == 0) {
             self::getAllProductTypes();
         } elseif (count($resources) == 3 && count($filters) == 0) {
@@ -62,17 +62,17 @@ class ProductTypeController extends BaseController
 
     private static function handlePutRequest()
     {
-        // Implementa la lógica para manejar las solicitudes PUT
+       
     }
 
     private static function handlePatchRequest()
     {
-        // Implementa la lógica para manejar las solicitudes PATCH
+        
     }
 
     private static function handleDeleteRequest()
     {
-        // Implementa la lógica para manejar las solicitudes DELETE
+        
     }
     //---------------------------------------------REQUEST HANDLERS---------------------------------------------
 
@@ -83,7 +83,6 @@ class ProductTypeController extends BaseController
         $data = json_decode($data, true);
 
         // Validar los datos recibidos
-
         $requiredParams = ['category', 'name', 'price', 'brand', 'description'];
         $error = '';
 
@@ -144,7 +143,7 @@ class ProductTypeController extends BaseController
     public static function getProductTypesByCategory($category)
     {
         try {
-            // Obtener tipos de productos por categoría de la base de datos
+            // Obtener tipos de productos por categoria de la base de datos
             $productTypes = ProductTypeDAO::getProductTypesByCategory($category);
             self::sendOutput(json_encode($productTypes), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
