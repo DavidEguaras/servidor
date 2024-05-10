@@ -106,7 +106,7 @@ INSERT INTO ORDERS (order_date, direction, payment, total, USER_ID) VALUES
 ('2024-05-15 12:15:00', 'Plaza Central', 'Efectivo', 2400.00, 3);
 
 -- Insertar detalles de órdenes
-INSERT INTO ORDER_DETAIL (quantity, total_price, FK_ORDER_ID, PRODUCT_ID) VALUES
+INSERT INTO ORDER_DETAIL (quantity, total_price, ORDER_ID, PRODUCT_ID) VALUES
 (2, 1000.00, 1, 1),
 (1, 800.00, 1, 2),
 (3, 60.00, 2, 3),
