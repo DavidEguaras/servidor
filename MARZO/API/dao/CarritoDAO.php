@@ -27,7 +27,7 @@ class CarritoDAO{
         } else
             return null;
     }
-    public static function findByUSER_ID($id){
+    public static function findByUserId($id){
         $sql = "select * from Carrito where IdUsuario  = ?";
         $parametros = array($id);
         $result = FactoryBd::realizaConsulta($sql, $parametros);
