@@ -16,9 +16,8 @@ class CartDAO extends Factory {
     }
 
     public static function createCart(Cart $cart) {
-        $query = "INSERT INTO Cart (cartID, lastUpdate, quantity, userID, productID) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Cart  VALUES (NULL, ?, ?, ?, ?)";
         $params = array(
-            $cart->cartID,
             $cart->lastUpdate,
             $cart->quantity,
             $cart->userID,

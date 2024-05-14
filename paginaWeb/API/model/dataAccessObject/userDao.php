@@ -11,7 +11,7 @@ class UserDAO extends Factory
                 $userData['rol'],
                 $userData['password'],
                 $userData['email'],
-                $userData['activo']
+                $userData['active']
             );
         } else {
             return null;
@@ -28,7 +28,7 @@ class UserDAO extends Factory
             $user->rol,
             $user->password,
             $user->email,
-            $user->activo
+            $user->active
         );
         
         try {
@@ -85,7 +85,7 @@ class UserDAO extends Factory
 
     public static function login($username, $password)
     {
-        $query = "SELECT * FROM USER WHERE username = ? AND password = ? AND activo = 1";
+        $query = "SELECT * FROM USER WHERE username = ? AND password = ? AND active = 1";
         $params = array($username, $password);
 
         try {
@@ -111,7 +111,7 @@ class UserDAO extends Factory
 
     public static function deleteUserAccount($userId, $active)
     {
-        $query = "UPDATE USER SET activo = ? WHERE USER_ID = ?";
+        $query = "UPDATE USER SET active = ? WHERE USER_ID = ?";
         $params = array($active, $userId);
         
         try {

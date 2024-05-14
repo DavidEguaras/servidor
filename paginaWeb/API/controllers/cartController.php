@@ -5,8 +5,6 @@ require_once 'paramValidators/paramValidator.php'; // Incluir el validador de pa
 
 class CartController extends BaseController
 {
-    private static $cartDAO;
-
     public static function method()
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -70,7 +68,7 @@ class CartController extends BaseController
 
         try {
             // Intentar crear el carrito en la base de datos
-            $result = self::$cartDAO->createCart($newCart);
+            $result = CartDao::createCart($newCart);
             if ($result) {
                 self::sendOutput('Cart created successfully', array('HTTP/1.1 201 Created'));
             } else {
@@ -91,7 +89,7 @@ class CartController extends BaseController
 
         if ($cartID !== null && $newQuantity !== null) {
             try {
-                $result = self::$cartDAO->updateCartQuantity($cartID, $newQuantity);
+                $result = CartDao::updateCartQuantity($cartID, $newQuantity);
                 if ($result) {
                     self::sendOutput('Cart quantity updated successfully', array('HTTP/1.1 200 OK'));
                 } else {
@@ -128,7 +126,7 @@ class CartController extends BaseController
 
         try {
             // Intentar crear el carrito en la base de datos
-            $result = self::$cartDAO->createCart($newCart);
+            $result = CartDao::createCart($newCart);
             if ($result) {
                 self::sendOutput('Cart created successfully', array('HTTP/1.1 201 Created'));
             } else {
@@ -143,7 +141,7 @@ class CartController extends BaseController
     public static function getCartByUserID($userID)
     {
         try {
-            $carts = self::$cartDAO->getCartByUserID($userID);
+            $carts = CartDao::getCartByUserID($userID);
             self::sendOutput(json_encode($carts), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -154,7 +152,7 @@ class CartController extends BaseController
     public static function updateCartQuantity($cartID, $newQuantity)
     {
         try {
-            $result = self::$cartDAO->updateCartQuantity($cartID, $newQuantity);
+            $result = CartDao::updateCartQuantity($cartID, $newQuantity);
             if ($result) {
                 self::sendOutput('Cart quantity updated successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -169,7 +167,7 @@ class CartController extends BaseController
     public static function deleteCart($cartID)
     {
         try {
-            $result = self::$cartDAO->deleteCart($cartID);
+            $result = CartDao::deleteCart($cartID);
             if ($result) {
                 self::sendOutput('Cart deleted successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -184,7 +182,7 @@ class CartController extends BaseController
     public static function clearCartByUserID($userID)
     {
         try {
-            $result = self::$cartDAO->clearCartByUserID($userID);
+            $result = CartDao::clearCartByUserID($userID);
             if ($result) {
                 self::sendOutput('Cart cleared successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -199,7 +197,7 @@ class CartController extends BaseController
     public static function getTotalProductsInCart($userID)
     {
         try {
-            $totalProducts = self::$cartDAO->getTotalProductsInCart($userID);
+            $totalProducts = CartDao::getTotalProductsInCart($userID);
             self::sendOutput(json_encode(['totalProducts' => $totalProducts]), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -210,7 +208,7 @@ class CartController extends BaseController
     public static function getAllProductsInCart($userID)
     {
         try {
-            $products = self::$cartDAO->getAllProductsInCart($userID);
+            $products = CartDao::getAllProductsInCart($userID);
             self::sendOutput(json_encode($products), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));

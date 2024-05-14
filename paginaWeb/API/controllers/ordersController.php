@@ -4,7 +4,7 @@ require_once 'model/objectModels/ordersModel.php'; // Incluir la definición de 
 require_once 'paramValidators/paramValidator.php';
 class OrderController extends BaseController
 {
-    private static $orderDAO;
+
 
     public static function method()
     {
@@ -95,7 +95,7 @@ class OrderController extends BaseController
 
         // Llamar al método createOrder en OrderDAO para agregar la nueva orden a la base de datos
         try {
-            $result = self::$orderDAO->createOrder($newOrder);
+            $result = OrderDao::createOrder($newOrder);
             if ($result) {
                 self::sendOutput('Order created successfully', array('HTTP/1.1 201 Created'));
             } else {
@@ -109,7 +109,7 @@ class OrderController extends BaseController
     public static function getOrderById($orderId)
     {
         try {
-            $order = self::$orderDAO->getOrderById($orderId);
+            $order = OrderDao::getOrderById($orderId);
             self::sendOutput(json_encode($order), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -119,7 +119,7 @@ class OrderController extends BaseController
     public static function getOrdersByUserId($userId)
     {
         try {
-            $orders = self::$orderDAO->getOrdersByUserId($userId);
+            $orders = OrderDao::getOrdersByUserId($userId);
             self::sendOutput(json_encode($orders), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -129,7 +129,7 @@ class OrderController extends BaseController
     public static function deleteOrderById($orderId)
     {
         try {
-            $result = self::$orderDAO->deleteOrderById($orderId);
+            $result = OrderDao::deleteOrderById($orderId);
             if ($result) {
                 self::sendOutput('Order deleted successfully', array('HTTP/1.1 200 OK'));
             } else {

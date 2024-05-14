@@ -117,7 +117,7 @@ class UserController extends BaseController
     public static function getAllUsers()
     {
         try {
-            $users = self::$userDAO->getAllUsers();
+            $users = UserDAO::getAllUsers();
             self::sendOutput(json_encode($users), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -127,7 +127,7 @@ class UserController extends BaseController
     public static function getUserById($userId)
     {
         try {
-            $user = self::$userDAO->getUserById($userId);
+            $user = UserDAO::getUserById($userId);
             self::sendOutput(json_encode($user), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -150,7 +150,7 @@ class UserController extends BaseController
         $password = $data['password'];
 
         try {
-            $user = self::$userDAO->login($username, $password);
+            $user = UserDAO::login($username, $password);
 
             if ($user && $user->isActive()) {
                 self::sendOutput('Login exitoso', array('HTTP/1.1 200 OK'));
@@ -166,7 +166,7 @@ class UserController extends BaseController
     public static function changePassword($userId, $newPassword)
     {
         try {
-            $result = self::$userDAO->changePassword($userId, $newPassword);
+            $result = UserDAO::changePassword($userId, $newPassword);
             if ($result) {
                 self::sendOutput('Password changed successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -180,7 +180,7 @@ class UserController extends BaseController
     public static function resetPassword($userId, $newPassword)
     {
         try {
-            $result = self::$userDAO->resetPassword($userId, $newPassword);
+            $result = UserDAO::resetPassword($userId, $newPassword);
             if ($result) {
                 self::sendOutput('Password reset successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -194,7 +194,7 @@ class UserController extends BaseController
     public static function deleteUserAccount($userId, $active)
     {
         try {
-            $result = self::$userDAO->deleteUserAccount($userId, $active);
+            $result = UserDAO::deleteUserAccount($userId, $active);
             if ($result) {
                 self::sendOutput('User account updated successfully', array('HTTP/1.1 200 OK'));
             } else {

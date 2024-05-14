@@ -29,3 +29,11 @@ MVC DE PHP
 	-MVC:	
 		+preguntarle a maria como interactuan los controladores y la vista en php
 		+comprobar controladores
+
+
+ARREGLAR CONTROLLERS:
+	-IDs con autoIncrement, null
+	-solucionar la referencia a los DAOs (borrar las referencias y llamar a la clase (con mayuscula))
+	-prodcutController
+	-isActive metodo
+	-comprobar que funcionan al menos los get y post de todas las clases

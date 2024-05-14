@@ -19,9 +19,8 @@ class ProductTypeDAO extends Factory {
 
     // Método para crear un nuevo tipo de producto en la base de datos
     public static function createProductType($productType) {
-        $query = "INSERT INTO ProductType (ptID, category, name, price, brand, description) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO ProductType VALUES (NULL, ?, ?, ?, ?, ?)";
         $params = array(
-            $productType->ptID,
             $productType->category,
             $productType->name,
             $productType->price,

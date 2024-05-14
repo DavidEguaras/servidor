@@ -7,9 +7,9 @@ class UserModel
     private $rol;
     private $password;
     private $email;
-    private $activo;
+    private $active;
 
-    public function __construct($userID, $userName, $name, $rol, $password, $email, $activo)
+    public function __construct($userID, $userName, $name, $rol, $password, $email, $active)
     {
         $this->userID = $userID;
         $this->userName = $userName;
@@ -17,7 +17,7 @@ class UserModel
         $this->rol = $rol;
         $this->password = $password;
         $this->email = $email;
-        $this->activo = $activo;
+        $this->active = $active;
     }
 
     public function __get($property) {

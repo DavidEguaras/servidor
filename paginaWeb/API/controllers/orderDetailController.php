@@ -8,7 +8,6 @@ require_once 'paramValidators/paramValidator.php'; // Incluir el validador de pa
 
 class orderDetailController extends BaseController
 {
-    private static $orderDetailDao;
 
     public static function method()
     {
@@ -69,7 +68,7 @@ class orderDetailController extends BaseController
         $newOrderDetail = new orderDetailModel($quantity, $totalPrice, $orderID, $productID);
 
         try {
-            $result = self::$orderDetailDao->createOrderDetail($newOrderDetail);
+            $result = OrderDetailDao::createOrderDetail($newOrderDetail);
             if ($result) {
                 self::sendOutput('User created successfully', array('HTTP/1.1 201 Created'));
             } else {

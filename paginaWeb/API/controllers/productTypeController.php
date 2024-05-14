@@ -6,9 +6,6 @@ require_once 'paramValidators/paramValidator.php'; // Incluir el validador de pa
 
 class ProductTypeController extends BaseController
 {
-    private static $productTypeDAO;
-
-
     public static function method()
     {
         // Obtener el método de la solicitud
@@ -111,7 +108,7 @@ class ProductTypeController extends BaseController
 
         try {
             // Insertar el nuevo tipo de producto en la base de datos
-            $result = self::$productTypeDAO->createProductType($productType);
+            $result = ProductTypeDAO::createProductType($productType);
             if ($result) {
                 self::sendOutput('Product type created successfully', array('HTTP/1.1 201 Created'));
             } else {
@@ -126,7 +123,7 @@ class ProductTypeController extends BaseController
     {
         try {
             // Obtener todos los tipos de productos de la base de datos
-            $productTypes = self::$productTypeDAO->getAllProductTypes();
+            $productTypes = ProductTypeDAO::getAllProductTypes();
             self::sendOutput(json_encode($productTypes), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -137,7 +134,7 @@ class ProductTypeController extends BaseController
     {
         try {
             // Obtener un tipo de producto por su ID de la base de datos
-            $productType = self::$productTypeDAO->getProductTypeByID($ptID);
+            $productType = ProductTypeDAO::getProductTypeByID($ptID);
             self::sendOutput(json_encode($productType), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -148,7 +145,7 @@ class ProductTypeController extends BaseController
     {
         try {
             // Obtener tipos de productos por categoría de la base de datos
-            $productTypes = self::$productTypeDAO->getProductTypesByCategory($category);
+            $productTypes = ProductTypeDAO::getProductTypesByCategory($category);
             self::sendOutput(json_encode($productTypes), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -159,7 +156,7 @@ class ProductTypeController extends BaseController
     {
         try {
             // Obtener tipos de productos por marca de la base de datos
-            $productTypes = self::$productTypeDAO->getProductTypesByBrand($brand);
+            $productTypes = ProductTypeDAO::getProductTypesByBrand($brand);
             self::sendOutput(json_encode($productTypes), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
