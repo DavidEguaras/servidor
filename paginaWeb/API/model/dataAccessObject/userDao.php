@@ -21,7 +21,7 @@ class UserDAO extends Factory
     
     public static function createUser($user)
     {
-        $query = "INSERT INTO USER (username, name, rol, password, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO USER VALUES (NULL,?, ?, ?, ?, ?, ?)";
         $params = array(
             $user->userName,
             $user->name,

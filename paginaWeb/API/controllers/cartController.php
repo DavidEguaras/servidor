@@ -1,6 +1,7 @@
 <?php
 require_once 'model/dataAccessObject/cartDao.php'; // Incluir la definición de la clase UserDAO
 require_once 'model/objectModels/cartModel.php'; // Incluir la definición de la clase UserModel
+require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
 
 class CartController extends BaseController
 {

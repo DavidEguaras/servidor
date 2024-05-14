@@ -26,12 +26,6 @@ MVC DE PHP
 	-API:
 		+Terminar Controladores
 		+Codificar contrasena sha1
-		+Pedirle a Maria que revise el index
-        +No me funciona las rutas en el config pero no entiendo porque
 	-MVC:	
 		+preguntarle a maria como interactuan los controladores y la vista en php
 		+comprobar controladores
-		
-
-
-

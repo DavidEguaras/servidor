@@ -1,6 +1,8 @@
 <?php
-require_once 'model/dataAccessObject/productTypeDAO.php'; // Incluir la definición de la clase ProductTypeDAO
+require_once 'model/dataAccessObject/productTypeDao.php'; // Incluir la definición de la clase ProductTypeDAO
 require_once 'model/objectModels/productTypeModel.php'; // Incluir la definición de la clase ProductTypeModel
+require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
+
 
 class ProductTypeController extends BaseController
 {

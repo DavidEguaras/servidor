@@ -2,7 +2,7 @@
 
 require_once 'model/dataAccessObject/orderDetailDao.php'; // Incluir la definición de la clase UserDAO
 require_once 'model/objectModels/orderDetailModel.php'; // Incluir la definición de la clase UserModel
-require_once 'validators/paramValidator.php'; // Incluir el validador de parámetros
+require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
 
 
 
@@ -66,7 +66,18 @@ class orderDetailController extends BaseController
         $totalPrice = $data['totalPrice'];
         $orderID = $data['orderID'];
         $productID = $data['productID'];
-        $newOrderDetail = new orderDetailModel($quantity);
+        $newOrderDetail = new orderDetailModel($quantity, $totalPrice, $orderID, $productID);
+
+        try {
+            $result = self::$orderDetailDao->createOrderDetail($newOrderDetail);
+            if ($result) {
+                self::sendOutput('User created successfully', array('HTTP/1.1 201 Created'));
+            } else {
+                self::sendOutput('Failed to create user', array('HTTP/1.1 500 Internal Server Error'));
+            }
+        } catch (Exception $e) {
+            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
+        }
     }
 
     public static function getOrderDetailsByOrderId(){

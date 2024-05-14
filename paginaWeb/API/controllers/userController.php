@@ -5,8 +5,7 @@ require_once 'paramValidators/paramValidator.php'; // Incluir el validador de pa
 
 class UserController extends BaseController
 {
-    private static $userDAO;
-
+ 
 
     public static function method()
     {
@@ -101,10 +100,10 @@ class UserController extends BaseController
         $email = $data['email'];
 
 
-        $newUser = new UserModel($username, $name, $rol, $password, $email, true);
-
+        $newUser = new UserModel(null, $username, $name, $rol, $password, $email, true);
+     
         try {
-            $result = self::$userDAO->createUser($newUser);
+            $result = UserDAO::createUser($newUser);
             if ($result) {
                 self::sendOutput('User created successfully', array('HTTP/1.1 201 Created'));
             } else {
