@@ -66,9 +66,6 @@ class orderDetailController extends BaseController
         $totalPrice = $data['totalPrice'];
         $orderID = $data['orderID'];
         $productID = $data['productID'];
-
-        
-
         $newOrderDetail = new orderDetailModel($quantity);
     }
 

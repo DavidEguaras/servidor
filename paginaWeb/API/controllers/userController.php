@@ -1,7 +1,7 @@
 <?php
 require_once 'model/dataAccessObject/userDao.php'; // Incluir la definición de la clase UserDAO
 require_once 'model/objectModels/userModel.php'; // Incluir la definición de la clase UserModel
-require_once 'validators/paramValidator.php'; // Incluir el validador de parámetros
+require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
 
 class UserController extends BaseController
 {
