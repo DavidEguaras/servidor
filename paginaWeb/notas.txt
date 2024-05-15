@@ -29,6 +29,8 @@ MVC DE PHP
 	-MVC:	
 		+preguntarle a maria como interactuan los controladores y la vista en php
 		+comprobar controladores
+		+Para manejar las vistas (con los roles) se hace mediante el almacenamiento en la session, esa session se guarda con el login y se destruye con el logout
+		
 
 
 ARREGLAR CONTROLLERS:
@@ -42,4 +44,4 @@ ARREGLAR CONTROLLERS:
 DAOs
 	-modificar los DAOs (en el buildModel, hacerlo clave valor y retornar un array), tambien en el getAll, comprobar el select de factory, 
 	que sea un select, no un un selectAll
-	-MODIFICAR LA NOMENCLATURA PARA QUE SEA COMO EN LA BDç
+	-MODIFICAR LA NOMENCLATURA PARA QUE SEA COMO EN LA BD✅

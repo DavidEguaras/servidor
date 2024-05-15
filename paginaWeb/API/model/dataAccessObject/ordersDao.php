@@ -73,7 +73,7 @@ class OrderDAO extends Factory {
         
         try {
             self::select($query, $params);
-            return true; // Retorna true si se eliminó correctamente
+            return true;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
