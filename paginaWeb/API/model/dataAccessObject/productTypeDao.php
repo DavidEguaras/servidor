@@ -4,13 +4,13 @@ class ProductTypeDAO extends Factory {
     // Método para construir un objeto productTypeModel a partir de los datos obtenidos de la base de datos
     public static function buildProductTypeModel($productTypeData) {
         if ($productTypeData) {
-            return new productTypeModel(
-                $productTypeData['PT_ID'],
-                $productTypeData['category'],
-                $productTypeData['name'],
-                $productTypeData['price'],
-                $productTypeData['brand'],
-                $productTypeData['description']
+            return array(
+                'PT_ID' =>$productTypeData['PT_ID'],
+                'category' =>$productTypeData['category'],
+                'name' =>$productTypeData['name'],
+                'price' =>$productTypeData['price'],
+                'brand' =>$productTypeData['brand'],
+                'description' =>$productTypeData['description']
             );
         } else {
             return null;

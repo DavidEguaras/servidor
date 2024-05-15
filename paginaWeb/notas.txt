@@ -30,16 +30,16 @@ MVC DE PHP
 		+preguntarle a maria como interactuan los controladores y la vista en php
 		+comprobar controladores
 		+Para manejar las vistas (con los roles) se hace mediante el almacenamiento en la session, esa session se guarda con el login y se destruye con el logout
-		
+
 
 
 ARREGLAR CONTROLLERS:
 	-IDs con autoIncrement, null✅
 	-solucionar la referencia a los DAOs (borrar las referencias y llamar a la clase (con mayuscula))✅
-	-prodcutController
 	-isActive metodo✅
 	-comprobar que funcionan al menos los get y post de todas las clases
 	-getOrderDetailsByORDER_ID
+	-prodcutController
 
 DAOs
 	-modificar los DAOs (en el buildModel, hacerlo clave valor y retornar un array), tambien en el getAll, comprobar el select de factory, 

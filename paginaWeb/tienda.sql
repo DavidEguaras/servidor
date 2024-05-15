@@ -33,7 +33,7 @@ CREATE TABLE PRODUCT(
     color VARCHAR(255) NOT NULL,
     size VARCHAR(255) NOT NULL,
     stock INT NOT NULL,
-    imageRoute VARCHAR(255) NOT NULL,
+    image_route VARCHAR(255) NOT NULL,
     PT_ID INT,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (PT_ID) REFERENCES PRODUCT_TYPE(PT_ID)
@@ -86,7 +86,7 @@ INSERT INTO PRODUCT_TYPE (category, name, price, brand, description) VALUES
 ('Electrónica', 'Laptop', 1200.00, 'Dell', 'Laptop Dell XPS 13');
 
 -- Insertar productos
-INSERT INTO PRODUCT (color, size, stock, imageRoute, PT_ID) VALUES
+INSERT INTO PRODUCT (color, size, stock, image_route, PT_ID) VALUES
 ('Negro', 'Grande', 50, '/images/s20.jpg', 1),
 ('Blanco', 'Mediano', 30, '/images/lavadora.jpg', 2),
 ('Rojo', 'Pequeño', 100, '/images/camiseta.jpg', 3),

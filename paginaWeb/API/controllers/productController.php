@@ -88,7 +88,7 @@ class ProductController extends BaseController
 
     }
 
-    public static function updateProductInfo($PRODUCT_ID, $newColor, $newSize, $newStock, $newImageRoute){
+    public static function updateProductInfo($PRODUCT_ID, $newColor, $newSize, $newStock, $newimage_route){
         
     }
 }

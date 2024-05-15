@@ -5,16 +5,16 @@ class Product
     private $color;
     private $size;
     private $stock;
-    private $imageRoute;
+    private $image_route;
     private $PT_ID;
 
-    public function __construct($PRODUCT_ID, $color, $size, $stock, $imageRoute, $PT_ID)
+    public function __construct($PRODUCT_ID, $color, $size, $stock, $image_route, $PT_ID)
     {
         $this->PRODUCT_ID = $PRODUCT_ID;
         $this->color = $color;
         $this->size = $size;
         $this->stock = $stock;
-        $this->imageRoute = $imageRoute;
+        $this->image_route = $image_route;
         $this->productType = $PT_ID;
     }
 

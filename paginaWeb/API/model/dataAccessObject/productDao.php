@@ -3,13 +3,13 @@
 class ProductDAO extends Factory {
     public static function buildProductModel($productData) {
         if ($productData) {
-            return new Product(
-                $productData['PRODUCT_ID'],
-                $productData['color'],
-                $productData['size'],
-                $productData['stock'],
-                $productData['imageRoute'],
-                $productData['PT_ID']
+            return array(
+                'PRODUCT_ID' =>$productData['PRODUCT_ID'],
+                'color' =>$productData['color'],
+                'size' =>$productData['size'],
+                'stock' =>$productData['stock'],
+                'image_route' =>$productData['image_route'],
+                'PT_ID' =>$productData['PT_ID']
             );
         } else {
             return null;
@@ -23,7 +23,7 @@ class ProductDAO extends Factory {
             $product->color,
             $product->size,
             $product->stock,
-            $product->imageRoute,
+            $product->image_route,
             $product->PT_ID
         );
         
@@ -108,9 +108,9 @@ class ProductDAO extends Factory {
     }
 
     // Método para actualizar la información de un producto en la base de datos
-    public static function updateProductInfo($PRODUCT_ID, $newColor, $newSize, $newStock, $newImageRoute) {
-        $query = "UPDATE Product SET color = ?, size = ?, stock = ?, imageRoute = ? WHERE PRODUCT_ID = ?";
-        $params = array($newColor, $newSize, $newStock, $newImageRoute, $PRODUCT_ID);
+    public static function updateProductInfo($PRODUCT_ID, $newColor, $newSize, $newStock, $newimage_route) {
+        $query = "UPDATE Product SET color = ?, size = ?, stock = ?, image_route = ? WHERE PRODUCT_ID = ?";
+        $params = array($newColor, $newSize, $newStock, $newimage_route, $PRODUCT_ID);
         
         try {
             self::select($query, $params);
