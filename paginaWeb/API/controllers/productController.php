@@ -63,17 +63,17 @@ class ProductController extends BaseController
 
     }
 
-    public static function getProductById($productID)
+    public static function getProductById($PRODUCT_ID)
     {
 
     }
 
-    public static function updateProductStock($productID, $newStock)
+    public static function updateProductStock($PRODUCT_ID, $newStock)
     {
 
     }
 
-    public static function deleteProduct($productID)
+    public static function deleteProduct($PRODUCT_ID)
     {
         
     }
@@ -83,12 +83,12 @@ class ProductController extends BaseController
 
     }
 
-    public static function getProductByType($productTypeID)
+    public static function getProductByType($PT_ID)
     {
 
     }
 
-    public static function updateProductInfo($productID, $newColor, $newSize, $newStock, $newImageRoute){
+    public static function updateProductInfo($PRODUCT_ID, $newColor, $newSize, $newStock, $newImageRoute){
         
     }
 }

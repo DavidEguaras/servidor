@@ -130,11 +130,11 @@ class ProductTypeController extends BaseController
         }
     }
 
-    public static function getProductTypeByID($ptID)
+    public static function getProductTypeByID($PT_ID)
     {
         try {
             // Obtener un tipo de producto por su ID de la base de datos
-            $productType = ProductTypeDAO::getProductTypeByID($ptID);
+            $productType = ProductTypeDAO::getProductTypeByID($PT_ID);
             self::sendOutput(json_encode($productType), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));

@@ -4,16 +4,16 @@ class orderDetail
     private $detailID;
     private $quantity;
     private $totalPrice;
-    private $orderID;
-    private $productID;
+    private $ORDER_ID;
+    private $PRODUCT_ID;
 
-    public function __construct($detailID, $quantity, $totalPrice, $orderID, $productID)
+    public function __construct($detailID, $quantity, $totalPrice, $ORDER_ID, $PRODUCT_ID)
     {
         $this->detailID = $detailID;
         $this->quantity = $quantity;
         $this->totalPrice = $totalPrice;
-        $this->orderID = $orderID;
-        $this->productID = $productID;
+        $this->ORDER_ID = $ORDER_ID;
+        $this->PRODUCT_ID = $PRODUCT_ID;
     }
 
     public function __get($property) {

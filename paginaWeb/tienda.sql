@@ -34,19 +34,19 @@ CREATE TABLE PRODUCT(
     size VARCHAR(255) NOT NULL,
     stock INT NOT NULL,
     imageRoute VARCHAR(255) NOT NULL,
-    FK_PT_ID INT,
+    PT_ID INT,
     active BOOLEAN NOT NULL DEFAULT TRUE,
-    FOREIGN KEY (FK_PT_ID) REFERENCES PRODUCT_TYPE(PT_ID)
+    FOREIGN KEY (PT_ID) REFERENCES PRODUCT_TYPE(PT_ID)
 );
 
 CREATE TABLE CART(
     CART_ID INT PRIMARY KEY AUTO_INCREMENT,
     last_update DATE NOT NULL,
     quantity INT NOT NULL,
-    FK_USER_ID INT,
-    FK_PRODUCT_ID INT,
-    FOREIGN KEY (FK_USER_ID) REFERENCES USER(USER_ID),
-    FOREIGN KEY (FK_PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
+    USER_ID INT,
+    PRODUCT_ID INT,
+    FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID),
+    FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
 );
 
 CREATE TABLE ORDERS(
@@ -55,18 +55,18 @@ CREATE TABLE ORDERS(
     direction VARCHAR(255) NOT NULL,
     payment VARCHAR(255) NOT NULL,
     total FLOAT NOT NULL,
-    FK_USER_ID INT,
-    FOREIGN KEY (FK_USER_ID) REFERENCES USER(USER_ID)
+    USER_ID INT,
+    FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
 );
 
 CREATE TABLE ORDER_DETAIL (
     DETAIL_ID INT PRIMARY KEY AUTO_INCREMENT,
     quantity INT NOT NULL,
     total_price FLOAT NOT NULL,
-    FK_ORDER_ID INT,
-    FK_PRODUCT_ID INT,
-    FOREIGN KEY (FK_ORDER_ID) REFERENCES ORDERS(ORDER_ID),
-    FOREIGN KEY (FK_PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
+    ORDER_ID INT,
+    PRODUCT_ID INT,
+    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
+    FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
 );
 
 
@@ -86,27 +86,27 @@ INSERT INTO PRODUCT_TYPE (category, name, price, brand, description) VALUES
 ('Electrónica', 'Laptop', 1200.00, 'Dell', 'Laptop Dell XPS 13');
 
 -- Insertar productos
-INSERT INTO PRODUCT (color, size, stock, imageRoute, FK_PT_ID) VALUES
+INSERT INTO PRODUCT (color, size, stock, imageRoute, PT_ID) VALUES
 ('Negro', 'Grande', 50, '/images/s20.jpg', 1),
 ('Blanco', 'Mediano', 30, '/images/lavadora.jpg', 2),
 ('Rojo', 'Pequeño', 100, '/images/camiseta.jpg', 3),
 ('Plata', 'Mediano', 20, '/images/laptop.jpg', 4);
 
 -- Insertar elementos en el carrito
-INSERT INTO CART (last_update, quantity, FK_USER_ID, FK_PRODUCT_ID) VALUES
+INSERT INTO CART (last_update, quantity, USER_ID, PRODUCT_ID) VALUES
 ('2024-05-15', 2, 1, 1),
 ('2024-05-15', 1, 1, 2),
 ('2024-05-15', 3, 2, 3),
 ('2024-05-15', 1, 3, 4);
 
 -- Insertar órdenes
-INSERT INTO ORDERS (order_date, direction, payment, total, FK_USER_ID) VALUES
+INSERT INTO ORDERS (order_date, direction, payment, total, USER_ID) VALUES
 ('2024-05-15 10:30:00', 'Calle 123', 'Tarjeta de crédito', 1200.00, 1),
 ('2024-05-15 11:45:00', 'Avenida Principal', 'PayPal', 100.00, 2),
 ('2024-05-15 12:15:00', 'Plaza Central', 'Efectivo', 2400.00, 3);
 
 -- Insertar detalles de órdenes
-INSERT INTO ORDER_DETAIL (quantity, total_price, FK_ORDER_ID, FK_PRODUCT_ID) VALUES
+INSERT INTO ORDER_DETAIL (quantity, total_price, FK_ORDER_ID, PRODUCT_ID) VALUES
 (2, 1000.00, 1, 1),
 (1, 800.00, 1, 2),
 (3, 60.00, 2, 3),

@@ -2,7 +2,7 @@
 
 class productTypeModel
 {
-    private $ptID;
+    private $PT_ID;
     private $category;
     private $name;
     private $price;
@@ -10,8 +10,8 @@ class productTypeModel
     private $description;
 
 
-    public function __construct($ptID, $category, $name, $price, $brand, $description){
-        $this->ptID = $ptID;
+    public function __construct($PT_ID, $category, $name, $price, $brand, $description){
+        $this->PT_ID = $PT_ID;
         $this->category = $category;
         $this->name = $name;
         $this->price = $price;

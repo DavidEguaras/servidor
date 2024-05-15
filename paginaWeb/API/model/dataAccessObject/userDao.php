@@ -71,10 +71,10 @@ class UserDAO extends Factory
     }
 
 
-    public static function getUserById($userId)
+    public static function getUserById($USER_ID)
     {
         $query = "SELECT * FROM USER WHERE USER_ID = ?";
-        $params = array($userId);
+        $params = array($USER_ID);
         
         try {
             $result = self::select($query, $params);
@@ -96,10 +96,10 @@ class UserDAO extends Factory
             throw new Exception($e->getMessage());
         }
     }
-    public static function changePassword($userId, $newPassword)
+    public static function changePassword($USER_ID, $newPassword)
     {
         $query = "UPDATE USER SET password = ? WHERE USER_ID = ?";
-        $params = array($newPassword, $userId);
+        $params = array($newPassword, $USER_ID);
         
         try {
             self::select($query, $params);
@@ -110,10 +110,10 @@ class UserDAO extends Factory
         }
     }
 
-    public static function deleteUserAccount($userId, $active)
+    public static function deleteUserAccount($USER_ID, $active)
     {
         $query = "UPDATE USER SET active = ? WHERE USER_ID = ?";
-        $params = array($active, $userId);
+        $params = array($active, $USER_ID);
         
         try {
             self::select($query, $params);

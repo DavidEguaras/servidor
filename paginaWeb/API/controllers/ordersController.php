@@ -42,7 +42,7 @@ class OrderController extends BaseController
         if (count($resources) == 3 && count($filters) == 0) {
             self::getOrderById($resources[2]);
         } elseif (count($resources) == 4 && count($filters) == 0 && $resources[3] == 'user') {
-            self::getOrdersByUserId($resources[2]);
+            self::getOrdersByUSER_ID($resources[2]);
         } else {
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
@@ -78,20 +78,21 @@ class OrderController extends BaseController
         $data = json_decode($data, true);
         $error = "";
 
-        $requiredParams = ['orderDate', 'direction','payment', 'userID'];
+        $requiredParams = ['order_date', 'direction','payment', 'total', 'USER_ID'];
 
         if(!ParamValidator::validateParams($data, $requiredParams, $error)){
             self::sendOutput('Missing required paramaters "' .$error . '"', array('HTTP/1.1 400 Bad Request'));
         }
         
         // Obtener los datos necesarios para crear una nueva orden
-        $orderDate = $data['orderDate'];
+        $order_date = $data['order_date'];
         $direction = $data['direction'];
         $payment = $data['payment'];
-        $userID = $data['userID'];
+        $total = $data['total'];
+        $USER_ID = $data['USER_ID'];
 
         // Crear un nuevo objeto OrderModel con los datos proporcionados
-        $newOrder = new OrderModel($orderDate, $direction, $payment, $userID);
+        $newOrder = new OrderModel($order_date, $direction, $payment, $total, $USER_ID);
 
         // Llamar al método createOrder en OrderDAO para agregar la nueva orden a la base de datos
         try {
@@ -106,30 +107,30 @@ class OrderController extends BaseController
         }
     }
 
-    public static function getOrderById($orderId)
+    public static function getOrderById($ORDER_ID)
     {
         try {
-            $order = OrderDao::getOrderById($orderId);
+            $order = OrderDao::getOrderById($ORDER_ID);
             self::sendOutput(json_encode($order), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
 
-    public static function getOrdersByUserId($userId)
+    public static function getOrdersByUSER_ID($USER_ID)
     {
         try {
-            $orders = OrderDao::getOrdersByUserId($userId);
+            $orders = OrderDao::getOrdersByUSER_ID($USER_ID);
             self::sendOutput(json_encode($orders), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
 
-    public static function deleteOrderById($orderId)
+    public static function deleteOrderById($ORDER_ID)
     {
         try {
-            $result = OrderDao::deleteOrderById($orderId);
+            $result = OrderDao::deleteOrderById($ORDER_ID);
             if ($result) {
                 self::sendOutput('Order deleted successfully', array('HTTP/1.1 200 OK'));
             } else {

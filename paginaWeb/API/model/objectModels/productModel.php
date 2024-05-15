@@ -1,21 +1,21 @@
 <?php
 class Product
 {
-    private $productID;
+    private $PRODUCT_ID;
     private $color;
     private $size;
     private $stock;
     private $imageRoute;
-    private $productTypeID;
+    private $PT_ID;
 
-    public function __construct($productID, $color, $size, $stock, $imageRoute, $productTypeID)
+    public function __construct($PRODUCT_ID, $color, $size, $stock, $imageRoute, $PT_ID)
     {
-        $this->productID = $productID;
+        $this->PRODUCT_ID = $PRODUCT_ID;
         $this->color = $color;
         $this->size = $size;
         $this->stock = $stock;
         $this->imageRoute = $imageRoute;
-        $this->productType = $productTypeID;
+        $this->productType = $PT_ID;
     }
 
     public function __get($property) {

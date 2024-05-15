@@ -1,18 +1,18 @@
 <?php
 class Cart
 {
-    private $cartID;
-    private $lastUpdate;
+    private $CART_ID;
+    private $last_update;
     private $quantity;
-    private $userID;
-    private $productID;
+    private $USER_ID;
+    private $PRODUCT_ID;
 
-    public function __construct($cartID, $lastUpdate, $userID, $productID)
+    public function __construct($CART_ID, $last_update, $USER_ID, $PRODUCT_ID)
     {
-        $this->cartID = $cartID;
-        $this->lastUpdate = $lastUpdate;
-        $this->userID = $userID;
-        $this->productID = $productID;
+        $this->CART_ID = $CART_ID;
+        $this->last_update = $last_update;
+        $this->USER_ID = $USER_ID;
+        $this->PRODUCT_ID = $PRODUCT_ID;
     }
 
     public function __get($property) {

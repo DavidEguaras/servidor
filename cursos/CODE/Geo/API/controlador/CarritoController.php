@@ -19,7 +19,7 @@ class CarritoController extends Base{
                 }
                 elseif (count($recursos) == 2 && count($filtros)==1) {
                     if(isset($filtros['IdUsuario'])){
-                        $datos=CarritoDAO::findByUserId($filtros['IdUsuario']);
+                        $datos=CarritoDAO::findByUSER_ID($filtros['IdUsuario']);
                     }
                 }
                 elseif (count($recursos) == 2 && count($filtros)==2) {

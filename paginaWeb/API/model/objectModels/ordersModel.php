@@ -1,20 +1,21 @@
 <?php
 class Order
 {
-    private $orderID;
-    private $orderDate;
+    private $ORDER_ID;
+    private $order_date;
     private $direction;
     private $payment;
     private $total;
-    private $userID;
+    private $USER_ID;
 
-    public function __construct($orderID, $orderDate, $direction, $payment, $userID)
+    public function __construct($ORDER_ID, $order_date, $direction, $payment, $total, $USER_ID)
     {
-        $this->orderID = $orderID;
-        $this->orderDate = $orderDate;
+        $this->ORDER_ID = $ORDER_ID;
+        $this->order_date = $order_date;
         $this->direction = $direction;
         $this->payment = $payment;
-        $this->userID = $userID;
+        $this->total = $total;
+        $this->USER_ID = $USER_ID;
     }
 
     public function __get($property) {

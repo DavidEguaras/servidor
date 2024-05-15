@@ -4,12 +4,13 @@ class OrderDAO extends Factory {
     // Método para construir un objeto Order a partir de los datos obtenidos de la base de datos
     public static function buildOrderModel($orderData) {
         if ($orderData) {
-            return new Order(
-                $orderData['orderID'],
-                $orderData['orderDate'],
-                $orderData['direction'],
-                $orderData['payment'],
-                $orderData['userID']
+            return array(
+                'ORDER_ID' =>$orderData['ORDER_ID'],
+                'order_date' =>$orderData['order_date'],
+                'direction' =>$orderData['direction'],
+                'payment' =>$orderData['payment'],
+                'total' =>$orderData['total'],
+                'USER_ID' =>$orderData['USER_ID']
             );
         } else {
             return null;
@@ -18,12 +19,13 @@ class OrderDAO extends Factory {
 
     // Método para crear una nueva orden en la base de datos
     public static function createOrder($order) {
-        $query = "INSERT INTO ORDERS VALUES (NULL, ?, ?, ?, ?)";
+        $query = "INSERT INTO ORDERS VALUES (NULL, ?, ?, ?, ?, ?)";
         $params = array(
-            $order->orderDate,
+            $order->order_date,
             $order->direction,
             $order->payment,
-            $order->userID
+            $order->total,
+            $order->USER_ID
         );
         
         try {
@@ -35,9 +37,9 @@ class OrderDAO extends Factory {
     }
 
     // Método para obtener una orden por su ID
-    public static function getOrderById($orderID) {
-        $query = "SELECT * FROM `Order` WHERE orderID = ?";
-        $params = array($orderID);
+    public static function getOrderById($ORDER_ID) {
+        $query = "SELECT * FROM ORDERS WHERE ORDER_ID = ?";
+        $params = array($ORDER_ID);
         
         try {
             $result = self::select($query, $params);
@@ -48,9 +50,9 @@ class OrderDAO extends Factory {
     }
 
     // Método para obtener todas las órdenes de un usuario
-    public static function getOrdersByUserId($userID) {
-        $query = "SELECT * FROM `Order` WHERE userID = ?";
-        $params = array($userID);
+    public static function getOrdersByUSER_ID($USER_ID) {
+        $query = "SELECT * FROM ORDERS WHERE USER_ID = ?";
+        $params = array($USER_ID);
         
         try {
             $result = self::select($query, $params);
@@ -65,9 +67,9 @@ class OrderDAO extends Factory {
     }
 
     // Método para eliminar una orden por su ID
-    public static function deleteOrderById($orderID) {
-        $query = "DELETE FROM `Order` WHERE orderID = ?";
-        $params = array($orderID);
+    public static function deleteOrderById($ORDER_ID) {
+        $query = "DELETE FROM ORDERS WHERE ORDER_ID = ?";
+        $params = array($ORDER_ID);
         
         try {
             self::select($query, $params);

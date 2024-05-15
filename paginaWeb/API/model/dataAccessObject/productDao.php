@@ -4,12 +4,12 @@ class ProductDAO extends Factory {
     public static function buildProductModel($productData) {
         if ($productData) {
             return new Product(
-                $productData['productID'],
+                $productData['PRODUCT_ID'],
                 $productData['color'],
                 $productData['size'],
                 $productData['stock'],
                 $productData['imageRoute'],
-                $productData['productTypeID']
+                $productData['PT_ID']
             );
         } else {
             return null;
@@ -24,7 +24,7 @@ class ProductDAO extends Factory {
             $product->size,
             $product->stock,
             $product->imageRoute,
-            $product->productTypeID
+            $product->PT_ID
         );
         
         try {
@@ -36,9 +36,9 @@ class ProductDAO extends Factory {
     }
 
     // Método para obtener un producto por su ID de producto
-    public static function getProductByID($productID) {
-        $query = "SELECT * FROM Product WHERE productID = ?";
-        $params = array($productID);
+    public static function getProductByID($PRODUCT_ID) {
+        $query = "SELECT * FROM Product WHERE PRODUCT_ID = ?";
+        $params = array($PRODUCT_ID);
         
         try {
             $result = self::select($query, $params);
@@ -49,9 +49,9 @@ class ProductDAO extends Factory {
     }
 
     // Método para actualizar el stock de un producto en la base de datos
-    public static function updateProductStock($productID, $newStock) {
-        $query = "UPDATE Product SET stock = ? WHERE productID = ?";
-        $params = array($newStock, $productID);
+    public static function updateProductStock($PRODUCT_ID, $newStock) {
+        $query = "UPDATE Product SET stock = ? WHERE PRODUCT_ID = ?";
+        $params = array($newStock, $PRODUCT_ID);
         
         try {
             self::select($query, $params);
@@ -62,9 +62,9 @@ class ProductDAO extends Factory {
     }
 
     // Método para eliminar un producto de la base de datos por su ID de producto
-    public static function deleteProduct($productID) {
-        $query = "DELETE FROM Product WHERE productID = ?";
-        $params = array($productID);
+    public static function deleteProduct($PRODUCT_ID) {
+        $query = "DELETE FROM Product WHERE PRODUCT_ID = ?";
+        $params = array($PRODUCT_ID);
         
         try {
             self::select($query, $params);
@@ -91,9 +91,9 @@ class ProductDAO extends Factory {
     }
 
     // Método para obtener productos por su tipo de producto
-    public static function getProductsByType($productTypeID) {
-        $query = "SELECT * FROM Product WHERE productTypeID = ?";
-        $params = array($productTypeID);
+    public static function getProductsByType($PT_ID) {
+        $query = "SELECT * FROM Product WHERE PT_ID = ?";
+        $params = array($PT_ID);
         
         try {
             $result = self::select($query, $params);
@@ -108,9 +108,9 @@ class ProductDAO extends Factory {
     }
 
     // Método para actualizar la información de un producto en la base de datos
-    public static function updateProductInfo($productID, $newColor, $newSize, $newStock, $newImageRoute) {
-        $query = "UPDATE Product SET color = ?, size = ?, stock = ?, imageRoute = ? WHERE productID = ?";
-        $params = array($newColor, $newSize, $newStock, $newImageRoute, $productID);
+    public static function updateProductInfo($PRODUCT_ID, $newColor, $newSize, $newStock, $newImageRoute) {
+        $query = "UPDATE Product SET color = ?, size = ?, stock = ?, imageRoute = ? WHERE PRODUCT_ID = ?";
+        $params = array($newColor, $newSize, $newStock, $newImageRoute, $PRODUCT_ID);
         
         try {
             self::select($query, $params);

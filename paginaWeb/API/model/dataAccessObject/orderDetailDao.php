@@ -4,12 +4,12 @@ class OrderDetailDAO extends Factory {
     // Método para construir un objeto OrderDetail a partir de los datos obtenidos de la base de datos
     public static function buildOrderDetailModel($orderDetailData) {
         if ($orderDetailData) {
-            return new orderDetail(
-                $orderDetailData['detailID'],
-                $orderDetailData['quantity'],
-                $orderDetailData['totalPrice'],
-                $orderDetailData['orderID'],
-                $orderDetailData['productID']
+            return array(
+                'DETAIL_ID' => $orderDetailData['DETAIL_ID'],
+                'quantity' => $orderDetailData['quantity'],
+                'total_price' => $orderDetailData['total_price'],
+                'ORDER_ID' => $orderDetailData['ORDER_ID'],
+                'PRODUCT_ID' => $orderDetailData['PRODUCT_ID']
             );
         } else {
             return null;
@@ -22,8 +22,8 @@ class OrderDetailDAO extends Factory {
         $params = array(
             $orderDetail->quantity,
             $orderDetail->totalPrice,
-            $orderDetail->orderID,
-            $orderDetail->productID
+            $orderDetail->ORDER_ID,
+            $orderDetail->PRODUCT_ID
         );
         
         try {
@@ -35,9 +35,9 @@ class OrderDetailDAO extends Factory {
     }
 
     // Método para obtener todos los detalles de orden de una orden específica
-    public static function getOrderDetailsByOrderId($orderID) {
-        $query = "SELECT * FROM OrderDetail WHERE orderID = ?";
-        $params = array($orderID);
+    public static function getOrderDetailsByORDER_ID($ORDER_ID) {
+        $query = "SELECT * FROM OrderDetail WHERE ORDER_ID = ?";
+        $params = array($ORDER_ID);
         
         try {
             $result = self::select($query, $params);

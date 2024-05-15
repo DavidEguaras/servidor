@@ -37,6 +37,9 @@ ARREGLAR CONTROLLERS:
 	-prodcutController
 	-isActive metodo✅
 	-comprobar que funcionan al menos los get y post de todas las clases
+	-getOrderDetailsByORDER_ID
+
+DAOs
 	-modificar los DAOs (en el buildModel, hacerlo clave valor y retornar un array), tambien en el getAll, comprobar el select de factory, 
 	que sea un select, no un un selectAll
-	-
+	-MODIFICAR LA NOMENCLATURA PARA QUE SEA COMO EN LA BDç

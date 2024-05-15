@@ -125,10 +125,10 @@ class UserController extends BaseController
         }
     }
 
-    public static function getUserById($userId)
+    public static function getUserById($USER_ID)
     {
         try {
-            $user = UserDAO::getUserById($userId);
+            $user = UserDAO::getUserById($USER_ID);
             self::sendOutput(json_encode($user), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -164,10 +164,10 @@ class UserController extends BaseController
     }
 
 
-    public static function changePassword($userId, $newPassword)
+    public static function changePassword($USER_ID, $newPassword)
     {
         try {
-            $result = UserDAO::changePassword($userId, $newPassword);
+            $result = UserDAO::changePassword($USER_ID, $newPassword);
             if ($result) {
                 self::sendOutput('Password changed successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -178,10 +178,10 @@ class UserController extends BaseController
         }
     }
 
-    public static function resetPassword($userId, $newPassword)
+    public static function resetPassword($USER_ID, $newPassword)
     {
         try {
-            $result = UserDAO::resetPassword($userId, $newPassword);
+            $result = UserDAO::resetPassword($USER_ID, $newPassword);
             if ($result) {
                 self::sendOutput('Password reset successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -192,10 +192,10 @@ class UserController extends BaseController
         }
     }
 
-    public static function deleteUserAccount($userId, $active)
+    public static function deleteUserAccount($USER_ID, $active)
     {
         try {
-            $result = UserDAO::deleteUserAccount($userId, $active);
+            $result = UserDAO::deleteUserAccount($USER_ID, $active);
             if ($result) {
                 self::sendOutput('User account updated successfully', array('HTTP/1.1 200 OK'));
             } else {

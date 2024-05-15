@@ -38,7 +38,7 @@ class orderDetailController extends BaseController
 
     //=============================REQUEST HANDLERS=============================
     private static function handleGetRequest(){
-        self::getOrderDetailsByOrderId();
+        self::getOrderDetailsByORDER_ID();
     }
 
     private static function handlePostRequest(){
@@ -53,7 +53,7 @@ class orderDetailController extends BaseController
         $data = json_decode($data, true);
 
         $error = "";
-        $requiredParams = ['quantity', 'totalPrice', 'orderID', 'productID'];
+        $requiredParams = ['quantity', 'totalPrice', 'ORDER_ID', 'PRODUCT_ID'];
 
         if(!ParamValidator::validateParams($data, $requiredParams, $error)){
             self::sendOutput('Missing required parameters "' . $error . '"', array('HTTP/1.1 400 Bad Request'));
@@ -63,9 +63,9 @@ class orderDetailController extends BaseController
 
         $quantity = $data['quantity'];
         $totalPrice = $data['totalPrice'];
-        $orderID = $data['orderID'];
-        $productID = $data['productID'];
-        $newOrderDetail = new orderDetailModel($quantity, $totalPrice, $orderID, $productID);
+        $ORDER_ID = $data['ORDER_ID'];
+        $PRODUCT_ID = $data['PRODUCT_ID'];
+        $newOrderDetail = new orderDetailModel($quantity, $totalPrice, $ORDER_ID, $PRODUCT_ID);
 
         try {
             $result = OrderDetailDao::createOrderDetail($newOrderDetail);
@@ -79,7 +79,7 @@ class orderDetailController extends BaseController
         }
     }
 
-    public static function getOrderDetailsByOrderId(){
+    public static function getOrderDetailsByORDER_ID(){
         
     }
 

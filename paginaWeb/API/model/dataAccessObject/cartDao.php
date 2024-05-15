@@ -3,12 +3,12 @@
 class CartDAO extends Factory {
     public static function buildCartModel($cartData) {
         if ($cartData) {
-            return new Cart(
-                $cartData['cartID'],
-                $cartData['lastUpdate'],
-                $cartData['quantity'],
-                $cartData['userID'],
-                $cartData['productID']
+            return array(
+                'CART_ID' =>$cartData['CART_ID'],
+                'last_update' =>$cartData['last_update'],
+                'quantity' =>$cartData['quantity'],
+                'USER_ID' =>$cartData['USER_ID'],
+                'PRODUCT_ID' =>$cartData['PRODUCT_ID']
             );
         } else {
             return null;
@@ -16,12 +16,12 @@ class CartDAO extends Factory {
     }
 
     public static function createCart(Cart $cart) {
-        $query = "INSERT INTO Cart  VALUES (NULL, ?, ?, ?, ?)";
+        $query = "INSERT INTO CART VALUES (NULL, ?, ?, ?, ?)";
         $params = array(
-            $cart->lastUpdate,
+            $cart->last_update,
             $cart->quantity,
-            $cart->userID,
-            $cart->productID
+            $cart->USER_ID,
+            $cart->PRODUCT_ID
         );
         
         try {
@@ -32,9 +32,9 @@ class CartDAO extends Factory {
         }
     }
 
-    public static function getCartByUserID($userID) {
-        $query = "SELECT * FROM Cart WHERE userID = ?";
-        $params = array($userID);
+    public static function getCartByUSER_ID($USER_ID) {
+        $query = "SELECT * FROM CART WHERE USER_ID = ?";
+        $params = array($USER_ID);
         
         try {
             $result = self::select($query, $params);
@@ -48,9 +48,9 @@ class CartDAO extends Factory {
         }
     }
 
-    public static function updateCartQuantity($cartID, $newQuantity) {
-        $query = "UPDATE Cart SET quantity = ? WHERE cartID = ?";
-        $params = array($newQuantity, $cartID);
+    public static function updateCartQuantity($CART_ID, $newQuantity) {
+        $query = "UPDATE Cart SET quantity = ? WHERE CART_ID = ?";
+        $params = array($newQuantity, $CART_ID);
         
         try {
             self::select($query, $params);
@@ -61,9 +61,9 @@ class CartDAO extends Factory {
     }
 
     //revisar
-    public static function deleteCart($cartID) {
-        $query = "DELETE FROM Cart WHERE cartID = ?";
-        $params = array($cartID);
+    public static function deleteCart($CART_ID) {
+        $query = "DELETE FROM Cart WHERE CART_ID = ?";
+        $params = array($CART_ID);
         
         try {
             self::select($query, $params);
@@ -73,9 +73,9 @@ class CartDAO extends Factory {
         }
     }
 
-    public static function clearCartByUserID($userID) {
-        $query = "DELETE FROM Cart WHERE userID = ?";
-        $params = array($userID);
+    public static function clearCartByUSER_ID($USER_ID) {
+        $query = "DELETE FROM Cart WHERE USER_ID = ?";
+        $params = array($USER_ID);
         
         try {
             self::select($query, $params);
@@ -85,9 +85,9 @@ class CartDAO extends Factory {
         }
     }
 
-    public static function getTotalProductsInCart($userID) {
-        $query = "SELECT SUM(quantity) AS total FROM Cart WHERE userID = ?";
-        $params = array($userID);
+    public static function getTotalProductsInCart($USER_ID) {
+        $query = "SELECT SUM(quantity) AS total FROM Cart WHERE USER_ID = ?";
+        $params = array($USER_ID);
         
         try {
             $result = self::select($query, $params);
@@ -97,9 +97,9 @@ class CartDAO extends Factory {
         }
     }
 
-    public static function getAllProductsInCart($userID) {
-        $query = "SELECT * FROM Cart WHERE userID = ?";
-        $params = array($userID);
+    public static function getAllProductsInCart($USER_ID) {
+        $query = "SELECT * FROM Cart WHERE USER_ID = ?";
+        $params = array($USER_ID);
         
         try {
             $result = self::select($query, $params);

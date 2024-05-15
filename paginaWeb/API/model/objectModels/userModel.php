@@ -1,7 +1,7 @@
 <?php
 class UserModel
 {
-    private $userID;
+    private $USER_ID;
     private $userName;
     private $name;
     private $rol;
@@ -9,9 +9,9 @@ class UserModel
     private $email;
     private $active;
 
-    public function __construct($userID, $userName, $name, $rol, $password, $email, $active)
+    public function __construct($USER_ID, $userName, $name, $rol, $password, $email, $active)
     {
-        $this->userID = $userID;
+        $this->USER_ID = $USER_ID;
         $this->userName = $userName;
         $this->name = $name;
         $this->rol = $rol;
