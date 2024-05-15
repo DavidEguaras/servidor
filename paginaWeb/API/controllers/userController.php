@@ -64,42 +64,42 @@ class UserController extends BaseController
     {
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
-
+    
         $error = "";
         $requiredParams = ['username', 'name', 'rol', 'password', 'email'];
-
+    
         if (!ParamValidator::validateParams($data, $requiredParams, $error)) {
             self::sendOutput('Missing required parameters "' . $error .'"', array('HTTP/1.1 400 Bad Request'));
             return;
         }
-
+    
         if (!ParamValidator::validatePassword($data['password'])) {
             self::sendOutput('Password must contain at least one special character', array('HTTP/1.1 400 Bad Request'));
             return;
         }
-
+    
         if (!ParamValidator::validateEmail($data['email'])) {
             self::sendOutput('Invalid email format', array('HTTP/1.1 400 Bad Request'));
             return;
         }
-
+    
         if (!ParamValidator::validateName($data['name'])) {
             self::sendOutput('Name must not contain numbers', array('HTTP/1.1 400 Bad Request'));
             return;
         }
-
+    
         if (!ParamValidator::validateRole($data['rol'])) {
             self::sendOutput('Invalid role', array('HTTP/1.1 400 Bad Request'));
             return;
         }
-
+    
         $username = $data['username'];
         $name = $data['name'];
         $rol = $data['rol'];
-        $password = $data['password'];
+        $password = sha1($data['password']);
         $email = $data['email'];
-
-
+    
+    
         $newUser = new UserModel(null, $username, $name, $rol, $password, $email, true);
      
         try {
@@ -113,6 +113,7 @@ class UserController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
+    
 
     public static function getAllUsers()
     {

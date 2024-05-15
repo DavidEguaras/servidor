@@ -32,8 +32,11 @@ MVC DE PHP
 
 
 ARREGLAR CONTROLLERS:
-	-IDs con autoIncrement, null
-	-solucionar la referencia a los DAOs (borrar las referencias y llamar a la clase (con mayuscula))
+	-IDs con autoIncrement, null✅
+	-solucionar la referencia a los DAOs (borrar las referencias y llamar a la clase (con mayuscula))✅
 	-prodcutController
-	-isActive metodo
+	-isActive metodo✅
 	-comprobar que funcionan al menos los get y post de todas las clases
+	-modificar los DAOs (en el buildModel, hacerlo clave valor y retornar un array), tambien en el getAll, comprobar el select de factory, 
+	que sea un select, no un un selectAll
+	-

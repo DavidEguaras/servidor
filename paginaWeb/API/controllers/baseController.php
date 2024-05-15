@@ -11,13 +11,13 @@ class BaseController
     {
         $uri = parse_url($_SERVER['PATH_INFO'], PHP_URL_PATH);
         $uri = explode( '/', $uri );
-        array_shift($uri);
         return $uri;
     }
 
     public static function getQueryStringParams()
     {
-        return parse_str($_SERVER['QUERY_STRING'], $query);
+     parse_str($_SERVER['QUERY_STRING'], $query);
+     return $query;
     }
 
     public static function sendOutput($data, $httpHeaders=array())

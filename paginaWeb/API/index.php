@@ -14,7 +14,7 @@ if (isset($_SERVER['PATH_INFO'])) {
     // Obtener la accion solicitada a traves de parametros GET, POST...
     $action = BaseController::getUriSegments();
 
-    switch ($action[0]) {
+    switch ($action[1]) {
         case 'user':
             $userController = new UserController();
             $userController->method();

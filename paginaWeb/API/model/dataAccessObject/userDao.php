@@ -5,13 +5,14 @@ class UserDAO extends Factory
     public static function buildUserModel($userData)
     {
         if ($userData) {
-            return new UserModel(
-                $userData['username'],
-                $userData['name'],
-                $userData['rol'],
-                $userData['password'],
-                $userData['email'],
-                $userData['active']
+            return array(
+                'USER_ID' =>$userData['USER_ID'],
+                'username' =>$userData['username'],
+                'name' =>$userData['name'],
+                'rol' =>$userData['rol'],
+                'password' =>$userData['password'],
+                'email' =>$userData['email'],
+                'active' =>$userData['active']
             );
         } else {
             return null;
@@ -57,7 +58,7 @@ class UserDAO extends Factory
         $query = "SELECT * FROM USER";
         
         try {
-            $result = self::selectAll($query);
+            $result = self::select($query);
             
             $users = array();
             foreach ($result as $userData) {

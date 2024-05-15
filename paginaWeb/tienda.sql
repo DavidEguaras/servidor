@@ -68,3 +68,46 @@ CREATE TABLE ORDER_DETAIL (
     FOREIGN KEY (FK_ORDER_ID) REFERENCES ORDERS(ORDER_ID),
     FOREIGN KEY (FK_PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
 );
+
+
+
+
+-- Insertar usuarios
+INSERT INTO USER (username, name, rol, password, email) VALUES
+('usuario1', 'Juan Pérez', 'cliente', 'contraseña1', 'juan@example.com'),
+('usuario2', 'María López', 'cliente', 'contraseña2', 'maria@example.com'),
+('admin1', 'Admin Admin', 'administrador', 'adminpass', 'admin@example.com');
+
+-- Insertar tipos de productos
+INSERT INTO PRODUCT_TYPE (category, name, price, brand, description) VALUES
+('Electrónica', 'Smartphone', 500.00, 'Samsung', 'Smartphone Samsung Galaxy S20'),
+('Electrodomésticos', 'Lavadora', 800.00, 'Whirlpool', 'Lavadora de carga frontal'),
+('Ropa', 'Camiseta', 20.00, 'Nike', 'Camiseta deportiva Nike'),
+('Electrónica', 'Laptop', 1200.00, 'Dell', 'Laptop Dell XPS 13');
+
+-- Insertar productos
+INSERT INTO PRODUCT (color, size, stock, imageRoute, FK_PT_ID) VALUES
+('Negro', 'Grande', 50, '/images/s20.jpg', 1),
+('Blanco', 'Mediano', 30, '/images/lavadora.jpg', 2),
+('Rojo', 'Pequeño', 100, '/images/camiseta.jpg', 3),
+('Plata', 'Mediano', 20, '/images/laptop.jpg', 4);
+
+-- Insertar elementos en el carrito
+INSERT INTO CART (last_update, quantity, FK_USER_ID, FK_PRODUCT_ID) VALUES
+('2024-05-15', 2, 1, 1),
+('2024-05-15', 1, 1, 2),
+('2024-05-15', 3, 2, 3),
+('2024-05-15', 1, 3, 4);
+
+-- Insertar órdenes
+INSERT INTO ORDERS (order_date, direction, payment, total, FK_USER_ID) VALUES
+('2024-05-15 10:30:00', 'Calle 123', 'Tarjeta de crédito', 1200.00, 1),
+('2024-05-15 11:45:00', 'Avenida Principal', 'PayPal', 100.00, 2),
+('2024-05-15 12:15:00', 'Plaza Central', 'Efectivo', 2400.00, 3);
+
+-- Insertar detalles de órdenes
+INSERT INTO ORDER_DETAIL (quantity, total_price, FK_ORDER_ID, FK_PRODUCT_ID) VALUES
+(2, 1000.00, 1, 1),
+(1, 800.00, 1, 2),
+(3, 60.00, 2, 3),
+(1, 1200.00, 3, 4);

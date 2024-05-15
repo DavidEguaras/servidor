@@ -36,6 +36,13 @@ class ParamValidator
         return true;
     }
 
+    public static function isActive($active)
+    {
+        if ($active == true){
+            return true;
+        }
+        return false;
+    }
     public static function validateRole($role)
     {
         if ($role !== 'user') {
