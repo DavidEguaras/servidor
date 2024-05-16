@@ -14,3 +14,7 @@ SELECT DISTINCT (PT_ID) FROM PRODUCT_TYPE
     AND Pro;
 
 color, size, category, price, brand
+
+-- por cada filtro, se agrega al query una condicion AND y se iguala( 
+-- salvo en algun caso como por ejemplo el precio que simplemente seria poner un <)
+--Ya que al ser clave valor le pasamos un array con estos valores y por cada filtro agregamos un AND al select
