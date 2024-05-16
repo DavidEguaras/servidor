@@ -1,7 +1,7 @@
 <?php
 
 class OrderDetailDAO extends Factory {
-    // Método para construir un objeto OrderDetail a partir de los datos obtenidos de la base de datos
+    // Metodo para construir un objeto OrderDetail a partir de los datos obtenidos de la base de datos
     public static function buildOrderDetailModel($orderDetailData) {
         if ($orderDetailData) {
             return array(
@@ -16,7 +16,7 @@ class OrderDetailDAO extends Factory {
         }
     }
 
-    // Método para crear un nuevo detalle de orden en la base de datos
+    // Metodo para crear un nuevo detalle de orden en la base de datos
     public static function createOrderDetail($orderDetail) {
         $query = "INSERT INTO OrderDetail VALUES (NULL, ?, ?, ?, ?)";
         $params = array(
@@ -34,7 +34,7 @@ class OrderDetailDAO extends Factory {
         }
     }
 
-    // Método para obtener todos los detalles de orden de una orden específica
+    // Metodo para obtener todos los detalles de orden de una orden específica
     public static function getOrderDetailsByORDER_ID($ORDER_ID) {
         $query = "SELECT * FROM OrderDetail WHERE ORDER_ID = ?";
         $params = array($ORDER_ID);

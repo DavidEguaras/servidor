@@ -17,8 +17,8 @@ ul#answers li {margin-top:1.8em}
 <li><b>2.</b> <a href='#q2'>Encuentro el siguiente error cuando intento generar un PDF: Some data has already been output, can't send PDF file</a></li>
 <li><b>3.</b> <a href='#q3'>Caracteres acentuados son reemplazados por algunos caracteres extraños como Ã©.</a></li>
 <li><b>4.</b> <a href='#q4'>Intento incluir el símbolo del euro, pero no funciona.</a></li>
-<li><b>5.</b> <a href='#q5'>Intento mostrar una variable en el método Header pero no se imprime nada.</a></li>
-<li><b>6.</b> <a href='#q6'>He definido los métodos Header y Footer en mi clase PDF, pero no se muestra nada.</a></li>
+<li><b>5.</b> <a href='#q5'>Intento mostrar una variable en el Metodo Header pero no se imprime nada.</a></li>
+<li><b>6.</b> <a href='#q6'>He definido los Metodos Header y Footer en mi clase PDF, pero no se muestra nada.</a></li>
 <li><b>7.</b> <a href='#q7'>No consigo que los saltos de línea funcionen. Pongo \n en la cadena para MultiCell, pero no funciona.</a></li>
 <li><b>8.</b> <a href='#q8'>Uso jQuery para generar el archivo PDF pero éste no se muestra.</a></li>
 <li><b>9.</b> <a href='#q9'>Dibujo un marco con dimensiones muy precisas pero, cuando lo imprimo, noto algunas diferencias.</a></li>
@@ -81,7 +81,7 @@ como esta para su comodidad:
 </li>
 
 <li id='q5'>
-<p><b>5.</b> <span class='question'>Intento mostrar una variable en el método Header pero no se imprime nada.</span></p>
+<p><b>5.</b> <span class='question'>Intento mostrar una variable en el Metodo Header pero no se imprime nada.</span></p>
 Tienes que utilizar la palabra clave <code>global</code> para acceder a las variables globales, por ejemplo:
 <div class="doc-source">
 <pre><code>function Header()
@@ -107,7 +107,7 @@ $pdf-&gt;title = 'Mi Título';</code></pre>
 </li>
 
 <li id='q6'>
-<p><b>6.</b> <span class='question'>He definido los métodos Header y Footer en mi clase PDF, pero no se muestra nada.</span></p>
+<p><b>6.</b> <span class='question'>He definido los Metodos Header y Footer en mi clase PDF, pero no se muestra nada.</span></p>
 Tiene que crear un objeto de la clase PDF, no de la FPDF:
 <div class="doc-source">
 <pre><code>$pdf = new PDF();</code></pre>
@@ -137,7 +137,7 @@ e imprimir en la totalidad del papel.
 
 <li id='q11'>
 <p><b>11.</b> <span class='question'>¿Cómo puedo poner un fondo en mi PDF?</span></p>
-Para una imagen, invoque Image() en el método Header(), antes que cualquier otra salida. Para configurar un color de fondo, use Rect().
+Para una imagen, invoque Image() en el Metodo Header(), antes que cualquier otra salida. Para configurar un color de fondo, use Rect().
 </li>
 
 <li id='q12'>
@@ -204,7 +204,7 @@ $pdf = new PDF();</code></pre>
 
 <li id='q14'>
 <p><b>14.</b> <span class='question'>¿Cómo abrir el archivo PDF en otra pestaña?</span></p>
-Sigue el mismo método que utilizarías para una página HTML o algo similar.
+Sigue el mismo Metodo que utilizarías para una página HTML o algo similar.
 Añade: target=”_blank” a tu link o form.
 </li>
 

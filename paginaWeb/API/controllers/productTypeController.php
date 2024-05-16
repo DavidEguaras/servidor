@@ -8,10 +8,10 @@ class ProductTypeController extends BaseController
 {
     public static function method()
     {
-        // Obtener el metodo de la solicitud
+        // Obtener el Metodo de la solicitud
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        // Realizar la accion correspondiente segun el método de solicitud
+        // Realizar la accion correspondiente segun el Metodo de solicitud
         switch ($requestMethod) {
             case 'GET':
                 self::handleGetRequest();

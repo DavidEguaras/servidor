@@ -1,7 +1,7 @@
 <?php
 
 class ProductTypeDAO extends Factory {
-    // Método para construir un objeto productTypeModel a partir de los datos obtenidos de la base de datos
+    // Metodo para construir un objeto productTypeModel a partir de los datos obtenidos de la base de datos
     public static function buildProductTypeModel($productTypeData) {
         if ($productTypeData) {
             return array(
@@ -17,7 +17,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para crear un nuevo tipo de producto en la base de datos
+    // Metodo para crear un nuevo tipo de producto en la base de datos
     public static function createProductType($productType) {
         $query = "INSERT INTO ProductType VALUES (NULL, ?, ?, ?, ?, ?)";
         $params = array(
@@ -36,7 +36,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para obtener un tipo de producto por su ID
+    // Metodo para obtener un tipo de producto por su ID
     public static function getProductTypeByID($PT_ID) {
         $query = "SELECT * FROM ProductType WHERE PT_ID = ?";
         $params = array($PT_ID);
@@ -49,7 +49,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para actualizar la información de un tipo de producto en la base de datos
+    // Metodo para actualizar la información de un tipo de producto en la base de datos
     public static function updateProductType($productType) {
         $query = "UPDATE ProductType SET category = ?, name = ?, price = ?, brand = ?, description = ? WHERE PT_ID = ?";
         $params = array(
@@ -69,7 +69,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para eliminar un tipo de producto de la base de datos por su ID
+    // Metodo para eliminar un tipo de producto de la base de datos por su ID
     public static function deleteProductType($PT_ID) {
         $query = "DELETE FROM ProductType WHERE PT_ID = ?";
         $params = array($PT_ID);
@@ -97,7 +97,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para buscar tipos de productos por categoría
+    // Metodo para buscar tipos de productos por categoría
     public static function getProductTypesByCategory($category) {
         $query = "SELECT * FROM ProductType WHERE category = ?";
         $params = array($category);
@@ -114,7 +114,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para buscar tipos de productos por marca
+    // Metodo para buscar tipos de productos por marca
     public static function getProductTypesByBrand($brand) {
         $query = "SELECT * FROM ProductType WHERE brand = ?";
         $params = array($brand);
@@ -131,7 +131,7 @@ class ProductTypeDAO extends Factory {
         }
     }
 
-    // Método para obtener la cantidad de productos por tipo
+    // Metodo para obtener la cantidad de productos por tipo
     public static function getProductCountByType($PT_ID) {
         $query = "SELECT COUNT(*) AS productCount FROM Product WHERE PT_ID = ?";
         $params = array($PT_ID);

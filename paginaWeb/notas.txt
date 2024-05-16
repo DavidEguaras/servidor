@@ -36,7 +36,7 @@ MVC DE PHP
 ARREGLAR CONTROLLERS:
 	-IDs con autoIncrement, null✅
 	-solucionar la referencia a los DAOs (borrar las referencias y llamar a la clase (con mayuscula))✅
-	-isActive metodo✅
+	-isActive Metodo✅
 	-getOrderDetailsByORDER_ID✅
 	-prodcutController✅
 

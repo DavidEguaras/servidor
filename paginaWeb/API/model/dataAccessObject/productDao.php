@@ -75,7 +75,7 @@ class ProductDAO extends Factory {
         }
     }
 
-    // Método para obtener todos los productos de la base de datos
+    // Metodo para obtener todos los productos de la base de datos
     public static function getAllProducts() {
         $query = "SELECT * FROM Product";
         

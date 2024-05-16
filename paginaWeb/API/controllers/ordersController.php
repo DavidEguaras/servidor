@@ -94,7 +94,7 @@ class OrderController extends BaseController
         // Crear un nuevo objeto OrderModel con los datos proporcionados
         $newOrder = new OrderModel($order_date, $direction, $payment, $total, $USER_ID);
 
-        // Llamar al método createOrder en OrderDAO para agregar la nueva orden a la base de datos
+        // Llamar al Metodo createOrder en OrderDAO para agregar la nueva orden a la base de datos
         try {
             $result = OrderDao::createOrder($newOrder);
             if ($result) {

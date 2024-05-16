@@ -5,15 +5,15 @@ require("./dao/UserDAO.php");
 class UserController extends Base{
 
     public static function usuarios(){
-        // Obtener el método de la solicitud HTTP (GET, POST, PUT, DELETE)
-        $metodo = $_SERVER['REQUEST_METHOD'];
+        // Obtener el Metodo de la solicitud HTTP (GET, POST, PUT, DELETE)
+        $Metodo = $_SERVER['REQUEST_METHOD'];
         
         // Obtener los recursos y filtros de la URI
         $recursos = self::divideURI();
         $filtros = self::condiciones();
         
-        // switch para manejar diferentes métodos HTTP
-        switch ($metodo) {
+        // switch para manejar diferentes Metodos HTTP
+        switch ($Metodo) {
             case 'GET':
                 if (count($recursos) == 2 && count($filtros)==2) {
                    if(isset($filtros['Nombre'])&&isset($filtros['Contraseña'])){
@@ -87,8 +87,8 @@ class UserController extends Base{
                 break;
     
             default:
-                // Si se utiliza un método no permitido, devolver un error
-                self::response("HTTP/1.0 400 No permite el metodo utilizado");
+                // Si se utiliza un Metodo no permitido, devolver un error
+                self::response("HTTP/1.0 400 No permite el Metodo utilizado");
                 break;
     }
 }

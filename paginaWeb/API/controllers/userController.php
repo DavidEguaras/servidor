@@ -9,10 +9,10 @@ class UserController extends BaseController
 
     public static function method()
     {
-        // Obtener el método de la solicitud
+        // Obtener el Metodo de la solicitud
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-        // Realizar la acción correspondiente según el método de solicitud
+        // Realizar la acción correspondiente según el Metodo de solicitud
         switch ($requestMethod) {
             case 'GET':
                 self::handleGetRequest();
@@ -57,7 +57,7 @@ class UserController extends BaseController
     /*
     private static function handlePutRequest()
     {
-        //Si agregamos un metodo put, implementamos aqui la logica
+        //Si agregamos un Metodo put, implementamos aqui la logica
     }
     */
 //---------------------------------------------REQUEST HANDLERS---------------------------------------------

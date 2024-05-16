@@ -1,7 +1,7 @@
 <?php
 
 class OrderDAO extends Factory {
-    // Método para construir un objeto Order a partir de los datos obtenidos de la base de datos
+    // Metodo para construir un objeto Order a partir de los datos obtenidos de la base de datos
     public static function buildOrderModel($orderData) {
         if ($orderData) {
             return array(
@@ -17,7 +17,7 @@ class OrderDAO extends Factory {
         }
     }
 
-    // Método para crear una nueva orden en la base de datos
+    // Metodo para crear una nueva orden en la base de datos
     public static function createOrder($order) {
         $query = "INSERT INTO ORDERS VALUES (NULL, ?, ?, ?, ?, ?)";
         $params = array(
@@ -36,7 +36,7 @@ class OrderDAO extends Factory {
         }
     }
 
-    // Método para obtener una orden por su ID
+    // Metodo para obtener una orden por su ID
     public static function getOrderById($ORDER_ID) {
         $query = "SELECT * FROM ORDERS WHERE ORDER_ID = ?";
         $params = array($ORDER_ID);
@@ -49,7 +49,7 @@ class OrderDAO extends Factory {
         }
     }
 
-    // Método para obtener todas las órdenes de un usuario
+    // Metodo para obtener todas las órdenes de un usuario
     public static function getOrdersByUSER_ID($USER_ID) {
         $query = "SELECT * FROM ORDERS WHERE USER_ID = ?";
         $params = array($USER_ID);
@@ -66,7 +66,7 @@ class OrderDAO extends Factory {
         }
     }
 
-    // Método para eliminar una orden por su ID
+    // Metodo para eliminar una orden por su ID
     public static function deleteOrderById($ORDER_ID) {
         $query = "DELETE FROM ORDERS WHERE ORDER_ID = ?";
         $params = array($ORDER_ID);

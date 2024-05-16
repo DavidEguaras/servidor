@@ -52,24 +52,24 @@ for(</span>$i<span class="kw">=</span>1<span class="kw">;</span>$i<span class="k
 </span>?&gt;</code></pre>
 </div>
 <p class='demo'><a href='tuto2.php' target='_blank' class='demo'>[Ejecutar]</a></p>
-Este ejemplo hace uso de los métodos <a href='../doc/header.htm'>Header()</a> y <a href='../doc/footer.htm'>Footer()</a> para procesar las
+Este ejemplo hace uso de los Metodos <a href='../doc/header.htm'>Header()</a> y <a href='../doc/footer.htm'>Footer()</a> para procesar las
 cabeceras y pies de páginas. Se llaman automáticamente. Ya existen en la clase FPDF
 origuinal, pero no hacen nada. Por ello, tenemos que heredar la clase y sobreescribirlos.
 <br>
 <br>
-El logotipo se imprime con el método <a href='../doc/image.htm'>Image()</a> especificando su esquina superior
+El logotipo se imprime con el Metodo <a href='../doc/image.htm'>Image()</a> especificando su esquina superior
 izquierda y su anchura. La altura se calcula automáticamente respetando las proporciones
 de la imagen.
 <br>
 <br>
 Para imprimir el número de página, se le pasa un valor nulo (null) como ancho de la celda. Eso
 significa que la celda se extenderá hasta el margen derecho de la página; puede ser útil centrar
-el texto. El número actual de la página se devuelve por el métodos <a href='../doc/pageno.htm'>PageNo()</a>;
+el texto. El número actual de la página se devuelve por el Metodos <a href='../doc/pageno.htm'>PageNo()</a>;
 mientras que el número total de páginas se obtiene mediante un valor especial de
 <code>{nb}</code> que será sustituido cuando se cierre el documento (suponiendo que
 usted antes utilizara <a href='../doc/aliasnbpages.htm'>AliasNbPages()</a>).
 <br>
-Observe el uso del método <a href='../doc/sety.htm'>SetY()</a> que le permite especificar la posición en una
+Observe el uso del Metodo <a href='../doc/sety.htm'>SetY()</a> que le permite especificar la posición en una
 ubicación absoluta respecto del origen de coordenadas de la página, empezando por
 el principio o por el final.
 <br>
