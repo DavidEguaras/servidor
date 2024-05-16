@@ -47,6 +47,6 @@ DAOs
 	que sea un select, no un un selectAll✅
 	-MODIFICAR LA NOMENCLATURA PARA QUE SEA COMO EN LA BD✅
 
-
 DUDAS:
 	Como seria la logica para filtrar productos teniendo en cuenta el ProductType
+	-Para filtrar los productos
