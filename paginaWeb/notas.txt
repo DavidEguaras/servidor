@@ -27,13 +27,14 @@ MVC DE PHP
 		+Terminar Controladores ✅
 		+Codificar contrasena sha1✅
 	-MVC:	
-		+preguntarle a maria como interactuan los controladores y la vista en php
-		+comprobar controladores
+		+Los botones manejan que paginas se ven
+		+Tengo que aclarar los controladores, como van a ser y sus funciones(por ejemplo cuando se activan, como se activan, como se administra cada peticion a la API)
 		+Para manejar las vistas (con los roles) se hace mediante el almacenamiento en la session, esa session se guarda con el login y se destruye con el logout
 
 
 
 ARREGLAR CONTROLLERS:
+	+comprobar controladores
 	-IDs con autoIncrement, null✅
 	-solucionar la referencia a los DAOs (borrar las referencias y llamar a la clase (con mayuscula))✅
 	-isActive Metodo✅

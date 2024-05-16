@@ -140,26 +140,8 @@ class ProductTypeController extends BaseController
         }
     }
 
-    public static function getProductTypesByCategory($category)
-    {
-        try {
-            // Obtener tipos de productos por categoria de la base de datos
-            $productTypes = ProductTypeDAO::getProductTypesByCategory($category);
-            self::sendOutput(json_encode($productTypes), array('HTTP/1.1 200 OK'));
-        } catch (Exception $e) {
-            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
-        }
-    }
-
-    public static function getProductTypesByBrand($brand)
-    {
-        try {
-            // Obtener tipos de productos por marca de la base de datos
-            $productTypes = ProductTypeDAO::getProductTypesByBrand($brand);
-            self::sendOutput(json_encode($productTypes), array('HTTP/1.1 200 OK'));
-        } catch (Exception $e) {
-            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
-        }
+    public static function getFilteredProducts($filterArray){
+        
     }
 }
 ?>
