@@ -16,9 +16,12 @@ class BaseController
 
     public static function getQueryStringParams()
     {
-     parse_str($_SERVER['QUERY_STRING'], $query);
-     return $query;
+        parse_str($_SERVER['QUERY_STRING'], $query);
+        return $query;
     }
+
+
+    
 
     public static function sendOutput($data, $httpHeaders=array())
     {

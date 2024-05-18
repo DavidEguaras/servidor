@@ -44,6 +44,10 @@ class UserController extends BaseController
             self::getAllUsers();
         } elseif (count($resources) == 3 && count($filters) == 0) {
             self::getUserById($resources[2]);
+        } elseif (count($resources) == 3 && count($filters) == 2) {
+            if(isset($filters['username']) && isset($filters['password'])){
+                self::loginUser($filters['username'], $filters['password']);
+            }
         } else {
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }

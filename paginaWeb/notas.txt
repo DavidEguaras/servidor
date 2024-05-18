@@ -26,6 +26,7 @@ MVC DE PHP
 	-API:
 		+Terminar Controladores ✅
 		+Codificar contrasena sha1✅
+		+isActive()
 	-MVC:	
 		+Los botones manejan que paginas se ven
 		+Tengo que aclarar los controladores, como van a ser y sus funciones(por ejemplo cuando se activan, como se activan, como se administra cada peticion a la API)

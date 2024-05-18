@@ -96,6 +96,7 @@ class UserDAO extends Factory
             throw new Exception($e->getMessage());
         }
     }
+    
     public static function changePassword($USER_ID, $newPassword)
     {
         $query = "UPDATE USER SET password = ? WHERE USER_ID = ?";

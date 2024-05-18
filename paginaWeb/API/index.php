@@ -4,12 +4,6 @@
 require_once 'config/configBD.php';
 require_once 'config/config.php';
 
-$users = UserDAO::getAllUsers();
-print_r($users);
-
-
-
-
 // Verificar accion
 if (isset($_SERVER['PATH_INFO'])) {
     // Obtener la accion solicitada a traves de parametros GET, POST...
