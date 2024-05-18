@@ -5,7 +5,6 @@ require_once 'paramValidators/paramValidator.php';
 class OrderController extends BaseController
 {
 
-
     public static function method()
     {
         // SWITCH METHOD
