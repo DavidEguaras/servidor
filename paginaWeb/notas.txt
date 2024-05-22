@@ -41,7 +41,6 @@ ARREGLAR CONTROLLERS:
 	-isActive Metodo✅
 	-getOrderDetailsByORDER_ID✅
 	-prodcutController✅
-
 	-comprobar que funcionan al menos los get y post de todas las clases
 
 DAOs

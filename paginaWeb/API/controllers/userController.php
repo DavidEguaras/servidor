@@ -41,6 +41,7 @@ class UserController extends BaseController
         self::createUser();
     }
 
+
     public static function createUser()
     {
         $data = file_get_contents('php://input');
@@ -94,6 +95,7 @@ class UserController extends BaseController
         }
     }
 
+
     public static function getAllUsers()
     {
         try {
@@ -114,6 +116,8 @@ class UserController extends BaseController
         }
     }
 
+
+    
     public static function loginUser($data)
     {
         $requiredParams = ['username', 'password'];
