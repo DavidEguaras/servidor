@@ -8,7 +8,7 @@ if(isset($_REQUEST['login']))
 else if(!isset($_SESSION['usuario'])){
     $_SESSION['vista'] = VIEW .'login.php';
 }
-else if(isset($_REQUEST['Login_CerrarSesion'])){
+else if(isset($_REQUEST['logOut'])){
     session_destroy();
     header('Location: ./index.php');
     exit;

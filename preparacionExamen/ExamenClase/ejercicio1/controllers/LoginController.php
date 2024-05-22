@@ -25,7 +25,7 @@ elseif (isset($_REQUEST['Login_IniciarSesion'])){
             $errores['validado'] = "No existe el usuario y contraseña";
         }
     }
-} elseif (isset($_REQUEST['Login_CerrarSesion'])) {
+} elseif (isset($_REQUEST['logOut'])) {
     session_destroy();
     header('Location: ./index.php');
     exit;

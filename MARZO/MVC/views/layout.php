@@ -53,7 +53,7 @@
           <div class="col-2 d-flex align-items-center justify-content-evenly">
             <?php if (validado()) { ?>
               <form action="" method="post" class="ms-2">
-                <input type="submit" value="Log Out" name="Login_CerrarSesion" class="btn btn-primary w-50 ">
+                <input type="submit" value="Log Out" name="logOut" class="btn btn-primary w-50 ">
                 <input type="submit" value="Home" name="ir_home" class="btn btn-primary ">
               </form>
             <?php } else { ?>

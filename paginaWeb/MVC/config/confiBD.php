@@ -1,6 +1,5 @@
 <?
-define('IP', '192.168.1.13');
-define('USER', 'georgi');
-define('PASS', 'georgi');
-define('BD', 'tienda');
-
+define('IP', '192.168.7.210');
+define('USER', 'david');
+define('PASS', 'david');
+define('DB_NAME','tienda');

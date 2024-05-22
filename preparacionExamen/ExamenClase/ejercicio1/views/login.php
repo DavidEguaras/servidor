@@ -36,5 +36,5 @@
 </form>
 
 <form action="" method="post">
-    <input type="submit" value="Volver a la página principal" name="Login_CerrarSesion">
+    <input type="submit" value="Volver a la página principal" name="logOut">
 </form>

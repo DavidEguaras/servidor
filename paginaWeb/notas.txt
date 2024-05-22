@@ -50,4 +50,6 @@ DAOs
 
 DUDAS:
 	Como seria la logica para filtrar productos teniendo en cuenta el ProductType
-	-Para filtrar los productos
+	-Para filtrar los productos, se selecciona una imagen por tipo de producto, 
+	y despues, cuando se clicka en el tipo de producto, se llama a las variantes (productos)
+	de este tipo de producto

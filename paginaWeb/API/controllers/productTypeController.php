@@ -98,6 +98,7 @@ class ProductTypeController extends BaseController
 
         // Crear un nuevo objeto ProductTypeModel
         $productType = new ProductTypeModel(
+            null,
             $data['category'],
             $data['name'],
             $data['price'],

@@ -8,9 +8,9 @@ if(isset($_REQUEST['login'])){
         $nombreUser=$_REQUEST['nombre'];
         $passUser=$_REQUEST['pass'];
         //user?username=jdoe&password=password123
-            $datosUser = get("user?username=".$nombreUser."&password=".$passUser);
-            $datosUser = json_decode($datosUser,true); //true para convertir en array
-            $usuario=$datosUser;
+        $datosUser = get("user?username=".$nombreUser."&password=".$passUser);
+        $datosUser = json_decode($datosUser,true); //true para convertir en array
+        $usuario=$datosUser;
 
         // if(!$usuario){
         //     echo "usuario validado";
@@ -26,6 +26,8 @@ if(isset($_REQUEST['login'])){
             $_SESSION['vista'] = VIEW.'home.php';
             $_SESSION['controlador'] = CON.'homeController.php';
             require $_SESSION['controlador'];
+        }else{
+            //Declarar errors
         }
     }
 
