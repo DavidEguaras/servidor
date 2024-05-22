@@ -5,7 +5,7 @@ if(isset($_REQUEST['login'])){
     if(validarFormulario($errores)){
         $nombreUser=$_REQUEST['nombre'];
         $passUser=$_REQUEST['pass'];
-        $datosUser = get("usuarios?Nombre=".$nombreUser."&Contraseña=".$passUser);
+        $datosUser = get("user?username=".$nombreUser."&password=".$passUser);
         $datosUser = json_decode($datosUser,true); //true para convertir en array
         $usuario=$datosUser;
         // if(!$usuario){
@@ -22,12 +22,6 @@ if(isset($_REQUEST['login'])){
             $_SESSION['vista'] = VIEW.'home.php';
             $_SESSION['controlador'] = CON.'homeController.php';
             require $_SESSION['controlador'];
-            //comprobar carrito
-            $datosCarritoUser=$datosProducto=get("carrito?".$usuario->Id);
-            $datosCarritoUser=json_decode($datosCarritoUser);
-            if($datosCarritoUser){
-                $_SESSION['carrito']=$datosCarritoUser;
-            }
-        }   
+        }
     }
 }

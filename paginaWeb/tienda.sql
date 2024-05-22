@@ -1,4 +1,3 @@
--- Eliminar la base de datos si existe
 DROP DATABASE IF EXISTS tienda;
 
 -- Crear la base de datos

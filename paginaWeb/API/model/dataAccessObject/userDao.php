@@ -87,15 +87,21 @@ class UserDAO extends Factory
     public static function login($username, $password)
     {
         $query = "SELECT * FROM USER WHERE username = ? AND password = ? AND active = 1";
-        $params = array($username, $password);
+        $params = array($username, sha1($password)); // Asegúrate de que la contraseña esté encriptada como se espera
 
         try {
             $result = self::select($query, $params);
-            return self::buildUserModel($result);
+            if (!empty($result)) {
+                return self::buildUserModel($result[0]); // Aquí debemos pasar solo el primer resultado si existe
+            } else {
+                return null;
+            }
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
     }
+
+
     
     public static function changePassword($USER_ID, $newPassword)
     {
@@ -125,7 +131,4 @@ class UserDAO extends Factory
         }
     }
 }
-
-
-
 ?>

@@ -1,88 +1,131 @@
 <?php
-
-require("./modelo/Usuario.php");
-require_once("./dao/factoryBD.php");
-
-class UserDAO{
-
-
-   
-
-
-
-    //devolver array asociativo
-    public static function validarUser($nombre, $contraseña) {
-        // $contraseña = sha1($contraseña);
-        $sql = "SELECT * FROM Usuario WHERE Nombre = ? AND Contraseña = ?";
-        $parametros = array($nombre, $contraseña);
-        $result = FactoryBd::realizaConsulta($sql, $parametros);
-    
-        if ($result->rowCount() == 1) {
-            $usuarioStd = $result->fetch(PDO::FETCH_ASSOC); 
-            return $usuarioStd; 
+class UserDAO extends Factory
+{
+    public static function buildUserModel($userData)
+    {
+        if ($userData && isset($userData[0])) {
+            $userData = $userData[0];
+            return array(
+                'USER_ID' => $userData['USER_ID'],
+                'username' => $userData['username'],
+                'name' => $userData['name'],
+                'rol' => $userData['rol'],
+                'password' => $userData['password'],
+                'email' => $userData['email'],
+                'active' => $userData['active']
+            );
         } else {
-            return null; 
+            return null;
         }
     }
-    public static function findById($id){
-        $sql = "select * from   Usuario where Id  = ?";
-        $parametros = array($id);
-        $result = FactoryBd::realizaConsulta($sql, $parametros);
-        if ($result->rowCount() == 1) {
-            $usuarioStd = $result->fetchAll(PDO::FETCH_ASSOC);
-            return $usuarioStd;
-        } else
-            return null;
-    }
 
-    public static function insert($usuario){
-        $sql = "INSERT INTO Usuario (Nombre, Contraseña, Email, FechaNacimiento, IdRol, Borrado) VALUES (?, ?, ?, ?, ?, ?)";
-        $parametros = array(
-            $usuario->Nombre,
-            sha1($usuario->Contraseña),
-            $usuario->Email,
-            $usuario->FechaNacimiento,
-            $usuario->IdRol,
-            $usuario->Borrado
+    public static function createUser($user)
+    {
+        $query = "INSERT INTO USER VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+        $params = array(
+            $user->userName,
+            $user->name,
+            $user->rol,
+            $user->password,
+            $user->email,
+            $user->active
         );
         
-        return FactoryBd::realizaConsulta($sql, $parametros);
+        try {
+            self::select($query, $params);
+            return $user;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public static function getUserByUsername($username)
+    {
+        $query = "SELECT * FROM USER WHERE username = ?";
+        $params = array($username);
+        
+        try {
+            $result = self::select($query, $params);
+            return self::buildUserModel($result);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
     }
     
+    public static function getAllUsers()
+    {
+        $query = "SELECT * FROM USER";
+        
+        try {
+            $result = self::select($query);
+            
+            $users = array();
+            foreach ($result as $userData) {
+                $users[] = self::buildUserModel($userData);
+            }
+            return $users;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 
+    public static function getUserById($USER_ID)
+    {
+        $query = "SELECT * FROM USER WHERE USER_ID = ?";
+        $params = array($USER_ID);
+        
+        try {
+            $result = self::select($query, $params);
+            return self::buildUserModel($result);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 
+    public static function login($username, $password)
+    {
+        $query = "SELECT * FROM USER WHERE username = ? AND password = ? AND active = 1";
+        $params = array($username, $password);
 
-    public static function update($usuario){
-        $sql = "update Usuario set Nombre = ?, Contraseña = ?, Email = ?, FechaNacimiento = ?, IdRol = ? , Borrado = ? where Id = ?";
-        $parametros = array(
-            $usuario->Nombre,
-            $usuario->Contraseña,
-            $usuario->Email,
-            $usuario->FechaNacimiento,
-            $usuario->IdRol,
-            $usuario->Borrado,
-            $usuario->Id
-        );
-        return FactoryBd::realizaConsulta($sql, $parametros);
+        try {
+            $result = self::select($query, $params);
+            return self::buildUserModel($result);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
     }
     
-
-    public static function delete($id){
-        $sql = "delete from Usuario where Id = ?";
-        $parametros = array($id);
-        return FactoryBd::realizaConsulta($sql, $parametros);
+    public static function changePassword($USER_ID, $newPassword)
+    {
+        $query = "UPDATE USER SET password = ? WHERE USER_ID = ?";
+        $params = array($newPassword, $USER_ID);
+        
+        try {
+            self::select($query, $params);
+            // Devuelve true si la contraseña se cambió correctamente
+            return true;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
-
-
-
-
-
-
-
+    public static function deleteUserAccount($USER_ID, $active)
+    {
+        $query = "UPDATE USER SET active = ? WHERE USER_ID = ?";
+        $params = array($active, $USER_ID);
+        
+        try {
+            self::select($query, $params);
+            // Devuelve true si la cuenta de usuario se activó o desactivó correctamente
+            return true;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 }
-
-    
-
-
 ?>
+
+<?php
+require_once 'model/dataAccessObject/userDao.php';
+require_once 'model/objectModels/userModel.php';
+require_once 'paramValidators/paramValidator.php';

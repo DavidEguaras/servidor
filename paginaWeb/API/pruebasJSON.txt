@@ -7,7 +7,3 @@ USERS
   "password": "david*",
   "email": "dabenegu@gmail.com"
 }
-
-PRODUCT TYPE{
-    ""
-}
