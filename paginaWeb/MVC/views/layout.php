@@ -21,10 +21,89 @@
         .card {
             height: auto; /* Ajustar la altura según sea necesario */
         }
+        footer{
+            font-family: Contrail One;
+            padding: 20px;
+        }
+        .headerTop{
+            background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(19,21,21,1) 94%);
+            padding: 20px;
+        }
+        .logo{
+            font-family: Contrail One; 
+        }
+        .logo h1{
+            font-size: 45px;
+            letter-spacing: 5px;
+        }
+        .phrase{
+            font-family: Cascadia Code;
+            color: aquamarine;
+        }
+        .topRight{
+            padding: 25px;
+            font-size: 18px;
+        }
+        nav i{
+            margin-right: 20px;
+            color: aqua;
+            font-family: Cascadia Code;
+        }
+        nav a{
+            color: white;
+            text-decoration: none;
+        }
+        .userIcons{
+            font-size:20px;
+        }
+        .userIcons a{
+            margin-right: 25px;
+            color: black;
+        }
+
+        .headerBot{
+            padding: 10px;
+            background: rgb(0,255,224);
+        }
+        .botRight{
+            margin-left: 80%;
+            justify-content: space-evenly;
+        }
+        .searchBox input[type=text]{
+            background-color: black;
+            color:white;
+            width: 80%;
+            padding: 5px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-family: Cascadia Code;
+            margin-right: 15px;
+        }
+
+
+        .login-box {
+            font-family: Cascadia Code;
+            background-color: black;
+            border-radius: 3px;
+            padding: 40px;
+            -webkit-box-shadow: 18px 18px 5px 0px rgba(0,255,255,1);
+            -moz-box-shadow: 18px 18px 5px 0px rgba(0,255,255,1);
+            box-shadow: 18px 18px 5px 0px rgba(0,255,255,1);
+        }
+
+        .text-info {
+            color: aquamarine;
+        }
+
+        .form-control {
+            background-color: #ccc;
+            border: none;
+        }
     </style>
 </head>
 <body class="bg-dark text-white">
-    <div class="container">
+
 
         <header class="header mb-5">
             <div class="headerTop bg-black container-fluid d-flex flex-row text-white">
@@ -38,17 +117,17 @@
                 </div>
                 <div class="topRight d-flex align-items-center justify-content-evenly">
                     <nav class="d-flex">
-                        <ul class="navbar-nav d-flex flex-row">
+                        <ul class="navbar-nav d-flex flex-column">
                             <li class="nav-item">
-                                <i>01.<a href="#">Style Man</a></i>
-                                <i>02.<a href="#">Style Women</a></i>
+                                <i>01.<a href="#">Man</a></i>
+                                <i>02.<a href="#">Women</a></i>
                             </li>
                         </ul>
                     </nav>
-                    <form class="d-flex ms-3" role="search">
+                    <!-- <form class="d-flex ms-3" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    </form> -->
                     <?php if (validado()) { ?>
                         <form action="" method="post" class="ms-3">
                             <input type="submit" value="Log Out" name="Login_CerrarSesion" class="btn btn-primary w-50">
@@ -56,7 +135,7 @@
                         </form>
                     <?php } else { ?>
                         <form action="" method="post" class="ms-3">
-                            <input type="submit" value="Login" name="ir_login" class="btn btn-link">
+                            <input type="submit" value="Login" name="ir_login" class="btn btn-primary mt-1">
                         </form>
                     <?php } ?>
                 </div>
@@ -64,6 +143,14 @@
         </header>
         <main>
             <?php
+                
+                if(isset($_SESSION['controlador'])) {
+                    print_r($_SESSION['controlador']);
+                }
+                if(isset($_SESSION['vista'])) {
+                            print_r($_SESSION['vista']);
+                }
+
                 if(!isset($_SESSION['vista'])){
                     require VIEW.'login.php';
                 } else {
@@ -102,6 +189,5 @@
                 </div>
             </div>
         </footer>
-    </div>
 </body>
 </html>

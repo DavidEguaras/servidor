@@ -1,12 +1,6 @@
 <?php
 
 
-if(isset($_SESSION['controlador'])) {
-    print_r($_SESSION['controlador']);
-}
-if(isset($_SESSION['vista'])) {
-    print_r($_SESSION['vista']);
-}
 
 if(isset($_REQUEST['login'])){
     $errores = array();
