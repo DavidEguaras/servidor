@@ -84,42 +84,38 @@ class UserDAO extends Factory
         }
     }
 
+    
+
     public static function login($username, $password)
     {
+    
+        // Mensajes de depuración
+        error_log("Intentando iniciar sesión con:");
+        error_log("Username: " . $username);
+        error_log("Password: " . $password);
+    
         $query = "SELECT * FROM USER WHERE username = ? AND password = ? AND active = 1";
-        $params = array($username, sha1($password)); // Asegúrate de que la contraseña esté encriptada como se espera
-
+        $params = array($username, $password);
+    
         try {
             $result = self::select($query, $params);
-            if (!empty($result)) {
-                return self::buildUserModel($result[0]); // Aquí debemos pasar solo el primer resultado si existe
+            if (!empty($result) && count($result) == 1) {
+                return self::buildUserModel($result[0]);
             } else {
-                return null;
+                return null; // Devolvemos null si no hay coincidencia
             }
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
     }
-
-
     
-    public static function changePassword($USER_ID, $newPassword)
-    {
-        $query = "UPDATE USER SET password = ? WHERE USER_ID = ?";
-        $params = array($newPassword, $USER_ID);
-        
-        try {
-            self::select($query, $params);
-            // Devuelve true si la contraseña se cambió correctamente
-            return true;
-        } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
+    
+    
 
-    public static function deleteUserAccount($USER_ID, $active)
+
+    public static function deleteUserAccount($USER_ID)
     {
-        $query = "UPDATE USER SET active = ? WHERE USER_ID = ?";
+        $query = "UPDATE USER SET active = 0 WHERE USER_ID = ?";
         $params = array($active, $USER_ID);
         
         try {

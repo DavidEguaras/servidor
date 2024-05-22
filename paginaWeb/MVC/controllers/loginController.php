@@ -1,13 +1,23 @@
 <?php
 
+
+if(isset($_SESSION['controlador'])) {
+    print_r($_SESSION['controlador']);
+}
+if(isset($_SESSION['vista'])) {
+    print_r($_SESSION['vista']);
+}
+
 if(isset($_REQUEST['login'])){
     $errores = array();
     if(validarFormulario($errores)){
         $nombreUser=$_REQUEST['nombre'];
         $passUser=$_REQUEST['pass'];
-        $datosUser = get("user?username=".$nombreUser."&password=".$passUser);
-        $datosUser = json_decode($datosUser,true); //true para convertir en array
-        $usuario=$datosUser;
+        //user?username=jdoe&password=password123
+            $datosUser = get("user?username=".$nombreUser."&password=".$passUser);
+            $datosUser = json_decode($datosUser,true); //true para convertir en array
+            $usuario=$datosUser;
+
         // if(!$usuario){
         //     echo "usuario validado";
         // }
@@ -24,4 +34,5 @@ if(isset($_REQUEST['login'])){
             require $_SESSION['controlador'];
         }
     }
+
 }

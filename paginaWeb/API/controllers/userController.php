@@ -26,7 +26,7 @@ class UserController extends BaseController
     {
         $resources = self::getUriSegments();
         $filters = self::getQueryStringParams();
-
+    
         if (count($resources) == 2 && count($filters) == 0) {
             self::getAllUsers();
         } elseif (count($resources) == 2 && isset($filters['username']) && isset($filters['password'])) {
@@ -35,6 +35,9 @@ class UserController extends BaseController
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
     }
+    
+  
+    
 
     private static function handlePostRequest()
     {
@@ -117,7 +120,6 @@ class UserController extends BaseController
     }
 
 
-    
     public static function loginUser($data)
     {
         $requiredParams = ['username', 'password'];
@@ -126,13 +128,13 @@ class UserController extends BaseController
             self::sendOutput('Missing required parameters "' . $error . '"', array('HTTP/1.1 400 Bad Request'));
             return;
         }
-
+    
         $username = $data['username'];
         $password = $data['password'];
-
+    
         try {
             $user = UserDAO::login($username, $password);
-
+    
             if ($user) {
                 self::sendOutput(json_encode($user), array('HTTP/1.1 200 OK'));
             } else {
@@ -142,35 +144,8 @@ class UserController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
+    
 
-
-    public static function changePassword($USER_ID, $newPassword)
-    {
-        try {
-            $result = UserDAO::changePassword($USER_ID, $newPassword);
-            if ($result) {
-                self::sendOutput('Password changed successfully', array('HTTP/1.1 200 OK'));
-            } else {
-                self::sendOutput('Failed to change password', array('HTTP/1.1 500 Internal Server Error'));
-            }
-        } catch (Exception $e) {
-            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
-        }
-    }
-
-    public static function resetPassword($USER_ID, $newPassword)
-    {
-        try {
-            $result = UserDAO::resetPassword($USER_ID, $newPassword);
-            if ($result) {
-                self::sendOutput('Password reset successfully', array('HTTP/1.1 200 OK'));
-            } else {
-                self::sendOutput('Failed to reset password', array('HTTP/1.1 500 Internal Server Error'));
-            }
-        } catch (Exception $e) {
-            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
-        }
-    }
 
     public static function deleteUserAccount($USER_ID, $active)
     {

@@ -8,44 +8,43 @@ require_once 'config/config.php';
 require_once 'controllers/userController.php';
 require_once 'model/dataAccessObject/userDao.php';
 
-$usuarios = UserDao::getAllUsers();
-print_r($usuarios);
 
-// // Verificar accion
-// if (isset($_SERVER['PATH_INFO'])) {
-//     // Obtener la accion solicitada a traves de parametros GET, POST...
-//     $action = BaseController::getUriSegments();
+// Verificar acción
+if (isset($_SERVER['PATH_INFO'])) {
+    // Obtener la acción solicitada a través de parámetros GET, POST...
+    $action = BaseController::getUriSegments();
 
-//     switch ($action[1]) {
-//         case 'user':
-//             $userController = new UserController();
-//             $userController->method();
-//             break;
-//         case 'product':
-//             $productController = new ProductController();
-//             $productController->method();
-//             break;
-//         case 'productType':
-//             $productTypeController = new ProductTypeController();
-//             $productTypeController->method();
-//             break;
-//         case 'orders':
-//             $orderController = new OrderController();
-//             $orderController->method();
-//             break;
-//         case 'orderDetail':
-//             $orderDetailController = new OrderDetailController();
-//             $orderDetailController->method();
-//             break;
-//         case 'cart':
-//             $cartController = new CartController();
-//             $cartController->method();
-//             break;
-//         default:
-//             echo "Not a valid action";
-//             break;
-//     }
-// } else {
-//     echo "No action was specified";
-// }
+    switch ($action[1]) {
+        case 'user':
+            $userController = new UserController();
+            $userController->method();
+            break;
+        case 'product':
+            $productController = new ProductController();
+            $productController->method();
+            break;
+        case 'productType':
+            $productTypeController = new ProductTypeController();
+            $productTypeController->method();
+            break;
+        case 'orders':
+            $orderController = new OrderController();
+            $orderController->method();
+            break;
+        case 'orderDetail':
+            $orderDetailController = new OrderDetailController();
+            $orderDetailController->method();
+            break;
+        case 'cart':
+            $cartController = new CartController();
+            $cartController->method();
+            break;
+        default:
+            echo "Not a valid action";
+            break;
+    }
+} else {
+    echo "No action was specified";
+}
+
 ?>

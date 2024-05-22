@@ -1,9 +1,6 @@
 <?
 require('./config/config.php');
 session_start();
-
-
-
 if(isset($_REQUEST['login']))
 {
     require CON.'loginController.php';
