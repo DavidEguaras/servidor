@@ -5,10 +5,6 @@ require_once 'config/configBD.php';
 require_once 'config/config.php';
 
 
-require_once 'controllers/userController.php';
-require_once 'model/dataAccessObject/userDao.php';
-
-
 // Verificar acción
 if (isset($_SERVER['PATH_INFO'])) {
     // Obtener la acción solicitada a través de parámetros GET, POST...

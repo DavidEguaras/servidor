@@ -68,45 +68,41 @@ CREATE TABLE ORDER_DETAIL (
     FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID)
 );
 
+-- Insertar valores en la tabla USER
+INSERT INTO USER (username, name, rol, password, email, active) VALUES
+('admin1', 'Admin User 1', 'admin', 'adminpass1', 'admin1@example.com', TRUE),
+('customer1', 'Customer User 1', 'customer', 'customerpass1', 'customer1@example.com', TRUE),
+('admin2', 'Admin User 2', 'admin', 'adminpass2', 'admin2@example.com', TRUE),
+('customer2', 'Customer User 2', 'customer', 'customerpass2', 'customer2@example.com', TRUE);
 
+-- Insertar valores en la tabla PRODUCT_TYPE
+INSERT INTO PRODUCT_TYPE (category, name, price, brand, description, active) VALUES
+('Electronics', 'Smartphone', 599.99, 'BrandA', 'Latest model smartphone', TRUE),
+('Clothing', 'T-Shirt', 19.99, 'BrandB', 'Comfortable cotton t-shirt', TRUE),
+('Electronics', 'Laptop', 999.99, 'BrandC', 'High-performance laptop', TRUE),
+('Clothing', 'Jeans', 49.99, 'BrandD', 'Stylish denim jeans', TRUE);
 
+-- Insertar valores en la tabla PRODUCT
+INSERT INTO PRODUCT (color, size, stock, image_route, PT_ID, active) VALUES
+('Black', 'Medium', 100, '/images/smartphone_black.jpg', 1, TRUE),
+('White', 'Large', 50, '/images/tshirt_white.jpg', 2, TRUE),
+('Silver', 'One Size', 30, '/images/laptop_silver.jpg', 3, TRUE),
+('Blue', '32', 70, '/images/jeans_blue.jpg', 4, TRUE);
 
--- Insertar usuarios
-INSERT INTO USER (username, name, rol, password, email) VALUES
-('usuario1', 'Juan Pérez', 'cliente', 'contraseña1', 'juan@example.com'),
-('usuario2', 'María López', 'cliente', 'contraseña2', 'maria@example.com'),
-('admin1', 'Admin Admin', 'administrador', 'adminpass', 'admin@example.com');
-
--- Insertar tipos de productos
-INSERT INTO PRODUCT_TYPE (category, name, price, brand, description) VALUES
-('Electrónica', 'Smartphone', 500.00, 'Samsung', 'Smartphone Samsung Galaxy S20'),
-('Electrodomésticos', 'Lavadora', 800.00, 'Whirlpool', 'Lavadora de carga frontal'),
-('Ropa', 'Camiseta', 20.00, 'Nike', 'Camiseta deportiva Nike'),
-('Electrónica', 'Laptop', 1200.00, 'Dell', 'Laptop Dell XPS 13');
-
--- Insertar productos
-INSERT INTO PRODUCT (color, size, stock, image_route, PT_ID) VALUES
-('Negro', 'Grande', 50, '/images/s20.jpg', 1),
-('Blanco', 'Mediano', 30, '/images/lavadora.jpg', 2),
-('Rojo', 'Pequeño', 100, '/images/camiseta.jpg', 3),
-('Plata', 'Mediano', 20, '/images/laptop.jpg', 4);
-
--- Insertar elementos en el carrito
+-- Insertar valores en la tabla CART
 INSERT INTO CART (last_update, quantity, USER_ID, PRODUCT_ID) VALUES
-('2024-05-15', 2, 1, 1),
-('2024-05-15', 1, 1, 2),
-('2024-05-15', 3, 2, 3),
-('2024-05-15', 1, 3, 4);
+('2024-05-21', 1, 2, 1),
+('2024-05-22', 2, 2, 2),
+('2024-05-23', 1, 4, 3),
+('2024-05-24', 3, 4, 4);
 
--- Insertar órdenes
+-- Insertar valores en la tabla ORDERS
 INSERT INTO ORDERS (order_date, direction, payment, total, USER_ID) VALUES
-('2024-05-15 10:30:00', 'Calle 123', 'Tarjeta de crédito', 1200.00, 1),
-('2024-05-15 11:45:00', 'Avenida Principal', 'PayPal', 100.00, 2),
-('2024-05-15 12:15:00', 'Plaza Central', 'Efectivo', 2400.00, 3);
+('2024-05-21 10:00:00', '123 Main St', 'Credit Card', 619.98, 2),
+('2024-05-22 11:30:00', '456 Oak St', 'PayPal', 49.99, 4);
 
--- Insertar detalles de órdenes
+-- Insertar valores en la tabla ORDER_DETAIL
 INSERT INTO ORDER_DETAIL (quantity, total_price, ORDER_ID, PRODUCT_ID) VALUES
-(2, 1000.00, 1, 1),
-(1, 800.00, 1, 2),
-(3, 60.00, 2, 3),
-(1, 1200.00, 3, 4);
+(1, 599.99, 1, 1),
+(1, 19.99, 1, 2),
+(1, 49.99, 2, 4);

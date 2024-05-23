@@ -5,11 +5,14 @@ print_r("Hola");
 
 print_r($datosTiposProducto);
 
+$esAdmin = $_SESSION['usuario']['rol'] == 'admin';
 
 ?>
 
+
+<?php if ($esAdmin): ?>
     
-<div id="Marcas" class="container mt-5">
+    <div id="productos" class="container mt-5">
         <h2> Registrar una marca (POST)</h2>
         <form id="marcaForm" style="margin-bottom: 10px;">
             <label for="category" style="margin-bottom: 5px;">Product Category:</label>
@@ -30,3 +33,5 @@ print_r($datosTiposProducto);
             <button type="submit" class="btn btn-primary" name='postProductType'>Register Product Type</button>
         </form>
     </div>
+
+<?php endif;?>
