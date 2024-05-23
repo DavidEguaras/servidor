@@ -1,31 +1,35 @@
+
 <?php
 
 // Incluir los archivos de configuración
 require_once './config/configBD.php';
 require_once './config/config.php';
 
-
-// Verificar acción
 if (isset($_SERVER['PATH_INFO'])) {
-    // Obtener la acción solicitada a través de parámetros GET, POST...
     $action = BaseController::getUriSegments();
+
+    // Para depuración
+    error_log(print_r($action, true));
 
     if (isset($action[1])) {
         switch ($action[1]) {
-            case 'user':
-                UserController::method();
+            case 'usuarios':
+                UsuariosController::method();
                 break;
             case 'coches':
-                CocheController::method();
+                CochesController::method();
                 break;
             default:
-                BaseController::sendOutput("Not a valid action", array('HTTP/1.1 400 Bad Request'));
+                echo json_encode(['error' => 'Invalid action']);
+                http_response_code(404);
                 break;
         }
     } else {
-        BaseController::sendOutput("No action was specified", array('HTTP/1.1 400 Bad Request'));
+        echo json_encode(['error' => 'Invalid action']);
+        http_response_code(404);
     }
 } else {
-    BaseController::sendOutput("No action was specified", array('HTTP/1.1 400 Bad Request'));
+    echo json_encode(['error' => 'No action specified']);
+    http_response_code(400);
 }
 ?>

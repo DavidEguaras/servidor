@@ -1,11 +1,11 @@
 <?php
-class CocheModel
+class Coche
 {
-    private $id;
-    private $modelo;
-    private $marca;
-    private $descripcion;
-    private $precio;
+    public $id;
+    public $modelo;
+    public $marca;
+    public $descripcion;
+    public $precio;
 
     public function __construct($id, $modelo, $marca, $descripcion, $precio)
     {

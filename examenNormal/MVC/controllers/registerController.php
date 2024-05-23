@@ -1,28 +1,35 @@
 <?php
-
 if (isset($_REQUEST['register'])) {
     $errores = array();
-    if (validarFormularioRegister($errores)) {
-        $nombreUser = $_REQUEST['nombre'];
-        $token = generarToken();
-        $caduca = fechaCaducidad();
+    if (validarFormulario($errores)) {
+        // Cerrar sesión actual
+        session_unset();
+        session_destroy();
+        session_start(); // Iniciar una nueva sesión
+
         $data = array(
-            'user' => $nombreUser,
-            'token' => $token,
-            'caduca' => $caduca
+            "username" => $_REQUEST['nombre'],
+            "name" => $_REQUEST['nombre_completo'],
+            "rol" => 'user', // Default role is 'user'
+            "password" => $_REQUEST['pass'],
+            "email" => $_REQUEST['email']
         );
-        $response = post("user", $data);
+
+        $response = post("usuarios", $data);
         $response = json_decode($response, true);
 
         if ($response) {
-            $_SESSION['token'] = $token;
-            $_SESSION['vista'] = VIEW . 'token.php';
+            $_SESSION['mensaje'] = "Usuario registrado correctamente";
+            $_SESSION['usuario'] = $response; // Guardar los datos del usuario en la sesión
+            $_SESSION['vista'] = VIEW.'coches.php';
+            $_SESSION['controlador'] = CON.'cochesController.php';
+            require $_SESSION['controlador'];
         } else {
-            $errores[] = "Error al registrar el usuario.";
+            $errores['api'] = "Error al registrar el usuario";
+            $_SESSION['vista'] = VIEW.'register.php';
         }
     } else {
-        $errores[] = "Formulario no válido.";
+        $_SESSION['vista'] = VIEW.'register.php';
     }
 }
-
 ?>

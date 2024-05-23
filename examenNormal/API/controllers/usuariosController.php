@@ -1,11 +1,9 @@
 <?php
+require_once './model/dataAccessObject/usuariosDao.php';
+require_once './model/objectModels/Usuario.php';
+require_once 'paramValidators/paramValidator.php';
 
-require_once './model/dataAccessObject/userDAO.php';
-require_once './model/objectModels/userModel.php';
-require_once './controllers/paramValidators/paramValidator.php';
-
-
-class UserController extends BaseController
+class UsuariosController extends BaseController
 {
     public static function method()
     {
@@ -29,10 +27,14 @@ class UserController extends BaseController
         $resources = self::getUriSegments();
         $filters = self::getQueryStringParams();
 
-        if (count($resources) == 2 && count($filters) == 0) {
-            self::getAllUsers();
-        } elseif (count($resources) == 2 && isset($filters['username']) && isset($filters['password'])) {
+        // Para depuración
+        error_log(print_r($resources, true));
+        error_log(print_r($filters, true));
+
+        if (count($resources) == 2 && isset($filters['username']) && isset($filters['password'])) {
             self::loginUser($filters);
+        } elseif (count($resources) == 2 && count($filters) == 0) {
+            self::getAllUsers();
         } else {
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
@@ -46,7 +48,7 @@ class UserController extends BaseController
     public static function getAllUsers()
     {
         try {
-            $users = UserDAO::getAllUsers();
+            $users = UsuariosDAO::getAllUsers();
             self::sendOutput(json_encode($users), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -72,10 +74,10 @@ class UserController extends BaseController
         $password = sha1($data['password']);
         $email = $data['email'];
 
-        $newUser = new UserModel(null, $username, $name, $rol, $password, $email, true);
+        $newUser = new Usuario(null, $username, $name, $rol, $password, $email);
 
         try {
-            $result = UserDAO::createUser($newUser);
+            $result = UsuariosDAO::createUser($newUser);
             if ($result) {
                 self::sendOutput('User created successfully', array('HTTP/1.1 201 Created'));
             } else {
@@ -88,23 +90,16 @@ class UserController extends BaseController
 
     public static function loginUser($data)
     {
-        $requiredParams = ['username', 'password'];
-        $error = "";
-        if (!ParamValidator::validateParams($data, $requiredParams, $error)) {
-            self::sendOutput('Missing required parameters "' . $error . '"', array('HTTP/1.1 400 Bad Request'));
-            return;
-        }
-
         $username = $data['username'];
         $password = sha1($data['password']);
 
         try {
-            $user = UserDAO::login($username, $password);
+            $user = UsuariosDAO::login($username, $password);
 
             if ($user) {
                 self::sendOutput(json_encode($user), array('HTTP/1.1 200 OK'));
             } else {
-                self::sendOutput('Nombre de usuario o contraseña inválidos', array('HTTP/1.1 401 Unauthorized'));
+                self::sendOutput('Invalid username or password', array('HTTP/1.1 401 Unauthorized'));
             }
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));

@@ -1,25 +1,13 @@
 <?php
 
-require_once 'model/dataAccessObject/cochesDAO.php';
-require_once 'model/objectModels/cochesModel.php';
+require_once './model/dataAccessObject/cochesDao.php';
+require_once './model/objectModels/Coche.php';
 require_once 'paramValidators/paramValidator.php';
 
-
-class CocheController extends BaseController
+class CochesController extends BaseController
 {
     public static function method()
     {
-        if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])) {
-            self::sendOutput('No credentials provided', array('HTTP/1.1 401 Unauthorized'));
-        }
-
-        $username = $_SERVER['PHP_AUTH_USER'];
-        $password = $_SERVER['PHP_AUTH_PW'];
-
-        if (!self::validatePassword($username, $password)) {
-            self::sendOutput('Invalid credentials', array('HTTP/1.1 401 Unauthorized'));
-        }
-
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         switch ($requestMethod) {
@@ -40,6 +28,10 @@ class CocheController extends BaseController
         $resources = self::getUriSegments();
         $filters = self::getQueryStringParams();
 
+        // Para depuración
+        error_log(print_r($resources, true));
+        error_log(print_r($filters, true));
+
         if (count($resources) == 2 && count($filters) == 0) {
             self::getAllCoches();
         } elseif (count($resources) == 2 && (isset($filters['modelo']) || isset($filters['marca']) || isset($filters['descripcion']))) {
@@ -57,7 +49,7 @@ class CocheController extends BaseController
     public static function getAllCoches()
     {
         try {
-            $coches = CocheDAO::getAllCoches();
+            $coches = CochesDAO::getAllCoches();
             self::sendOutput(json_encode($coches), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -67,7 +59,7 @@ class CocheController extends BaseController
     public static function getCochesByFilter($filters)
     {
         try {
-            $coches = CocheDAO::getCochesByFilter($filters);
+            $coches = CochesDAO::getCochesByFilter($filters);
             self::sendOutput(json_encode($coches), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -92,10 +84,10 @@ class CocheController extends BaseController
         $descripcion = $data['descripcion'];
         $precio = $data['precio'];
 
-        $newCoche = new CocheModel(null, $modelo, $marca, $descripcion, $precio);
+        $newCoche = new Coche(null, $modelo, $marca, $descripcion, $precio);
 
         try {
-            $result = CocheDAO::createCoche($newCoche);
+            $result = CochesDAO::createCoche($newCoche);
             if ($result) {
                 self::sendOutput('Coche created successfully', array('HTTP/1.1 201 Created'));
             } else {
