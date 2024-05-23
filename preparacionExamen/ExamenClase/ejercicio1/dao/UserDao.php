@@ -3,7 +3,7 @@
 class UserDAO{
 
     public static function crearUsuario($user, $token){
-        $array = json_encode(array($user,$token));
+    $array = json_encode(array($user,$token));
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, URI_API."user");
