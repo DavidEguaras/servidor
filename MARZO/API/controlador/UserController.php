@@ -17,6 +17,8 @@ class UserController extends Base{
             case 'GET':
                 if (count($recursos) == 2 && count($filtros)==2) {
                    if(isset($filtros['Nombre'])&&isset($filtros['Contraseña'])){
+                    //para los cifrados
+                    //$datos = UserDAO::validarUser($filtros['Nombre'],sha1($filtros['Contraseña']));
                        $datos = UserDAO::validarUser($filtros['Nombre'],$filtros['Contraseña']);
                     //    echo " **PRUEBA**<pre>";
                     //    echo"<br>*******************************************************<br>";

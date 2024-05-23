@@ -27,10 +27,12 @@ function post($recurso, $array){
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if($http_code != 201){
         echo "Ha habido algún error con la API";
+    }else{
+        
+        return $response=true; // esto para que me devuelva un true y poder cambiar pagina
     }
 
     curl_close($ch);
-    return $response;
 }
 
 function put($recurso, $id, $array){
@@ -63,6 +65,8 @@ function deleteFromAPI($recurso, $id) {
     if ($response === false) {
         // Si hay un error en la solicitud cURL, manejarlo aquí
         echo 'Error: ' . curl_error($ch);
+    }else{
+        $response=true;
     }
     
     curl_close($ch);

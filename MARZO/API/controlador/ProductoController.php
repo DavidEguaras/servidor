@@ -71,31 +71,31 @@ class ProductoController extends Base{
             case 'PUT':
                 self::put();
                 break;
+                case 'DELETE':
+                    // Verificar si se está solicitando eliminar un producto por ID
+                    if (count($recursos) == 3) {
+                        $idProducto = $recursos[2];
+                        // Verificar si el producto existe antes de intentar eliminarlo
+                        if (!empty(ProductoDAO::findById($idProducto))) {
+                            // Eliminar el producto de la base de datos
+                            if (ProductoDAO::delete($idProducto)) {
+                                self::response('HTTP/1.0 200 Recurso eliminado');
+                            } else {
+                                self::response('HTTP/1.0 500 No se pudo eliminar el recurso');
+                            }
+                        } else {
+                            self::response('HTTP/1.0 404 No se pudo localizar el recurso a eliminar');
+                        }
+                    } else {
+                        self::response('HTTP/1.0 400 No ha indicado el ID');
+                    }
+                    break;
     
-        //     case 'DELETE':
-        //         // Verificar si se está solicitando eliminar una matrícula por ID
-        //         $recursos = self::divideURI();
-        //         if(count($recursos) == 3){
-        //             // Verificar si la matrícula existe antes de intentar eliminarla
-        //             if(!empty(productoDAO::findbyId($recursos[2]))){
-        //                 // Eliminar la matrícula de la base de datos
-        //                 if(productoDAO::delete($recursos[2])){
-        //                     self::response('HTTP/1.0 200 Recurso eliminado');
-        //                 }else{
-        //                     self::response('HTTP/1.0 400 No se pudo eliminar el recurso');
-        //                 }
-        //             }else{
-        //                 self::response('HTTP/1.0 400 No se pudo localizar el recurso a eliminar');
-        //             }
-        //         }else{
-        //             self::response('HTTP/1.0 400 No ha indicado el id');
-        //         }
-        //         break;
-            default:
-                // Si se utiliza un método no permitido, devolver un error
-                self::response("HTTP/1.0 400 No permite el metodo utilizado");
-                break;
-    }
+                default:
+                    // Si se utiliza un método no permitido, devolver un error
+                    self::response("HTTP/1.0 405 Método no permitido");
+                    break;
+            }
 }
 
 static function put(){

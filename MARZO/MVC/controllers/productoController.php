@@ -42,6 +42,25 @@ if(isset($_REQUEST['producto_cambio'])){
     }
 }
 
+if(isset($_REQUEST['producto_borrar'])){
+    $producto_id = $producto[0]->Id; 
+    $ruta_imagen = $producto[0]->RutaImg; // Concatenar la ruta base con la ruta relativa de la imagen
+    $delete = deleteFromAPI("productos", $producto_id); // Eliminar el producto de la API
+    if($delete){
+        // Eliminar el archivo de imagen asociado
+        if(file_exists(IMG.$ruta_imagen)) {
+            unlink(IMG.$ruta_imagen); // Eliminar el archivo
+            echo "Archivo eliminado correctamente.";
+        } else {
+            echo "El archivo no existe.";
+        }
+        // Redirigir o realizar otras acciones después de eliminar el producto
+        $_SESSION['vista'] = VIEW.'home.php';
+        $_SESSION['controlador'] = CON.'homeController.php';
+        require $_SESSION['controlador'];
+    }
+}
+
 
 
 

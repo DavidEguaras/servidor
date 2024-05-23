@@ -1,5 +1,6 @@
 <?
 
+
 if(isset($_REQUEST['login'])){
     //ver si nombre y contraseña no estan vacios
         $errores = array();

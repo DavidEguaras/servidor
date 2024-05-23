@@ -7,7 +7,7 @@ require('./controlador/CarritoController.php');
 require('./controlador/CategoriaController.php');
 
 
-// require_once('./dao/UserDAO.php');
+
 // $nombre="Georgi";
 // $pass="userpass";
 
@@ -49,9 +49,10 @@ if(isset($_SERVER['PATH_INFO'])){
         ProductoController::productos();
     }elseif($recurso[1]==="carrito"){
         CarritoController::carrito();
-    }elseif($recurso[1]==="categoria"){
+    }elseif($recurso[1]==="categorias"){
         CategoriaController::categoria();
     }
+
     
 } else {
     // Si no se ha especificado la información de la ruta, se devuelve un error 400

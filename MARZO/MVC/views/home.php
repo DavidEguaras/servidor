@@ -1,5 +1,7 @@
 <?
     $esAdmin = ($_SESSION['usuario']['IdRol'] == 1 || $_SESSION['usuario']['IdRol'] == 2);
+    // echo "<pre>";
+    // print_r($_SESSION['productos']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,47 +21,53 @@
     </style>
 </head>
 <body>
-<h1 class="text-center mt-3">ESTO ES EL HOME</h1>
+    
+    
+    
+    <div class="container">
+    <?
+            if($esAdmin){
+                echo '<div class="row mt-4 mb-5">';
+                echo '<div class="col-md-12 text-center">';
+                echo '<form method="POST">';
+                echo '<button type="submit" name="agregar_producto" class="btn btn-warning text-white">
+                        Agregar Producto
+                        </button>';
 
-<div class="container">
-<?
-        if($esAdmin){
-            echo '<div class="row mt-4 mb-5">';
-            echo '<div class="col-md-12 text-center">';
-            echo '<form method="POST">';
-            echo '<button type="submit" name="agregar_producto" class="btn btn-warning text-white">
-                     Agregar Producto
-                    </button>';
-
-            echo '<button type="submit" name="agregar_categoria" class="btn btn-info text-white ms-5">
-            Agregar Categoria
-                    </button>';
-            echo '</form>';
-            echo '</div>';
-            echo '</div>';
-        }
-    ?>
+                echo '<button type="submit" name="gestion_categoria" class="btn btn-info text-white ms-5">
+                Gestion de categorias
+                        </button>';
+                echo '</form>';
+                echo '</div>';
+                echo '</div>';
+            }
+        ?>
     <div class="row">
         <?php
         $productos = $_SESSION['productos'];
         foreach ($productos as $producto) {
-            echo '<div class="col-md-4 mb-4">';
-            echo '<div class="card" style="width: 18rem;">';
-            echo '<img src="' . IMG . 'productoDefault.jpg" class="card-img-top img-fluid" alt="' . $producto->Nombre . '">';
+            echo '<div class="col-md-4 mb-4 mt-5">';
+            echo '<div class="card">';
+            echo '<img src="' . IMG . $producto->RutaImg. '" class="card-img-top" alt="' . $producto->Nombre . '">';
             echo '<div class="card-body">';
-            echo '<h5 class="card-title fw-bold">' . $producto->Nombre . '</h5>';
-            echo '<p class="card-text">' . $producto->Descripcion . '</p>';
-            echo '<form method="POST" class="d-flex justify-content-between align-items-center" >';
+            echo '<h5 class="card-title fw-bold text-center">' . $producto->Nombre . '</h5>';
+            echo '<p class="card-text text-center fst-italic">' . $producto->Descripcion . '</p>';
+            echo '<div class="d-flex justify-content-between align-items-center">';
             echo '<p class="fw-bold mb-0">Precio: €' . number_format($producto->Precio, 2) . '</p>';
+            echo '<form method="POST">';
             echo '<input type="hidden" name="producto_id" value="' . $producto->Id . '">';
-            echo '<input type="submit" name="ir_producto" value="Comprar" class="btn btn-outline-primary">';
+            echo '<button type="submit" name="ir_producto" class="btn btn-outline-dark">Comprar</button>';
             echo '</form>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
+            echo '</div>'; // Cierre de div.d-flex
+            echo '</div>'; // Cierre de div.card-body
+            echo '</div>'; // Cierre de div.card
+            echo '</div>'; // Cierre de div.col-md-4
         }
         ?>
     </div>
+
+
+
 
 </div>
 

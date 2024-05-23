@@ -31,7 +31,7 @@
                         </div>
                         <div class="row d-flex justify-content-center mb-3">
                             <input class="btn btn-success w-25 ms-auto" type="submit" value="Guardar cambios" name="producto_cambio">
-                            <input class="btn btn-success w-25 mx-auto " type="submit" value="Dar De baja">
+                            <input class="btn btn-success w-25 mx-auto " type="submit" value="Dar De baja" name="producto_borrar">
                         </div>
                     <?php endif; ?>
                     <div class="row d-flex justify-content-center">

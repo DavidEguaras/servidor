@@ -15,7 +15,7 @@ class CarritoController extends Base{
             case 'GET':
                 //para todos los productos
                 if (count($recursos) == 2 && count($filtros)==0) {
-                       $datos = CarritoDAO::findAll();
+                        $datos = CarritoDAO::findAll();
                 }
                 elseif (count($recursos) == 2 && count($filtros)==1) {
                     if(isset($filtros['IdUsuario'])){

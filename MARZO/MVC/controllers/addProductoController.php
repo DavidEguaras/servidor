@@ -15,9 +15,9 @@ if(isset($_REQUEST['guardar_producto'])){
     $Descripcion=$_REQUEST['descripcion'];
     $Precio=$_REQUEST['precio'];
     $Categoria=$_REQUEST['categoria'];
-    $RutaImg=IMG.$Nombre;
-    //extension fichero
     $extension = pathinfo($_FILES['ruta_img']['name'], PATHINFO_EXTENSION);
+    $RutaImg=$Nombre.".".$extension;
+    //extension fichero
     $CantidadStock=$_REQUEST['cantidad_stock'];
     
     //subir fichero al servidor
@@ -37,12 +37,22 @@ if(isset($_REQUEST['guardar_producto'])){
     }
 
     //array con los datos del producto que se va a crear
-    $datos_producto= array(
+    $datos_producto = array(
+        "Nombre" => $Nombre,
         "Descripcion" => $Descripcion,
         "Precio" => $Precio,
-        "CantidadStock" => $CantidadStock
-        // Llamar a la función put() para actualizar los datos del producto
+        "Categoria" => $Categoria,
+        "RutaImg" => $RutaImg,
+        "CantidadStock" => $CantidadStock,
+        "Borrado"=>0
     );
 
+    // $response = post("productos", $datos_producto);
+    
+    if($response = post("productos", $datos_producto)){
+        $_SESSION['vista'] = VIEW.'home.php';
+        $_SESSION['controlador'] = CON.'homeController.php';
+        require $_SESSION['controlador'];
+    }
 }
 ?>
