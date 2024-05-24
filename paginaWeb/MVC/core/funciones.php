@@ -1,5 +1,5 @@
 <?
-function validarFormulario(&$errores)
+function validarFormularioLogin(&$errores)
 {
 
     # code...
@@ -9,16 +9,6 @@ function validarFormulario(&$errores)
     if (isset($_REQUEST['pass'])) {
         comcontra($errores);
     }
-    // if (isset($_REQUEST['codUsuarior'])) {
-    //     comCodir($errores);
-    // }
-    // if (isset($_REQUEST['descUsuarior'])) {
-    //     comNombrer($errores);
-    // }
-    // if (isset($_REQUEST['passr'])) {
-    //     comcontrar($errores);
-    // }
-
     if (count($errores) == 0) {
         return true;
     } else
@@ -26,39 +16,6 @@ function validarFormulario(&$errores)
 
 }
 
-function validarFomInsertMatricula(&$errores){
-    comMatricula($errores);
-    if (count($errores) == 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function validarFomInsertCoche(&$errores){
-    if(isset($_REQUEST['marca'])){
-        compMarca($errores);
-    }
-    if(isset($_REQUEST['modelo'])){
-        compModelo($errores);
-    }
-    if(isset($_REQUEST['anio'])){
-        compAnio($errores);
-    }
-    if(isset($_REQUEST['color'])){
-        compColor($errores);
-    }
-    if(isset($_REQUEST['precio'])){
-        compPrecio($errores);
-    }
-    if (count($errores) == 0) {
-        return true;
-    } else {
-        return false;
-    }
-    
-
-}
 
 function validarInsert(&$errores){
     if(isset($_REQUEST['marca'])){
@@ -84,44 +41,6 @@ function validarInsert(&$errores){
     
 }
 
-function compMarca(&$errores){
-    if(textoVacio('marca')){
-        $errores['marca'] = "  Marca esta vacio";
-        return false;
-    }
-    return true;
-}
-function compModelo(&$errores){
-    if(textoVacio('modelo')){
-        $errores['modelo'] = " Modelo esta vacio";
-        return false;
-    }
-    return true;
-}
-
-function compAnio(&$errores){
-    if(textoVacio('anio')){
-        $errores['anio'] = " Año esta vacio";
-        return false;
-    }
-    return true;
-}
-
-function compColor(&$errores){
-    if(textoVacio('color')){
-        $errores['color'] = " Color esta vacio";
-        return false;
-    }
-    return true;
-}
-
-function compPrecio(&$errores){
-    if(textoVacio('precio')){
-        $errores['precio'] = " Precio esta vacio";
-        return false;
-    }
-    return true;
-}
 
 
 function validarLetra(&$errores)
@@ -215,39 +134,3 @@ function admin()
     return false;
 
 }
-
-
-function compararPalabras($letra, $PalabraAleatoria) {
-    $letra = strtoupper($letra); 
-    $PalabraAleatoria = strtoupper($PalabraAleatoria); 
-    
-    $arrayAleatoria = str_split($PalabraAleatoria);
-    foreach ($arrayAleatoria as $key => $value) {
-        if ($value === $letra) {
-            return $value; 
-        }
-    }
-    return "x"; 
-}
-
-
-// para borrar 
-function eliminarMatricula($idMatricula,$idCoche) {
-    // Eliminar la matrícula usando la API
-    $result = deleteFromAPI("matricula", $idMatricula);
-
-    if ($result) {
-        // Actualizar la lista de matrículas después de eliminar
-        $matriculas = get("matricula/coche_id/".$idCoche);
-        $matriculas = json_decode($matriculas, true);
-        $_SESSION['matriculas'] = $matriculas;
-        $_SESSION['avisos'] = "Matrícula eliminada correctamente";
-    } else {
-        $_SESSION['errores']['eliminarMatricula'] = "No se ha podido eliminar la matrícula";
-    }
-}
-
-
-
-
-

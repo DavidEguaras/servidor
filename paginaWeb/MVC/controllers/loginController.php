@@ -4,7 +4,7 @@
 
 if(isset($_REQUEST['login'])){
     $errores = array();
-    if(validarFormulario($errores)){
+    if(validarFormularioLogin($errores)){
         $nombreUser=$_REQUEST['nombre'];
         $passUser=$_REQUEST['pass'];
         //user?username=jdoe&password=password123

@@ -133,11 +133,7 @@
                             <input type="submit" value="Log Out" name="logOut" class="btn btn-primary w-50">
                             <input type="submit" value="Home" name="ir_home" class="btn btn-primary">
                         </form>
-                    <?php } else { ?>
-                        <form action="" method="post" class="ms-3">
-                            <input type="submit" value="Login" name="ir_login" class="btn btn-primary mt-1">
-                        </form>
-                    <?php } ?>
+                    <?php }?>
                 </div>
             </div>
         </header>

@@ -1,5 +1,0 @@
-# Sirve para que el navegador te lea el archivo .php sin que tenga la extensión
-
-Options +MultiViews
-AddHandler php5-script php
-AddType text/html php
