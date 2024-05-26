@@ -3,7 +3,7 @@ $_SESSION['view'] = VIEW . 'cart.php';
 
 $userCartsJson = get("cart?USER_ID=" . $_SESSION['user']['USER_ID']);
 $userCarts = json_decode($userCartsJson, true);
-
+//se imprimen los carritos del user
 foreach ($userCarts as &$cart) {
     $productDetailsJson = get("product/" . $cart['PRODUCT_ID']);
     $productDetails = json_decode($productDetailsJson, true);
