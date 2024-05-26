@@ -8,6 +8,8 @@ if (isset($_REQUEST['login'])) {
     $_SESSION['controller'] = CON . 'registerController.php';
     $_SESSION['view'] = VIEW . 'register.php';
     require $_SESSION['controller'];
+} elseif (isset($_REQUEST['registerSubmit'])) {
+    require CON . 'registerController.php';
 } elseif (!isset($_SESSION['user'])) {
     $_SESSION['view'] = VIEW . 'login.php';
 } elseif (isset($_REQUEST['logOut'])) {
@@ -18,13 +20,13 @@ if (isset($_REQUEST['login'])) {
     $_SESSION['view'] = VIEW . 'home.php';
     $_SESSION['controller'] = CON . 'homeController.php';
     require $_SESSION['controller'];
-}else {
+} else {
     if (isset($_SESSION['controller'])) {
         require $_SESSION['controller'];
     }
 }
 
 require VIEW . 'layout.php';
-
+?>
 
 

@@ -24,13 +24,15 @@ function post($recurso, $array){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
     $response = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    if($http_code != 201){
+    if ($http_code != 201) {
         echo "Ha habido algún error con la API";
+        return null;
     }
 
     curl_close($ch);
     return $response;
 }
+
 
 function put($recurso, $id = null, $array){
     $array = json_encode($array);
