@@ -25,7 +25,6 @@ MVC DE PHP
 --Tareas Pendientes
 	-API:
 		+Terminar Controladores ✅
-		+Codificar contrasena sha1✅
 		+isActive()
 	-MVC:	
 		+Los botones manejan que paginas se ven

@@ -1,9 +1,12 @@
 En el register, la api deniega el post si la password no tiene un caracter especial
 
-No me ha dado tiempo a implementar las siguientes funciones:
+No me ha dado tiempo a implementar las siguientes funciones(que me de cuenta):
     -vista de admin
     -filtrar productos
-    -generar un pedido(order y orderDetail), con su respectivo formulario donde se introducirian datos(direccion etc), aunque cuando un usuario compra los items del carrito, resto el stock de la base de datos
+    -generar un pedido(order y orderDetail), con su respectivo formulario donde se introducirian datos(direccion etc), 
+            aunque cuando un usuario compra los items del carrito, resto el stock de la base de datos
     -vista de producto donde elegir la talla y el color, los controllers eligen el primer producto de un tipo y muestran ese en la vista la general
+    -No codifico la password, se que se hace con sha1($password), simplemente no me ha dado tiempo a entender bien como funciona a la hora de registrar, hacer un get y todo eso para que no me diese conflicto
+    -validacion de formulario en el register
 
-Me he intentado centrar en la funcionalidad del carrito como me dijiste porque he visto que no me daba tiempo
+Me he intentado centrar en la funcionalidad del carrito como me dijiste ya que vi que no iba a poder entregar la tienda como yo queria entregarla
