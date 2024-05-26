@@ -20,7 +20,8 @@ if (isset($_REQUEST['login'])) {
     $_SESSION['view'] = VIEW . 'home.php';
     $_SESSION['controller'] = CON . 'homeController.php';
     require $_SESSION['controller'];
-} else {
+} 
+else {
     if (isset($_SESSION['controller'])) {
         require $_SESSION['controller'];
     }
@@ -28,5 +29,3 @@ if (isset($_REQUEST['login'])) {
 
 require VIEW . 'layout.php';
 ?>
-
-

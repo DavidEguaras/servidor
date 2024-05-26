@@ -1,20 +1,20 @@
 html, body {
-    height: 100%; /* Ensures the full height is considered */
+    height: 100%; 
     margin: 0;
     padding: 0;
 }
 
 body {
     display: flex;
-    flex-direction: column; /* Stacks content vertically */
-    min-height: 100vh; /* Minimum height is full viewport height */
+    flex-direction: column;
+    min-height: 100vh; 
 }
 
 
 footer {
-    background-color: #000000; /* Example background color */
-    color: #ffffff; /* Example text color */
-    text-align: center; /* Centers the text inside the footer */
+    background-color: #000000; 
+    color: #ffffff; 
+    text-align: center;
 }
 
 tr, td, th {
@@ -28,10 +28,10 @@ tr, td, th {
 }
 
 .card {
-    height: auto; /* Ajustar la altura según sea necesario */
+    height: auto; 
 }
 footer{
-    font-family: Contrail One;
+    font-family: Cascadia Code;
     padding: 20px;
 }
 .headerTop{
@@ -39,7 +39,7 @@ footer{
     padding: 20px;
 }
 .logo{
-    font-family: Contrail One; 
+    font-family: Cascadia Code; 
 }
 .logo h1{
     font-size: 45px;
@@ -109,7 +109,6 @@ nav a{
     border: none;
 }
 
-/* Estilos personalizados para los botones */
 .btn-custom {
     background: none;
     color: white;
@@ -137,9 +136,9 @@ nav a{
     box-shadow: 8px 8px 5px 0px rgba(0, 255, 255, 1);
     transition: transform 0.2s;
     display: flex;
-    flex-direction: column; /* Ensures flex behaviors */
-    background-color: #000; /* Dark background for the card */
-    padding: 20px; /* Padding around the card content */
+    flex-direction: column; 
+    background-color: #000; 
+    padding: 10px; 
 }
 
 .card-custom:hover {
@@ -147,10 +146,10 @@ nav a{
 }
 
 .card-img-top {
-    width: calc(100% - 20px); /* Subtracting total horizontal padding */
-    height: 300px; /* Fixed height for all images */
-    object-fit: cover; /* Ensures images cover the area well */
-    margin: 20px; /* Margin to create space around the image */
+    width: calc(100% - 20px);
+    height: 250px; 
+    object-fit: cover; 
+    margin: 10px;
     transition: opacity 0.3s;
 }
 
@@ -159,8 +158,8 @@ nav a{
 }
 
 .card-body {
-    padding: 1.5rem;
-    flex-grow: 1; /* Allows the card body to expand */
+    padding: 1rem;
+    flex-grow: 1;
 }
 
 .card-title {
@@ -176,6 +175,53 @@ nav a{
     border: none;
 }
 
+
+.header a {
+    color: aquamarine;
+    text-decoration: none;
+}
+
+.cart-item {
+    display: flex;
+    margin-top: 20px;
+    background-color: #222;
+    padding: 10px;
+}
+
+.cart-item img {
+    width: 100px;
+    height: auto;
+}
+
+.cart-item div {
+    margin-left: 20px;
+}
+
+table {
+    color: white;
+    margin-top: 10px;
+}
+
+table td {
+    padding: 5px;
+}
+
+.summary {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.buy-button {
+    background-color: aqua;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font-size: 20px;
+}
 
 .btn-custom {
     background: none;

@@ -76,9 +76,9 @@ INSERT INTO USER (username, name, rol, password, email, active) VALUES
 
 -- Insertar valores en la tabla PRODUCT_TYPE
 INSERT INTO PRODUCT_TYPE (category, name, price, brand, description, active) VALUES
-('Electronics', 'Smartphone', 599.99, 'BrandA', 'Latest model smartphone', TRUE),
-('Clothing', 'T-Shirt', 19.99, 'BrandB', 'Comfortable cotton t-shirt', TRUE),
-('Electronics', 'Laptop', 999.99, 'BrandC', 'High-performance laptop', TRUE),
+('Electronics', 'Cabra Montesa', 599.99, 'BrandA', 'Recogida en tienda', TRUE),
+('Clothing', 'Wallmart Kratos', 19.99, 'BrandB', 'Figura no muy fidedigna', TRUE),
+('Electronics', 'Poster de El Papa', 999.99, 'BrandC', 'El Papa jugando al basket🥶', TRUE),
 ('Clothing', 'Jeans', 49.99, 'BrandD', 'Stylish denim jeans', TRUE);
 
 -- Insertar valores en la tabla PRODUCT

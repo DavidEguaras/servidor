@@ -1,6 +1,6 @@
 <?php
-require_once 'model/dataAccessObject/ordersDao.php'; // Incluir la definición de la clase OrderDAO
-require_once 'model/objectModels/ordersModel.php'; // Incluir la definición de la clase OrderModel
+require_once 'model/dataAccessObject/ordersDao.php'; 
+require_once 'model/objectModels/ordersModel.php';
 require_once 'paramValidators/paramValidator.php';
 class OrderController extends BaseController
 {

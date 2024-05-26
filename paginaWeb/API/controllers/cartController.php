@@ -133,7 +133,7 @@ class CartController extends BaseController
         try {
             $result = CartDao::updateCartQuantity($CART_ID, $newQuantity);
             if ($result) {
-                self::sendOutput('Cart quantity updated successfully', array('HTTP/1.1 200 OK'));
+                self::sendOutput('Cart quantity updated successfully', array('HTTP/1.1 201 OK'));
             } else {
                 self::sendOutput('Failed to update cart quantity', array('HTTP/1.1 500 Internal Server Error'));
             }
