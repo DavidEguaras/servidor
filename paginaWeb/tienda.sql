@@ -40,7 +40,6 @@ CREATE TABLE PRODUCT(
 
 CREATE TABLE CART(
     CART_ID INT PRIMARY KEY AUTO_INCREMENT,
-    last_update DATE NOT NULL,
     quantity INT NOT NULL,
     USER_ID INT,
     PRODUCT_ID INT,
@@ -84,17 +83,11 @@ INSERT INTO PRODUCT_TYPE (category, name, price, brand, description, active) VAL
 
 -- Insertar valores en la tabla PRODUCT
 INSERT INTO PRODUCT (color, size, stock, image_route, PT_ID, active) VALUES
-('Black', 'Medium', 100, '/images/smartphone_black.jpg', 1, TRUE),
-('White', 'Large', 50, '/images/tshirt_white.jpg', 2, TRUE),
-('Silver', 'One Size', 30, '/images/laptop_silver.jpg', 3, TRUE),
-('Blue', '32', 70, '/images/jeans_blue.jpg', 4, TRUE);
+('Black', 'Medium', 100, '/images/camiseta.jpg', 1, TRUE),
+('White', 'Large', 50, '/images/laptop.jpg', 2, TRUE),
+('Silver', 'One Size', 30, '/images/lavadora.jpg', 3, TRUE),
+('Blue', '32', 70, '/images/s20.jpg', 4, TRUE);
 
--- Insertar valores en la tabla CART
-INSERT INTO CART (last_update, quantity, USER_ID, PRODUCT_ID) VALUES
-('2024-05-21', 1, 2, 1),
-('2024-05-22', 2, 2, 2),
-('2024-05-23', 1, 4, 3),
-('2024-05-24', 3, 4, 4);
 
 -- Insertar valores en la tabla ORDERS
 INSERT INTO ORDERS (order_date, direction, payment, total, USER_ID) VALUES
@@ -106,3 +99,6 @@ INSERT INTO ORDER_DETAIL (quantity, total_price, ORDER_ID, PRODUCT_ID) VALUES
 (1, 599.99, 1, 1),
 (1, 19.99, 1, 2),
 (1, 49.99, 2, 4);
+
+
+

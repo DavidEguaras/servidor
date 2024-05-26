@@ -1,9 +1,0 @@
-
-USERS
-{
-  "username": "david123",
-  "name": "david",
-  "rol": "user",
-  "password": "david*",
-  "email": "dabenegu@gmail.com"
-}

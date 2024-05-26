@@ -3,7 +3,6 @@
 // require("insertar.php");
 
 function get($recurso){
-
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, URI_API.$recurso);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -33,13 +32,19 @@ function post($recurso, $array){
     return $response;
 }
 
-function put($recurso, $id, $array){
+function put($recurso, $id = null, $array){
     $array = json_encode($array);
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, URI_API.$recurso.'/'.$id);
+    $url = URI_API . $recurso;
+    // Si se proporciona un ID, añadirlo a la URL
+    if($id !== null) {
+        $url .= '/' . $id;
+    }
+
+    curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json, Content-Length:'. strlen($array)));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: '. strlen($array)));
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
     $response = curl_exec($ch);
@@ -52,11 +57,17 @@ function put($recurso, $id, $array){
     return $response;
 }
 
-function deleteFromAPI($recurso, $id) {
+
+function deleteFromAPI($recurso, $data) {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, URI_API . $recurso . '/' . $id);
+    curl_setopt($ch, CURLOPT_URL, URI_API . $recurso);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen(json_encode($data))
+    ));
     
     $response = curl_exec($ch);
     
@@ -69,6 +80,7 @@ function deleteFromAPI($recurso, $id) {
     
     return $response;
 }
+
 
 
 ?>

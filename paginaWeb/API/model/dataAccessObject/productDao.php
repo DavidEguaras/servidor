@@ -3,30 +3,33 @@
 class ProductDAO extends Factory {
     public static function buildProductModel($productData) {
         if ($productData) {
-            return new Product(
-                $productData['productID'],
-                $productData['color'],
-                $productData['size'],
-                $productData['stock'],
-                $productData['imageRoute'],
-                $productData['productTypeID']
+            return array(
+                'PRODUCT_ID' => $productData['PRODUCT_ID'],
+                'color' => $productData['color'],
+                'size' => $productData['size'],
+                'stock' => $productData['stock'],
+                'image_route' => $productData['image_route'],
+                'PT_ID' => $productData['PT_ID'],
+                'name' => $productData['name'],
+                'price' => $productData['price'],
+                'description' => $productData['description'],
+                'brand' => $productData['brand']
             );
         } else {
             return null;
         }
     }
 
-    // Metodo para crear un nuevo producto en la base de datos
     public static function createProduct($product) {
-        $query = "INSERT INTO Product  VALUES (NULL, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Product VALUES (NULL, ?, ?, ?, ?, ?)";
         $params = array(
             $product->color,
             $product->size,
             $product->stock,
-            $product->imageRoute,
-            $product->productTypeID
+            $product->image_route,
+            $product->PT_ID
         );
-        
+
         try {
             self::select($query, $params);
             return $product;
@@ -34,13 +37,11 @@ class ProductDAO extends Factory {
             throw new Exception($e->getMessage());
         }
     }
-    
 
-    // Metodo para obtener un producto por su ID de producto
-    public static function getProductByID($productID) {
-        $query = "SELECT * FROM Product WHERE productID = ?";
-        $params = array($productID);
-        
+    public static function getProductByID($PRODUCT_ID) {
+        $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = ?";
+        $params = array($PRODUCT_ID);
+
         try {
             $result = self::select($query, $params);
             return self::buildProductModel($result[0]);
@@ -49,11 +50,10 @@ class ProductDAO extends Factory {
         }
     }
 
-    // Metodo para actualizar el stock de un producto en la base de datos
-    public static function updateProductStock($productID, $newStock) {
-        $query = "UPDATE Product SET stock = ? WHERE productID = ?";
-        $params = array($newStock, $productID);
-        
+    public static function updateProductQuantity($PRODUCT_ID, $newQuantity) {
+        $query = "UPDATE PRODUCT SET stock = stock - ? WHERE PRODUCT_ID = ?";
+        $params = array($newQuantity, $PRODUCT_ID);
+    
         try {
             self::select($query, $params);
             return true; // Retorna true si se actualizó correctamente
@@ -62,23 +62,36 @@ class ProductDAO extends Factory {
         }
     }
 
-    // Metodo para eliminar un producto de la base de datos por su ID de producto
-    public static function deleteProduct($productID) {
-        $query = "DELETE FROM Product WHERE productID = ?";
-        $params = array($productID);
-        
+    public static function getProductWithDetailsByID($PRODUCT_ID) {
+        $query = "SELECT PRODUCT.*, PRODUCT_TYPE.name, PRODUCT_TYPE.price, PRODUCT_TYPE.description, PRODUCT_TYPE.brand 
+                  FROM PRODUCT 
+                  JOIN PRODUCT_TYPE ON PRODUCT.PT_ID = PRODUCT_TYPE.PT_ID 
+                  WHERE PRODUCT.PRODUCT_ID = ?";
+        $params = array($PRODUCT_ID);
+
         try {
-            self::select($query, $params);
-            return true; //si se elimino correctamente
+            $result = self::select($query, $params);
+            return self::buildProductModel($result[0]);
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    // Metodo para obtener todos los productos de la base de datos
+    public static function deleteProduct($PRODUCT_ID) {
+        $query = "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
+        $params = array($PRODUCT_ID);
+
+        try {
+            self::select($query, $params);
+            return true; // si se eliminó correctamente
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public static function getAllProducts() {
-        $query = "SELECT * FROM Product";
-        
+        $query = "SELECT * FROM PRODUCT";
+
         try {
             $result = self::select($query);
             $products = array();
@@ -90,7 +103,6 @@ class ProductDAO extends Factory {
             throw new Exception($e->getMessage());
         }
     }
-
 }
 
 ?>

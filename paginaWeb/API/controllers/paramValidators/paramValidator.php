@@ -1,16 +1,15 @@
 <?php
-class ParamValidator
-{
-    public static function validateParams($data, $requiredParams, &$error)
-    {
+class ParamValidator {
+    public static function validateParams($data, $requiredParams, &$error = null) {
         foreach ($requiredParams as $param) {
-            if (!isset($data[$param]) || empty($data[$param])) {
-                $error = $param;
+            if (!isset($data[$param])) {
+                $error = "Missing required parameter: $param";
                 return false;
             }
         }
         return true;
     }
+
 
     public static function validatePassword($password)
     {

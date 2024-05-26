@@ -27,66 +27,61 @@ class ProductController extends BaseController
         }
     }
 
-    //---------------------------------------------REQUEST HANDLERS---------------------------------------------
-    // Handler para las solicitudes GET
     private static function handleGetRequest()
     {
         $resources = self::getUriSegments();
         $filters = self::getQueryStringParams();
 
-        if (count($resources) == 1 && count($filters) == 0) {
+        if (count($resources) == 2 && count($filters) == 0) {
             self::getAllProducts();
-        } elseif (count($resources) == 2 && isset($resources[1]) && is_numeric($resources[1])) {
-            self::getProductById($resources[1]);
+        } elseif (count($resources) == 3 && count($filters) == 0) {
+            self::getProductsWithDetailById($resources[2]);
         } else {
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
     }
 
-    // Handler para las solicitudes POST
     private static function handlePostRequest()
     {
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
 
-        $requiredParams = ['color', 'size', 'stock', 'imageRoute', 'productTypeID'];
-        if (!ParamValidator::validateParams($data, $requiredParams)) {
-            self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
+        $requiredParams = ['color', 'size', 'stock', 'image_route', 'PT_ID'];
+        $error = '';
+        if (!ParamValidator::validateParams($data, $requiredParams, $error)) {
+            self::sendOutput('Missing required parameters: ' . $error, array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
         self::createProduct($data);
     }
 
-    // Handler para las solicitudes PUT
     private static function handlePutRequest()
     {
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
 
-        $requiredParams = ['productID', 'color', 'size', 'stock', 'imageRoute'];
-        if (!ParamValidator::validateParams($data, $requiredParams)) {
-            self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
+        $requiredParams = ['PRODUCT_ID', 'quantity'];
+        $error = '';
+        if (!ParamValidator::validateParams($data, $requiredParams, $error)) {
+            self::sendOutput('Missing required parameters: ' . $error, array('HTTP/1.1 400 Bad Request'));
             return;
         }
 
-        self::updateProduct($data);
+        self::updateProductQuantity($data);
     }
 
-    // Handler para las solicitudes DELETE
     private static function handleDeleteRequest()
     {
         $resources = self::getUriSegments();
 
-        if (count($resources) == 2 && isset($resources[1]) && is_numeric($resources[1])) {
-            self::deleteProduct($resources[1]);
+        if (count($resources) == 3 && isset($resources[2]) && is_numeric($resources[2])) {
+            self::deleteProduct($resources[2]);
         } else {
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
     }
-    //---------------------------------------------REQUEST HANDLERS---------------------------------------------
 
-    //---------------------------------------------PRODUCT ACTIONS----------------------------------------------
     private static function getAllProducts()
     {
         try {
@@ -97,10 +92,10 @@ class ProductController extends BaseController
         }
     }
 
-    private static function getProductById($productId)
+    private static function getProductsWithDetailById($PRODUCT_ID)
     {
         try {
-            $product = ProductDAO::getProductByID($productId);
+            $product = ProductDAO::getProductWithDetailsByID($PRODUCT_ID);
             self::sendOutput(json_encode($product), array('HTTP/1.1 200 OK'));
         } catch (Exception $e) {
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
@@ -114,8 +109,8 @@ class ProductController extends BaseController
             $data['color'],
             $data['size'],
             $data['stock'],
-            $data['imageRoute'],
-            $data['productTypeID']
+            $data['image_route'],
+            $data['PT_ID']
         );
 
         try {
@@ -130,18 +125,14 @@ class ProductController extends BaseController
         }
     }
 
-    private static function updateProduct($data)
-    {
+    private static function updateProductQuantity($data) {
         try {
-            $result = ProductDAO::updateProductInfo(
-                $data['productID'],
-                $data['color'],
-                $data['size'],
-                $data['stock'],
-                $data['imageRoute']
+            $result = ProductDAO::updateProductQuantity(
+                $data['PRODUCT_ID'],
+                $data['quantity']
             );
             if ($result) {
-                self::sendOutput('Product updated successfully', array('HTTP/1.1 200 OK'));
+                self::sendOutput('Product updated successfully', array('HTTP/1.1 201 OK'));
             } else {
                 self::sendOutput('Failed to update product', array('HTTP/1.1 500 Internal Server Error'));
             }
@@ -150,10 +141,10 @@ class ProductController extends BaseController
         }
     }
 
-    private static function deleteProduct($productId)
+    private static function deleteProduct($PRODUCT_ID)
     {
         try {
-            $result = ProductDAO::deleteProduct($productId);
+            $result = ProductDAO::deleteProduct($PRODUCT_ID);
             if ($result) {
                 self::sendOutput('Product deleted successfully', array('HTTP/1.1 200 OK'));
             } else {
@@ -163,6 +154,4 @@ class ProductController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
-    //---------------------------------------------PRODUCT ACTIONS----------------------------------------------
 }
-?>

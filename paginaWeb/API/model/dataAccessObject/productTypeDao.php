@@ -50,6 +50,44 @@ class ProductTypeDAO extends Factory {
         }
     }
 
+
+    public static function getFirstProductForEachType() {
+        $query = "SELECT PT.PT_ID, PT.category, PT.name AS product_name, PT.price, PT.brand, PT.description,
+                        P.PRODUCT_ID, P.color, P.size, P.image_route
+                  FROM PRODUCT_TYPE PT
+                  JOIN (
+                      SELECT PT_ID, MIN(PRODUCT_ID) AS first_product_id
+                      FROM PRODUCT
+                      GROUP BY PT_ID
+                  ) AS FirstProducts ON PT.PT_ID = FirstProducts.PT_ID
+                  JOIN PRODUCT P ON FirstProducts.first_product_id = P.PRODUCT_ID";
+    
+        try {
+            $result = self::select($query);
+            $products = array();
+            foreach ($result as $productData) {
+                $products[] = array(
+                    'PT_ID' => $productData['PT_ID'],
+                    'PRODUCT_ID' => $productData['PRODUCT_ID'],
+                    'category' => $productData['category'],
+                    'name' => $productData['product_name'],
+                    'price' => $productData['price'],
+                    'brand' => $productData['brand'],
+                    'description' => $productData['description'],
+                    'color' => $productData['color'],
+                    'size' => $productData['size'],
+                    'image_route' => $productData['image_route']
+                );
+            }
+            return $products;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+    
+    
+
+
     // Metodo para actualizar la información de un tipo de producto en la base de datos
     public static function updateProductType($productType) {
         $query = "UPDATE PRODUCT_TYPE SET category = ?, name = ?, price = ?, brand = ?, description = ? WHERE PT_ID = ?";

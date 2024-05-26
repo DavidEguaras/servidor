@@ -81,7 +81,7 @@ class UserController extends BaseController
         $username = $data['username'];
         $name = $data['name'];
         $rol = $data['rol'];
-        $password = sha1($data['password']);
+        $password = $data['password'];
         $email = $data['email'];
 
         $newUser = new UserModel(null, $username, $name, $rol, $password, $email, true);

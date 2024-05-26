@@ -3,6 +3,7 @@ require_once 'model/dataAccessObject/cartDao.php'; // Incluir la definición de 
 require_once 'model/objectModels/cartModel.php'; // Incluir la definición de la clase UserModel
 require_once 'paramValidators/paramValidator.php'; // Incluir el validador de parámetros
 
+
 class CartController extends BaseController
 {
     public static function method()
@@ -33,82 +34,62 @@ class CartController extends BaseController
     //==========================================================REQUEST HANDLERS==========================================================
     private static function handleGetRequest()
     {
-        // Obtener el ID del usuario desde la URL
-        $USER_ID = $_GET['USER_ID'] ?? null;
+        $resources = self::getUriSegments();
+        $filters = self::getQueryStringParams();
 
-        if ($USER_ID !== null) {
-            self::getCartByUSER_ID($USER_ID);
-        } else {
-            self::sendOutput('Missing user ID', array('HTTP/1.1 400 Bad Request'));
+        if (count($resources) == 2 && count($filters) == 1) {
+            if (isset($filters['USER_ID'])) {
+                self::getCartsByUSER_ID($filters['USER_ID']);
+            }
         }
     }
 
-    
     private static function handlePostRequest()
     {
         $data = file_get_contents('php://input');
         $data = json_decode($data, true);
 
-        // Validar los datos recibidos
-        $requiredParams = ['last_update', 'quantity', 'USER_ID', 'PRODUCT_ID'];
-        $error = '';
-
-        if (!ParamValidator::validateParams($data, $requiredParams, $error)) {
-            self::sendOutput('Missing required parameter: ' . $error, array('HTTP/1.1 400 Bad Request'));
-            return;
-        }
-
-        // Crear un nuevo objeto CartModel
-        $newCart = new CartModel(
-            $data['last_update'],
-            $data['quantity'],
-            $data['USER_ID'],
-            $data['PRODUCT_ID']
-        );
-
-        try {
-            // Intentar crear el carrito en la base de datos
-            $result = CartDao::createCart($newCart);
-            if ($result) {
-                self::sendOutput('Cart created successfully', array('HTTP/1.1 201 Created'));
-            } else {
-                self::sendOutput('Failed to create cart', array('HTTP/1.1 500 Internal Server Error'));
-            }
-        } catch (Exception $e) {
-            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
-        }
+        self::createCart($data);
     }
-
 
     private static function handlePutRequest()
     {
-        parse_str(file_get_contents('php://input'), $data);
+        $data = file_get_contents('php://input');
+        $data = json_decode($data, true);
 
         $CART_ID = $data['CART_ID'] ?? null;
         $newQuantity = $data['quantity'] ?? null;
 
         if ($CART_ID !== null && $newQuantity !== null) {
-            try {
-                $result = CartDao::updateCartQuantity($CART_ID, $newQuantity);
-                if ($result) {
-                    self::sendOutput('Cart quantity updated successfully', array('HTTP/1.1 200 OK'));
-                } else {
-                    self::sendOutput('Failed to update cart quantity', array('HTTP/1.1 500 Internal Server Error'));
-                }
-            } catch (Exception $e) {
-                self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
-            }
+            self::updateCartQuantity($CART_ID, $newQuantity);
         } else {
             self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
         }
     }
-    //==========================================================!REQUEST HANDLERS==========================================================
 
+    private static function handleDeleteRequest()
+    {
+        $data = file_get_contents('php://input');
+        $data = json_decode($data, true);
+
+        $CART_ID = $data['CART_ID'] ?? null;
+        $USER_ID = $data['USER_ID'] ?? null;
+
+        if ($CART_ID !== null) {
+            self::deleteCart($CART_ID);
+        } elseif ($USER_ID !== null) {
+            self::clearCartByUSER_ID($USER_ID);
+        } else {
+            self::sendOutput('Missing required parameters', array('HTTP/1.1 400 Bad Request'));
+        }
+    }
+
+    //==========================================================!REQUEST HANDLERS==========================================================
 
     public static function createCart($cart)
     {
         // Validar los datos del carrito recibidos
-        $requiredParams = ['last_update', 'quantity', 'USER_ID', 'PRODUCT_ID'];
+        $requiredParams = ['quantity', 'USER_ID', 'PRODUCT_ID'];
         $error = '';
 
         if (!ParamValidator::validateParams($cart, $requiredParams, $error)) {
@@ -117,8 +98,8 @@ class CartController extends BaseController
         }
 
         // Crear un nuevo objeto CartModel
-        $newCart = new CartModel(
-            $cart['last_update'],
+        $newCart = new Cart(
+            null,
             $cart['quantity'],
             $cart['USER_ID'],
             $cart['PRODUCT_ID']
@@ -137,8 +118,7 @@ class CartController extends BaseController
         }
     }
 
-
-    public static function getCartByUSER_ID($USER_ID)
+    public static function getCartsByUSER_ID($USER_ID)
     {
         try {
             $carts = CartDao::getCartByUSER_ID($USER_ID);
@@ -147,7 +127,6 @@ class CartController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
-
 
     public static function updateCartQuantity($CART_ID, $newQuantity)
     {
@@ -163,7 +142,6 @@ class CartController extends BaseController
         }
     }
 
-
     public static function deleteCart($CART_ID)
     {
         try {
@@ -177,7 +155,6 @@ class CartController extends BaseController
             self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
         }
     }
-
 
     public static function clearCartByUSER_ID($USER_ID)
     {
@@ -193,7 +170,6 @@ class CartController extends BaseController
         }
     }
 
-
     public static function getTotalProductsInCart($USER_ID)
     {
         try {
@@ -204,7 +180,6 @@ class CartController extends BaseController
         }
     }
 
-    
     public static function getAllProductsInCart($USER_ID)
     {
         try {
@@ -215,5 +190,4 @@ class CartController extends BaseController
         }
     }
 }
-
 ?>

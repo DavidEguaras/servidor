@@ -1,34 +1,30 @@
-<?
+<?php
 require('./config/config.php');
 session_start();
-if(isset($_REQUEST['login']))
-{
-    require CON.'loginController.php';
-}
-else if(!isset($_SESSION['usuario'])){
-    $_SESSION['vista'] = VIEW .'login.php';
-}
-else if(isset($_REQUEST['logOut'])){
+
+if (isset($_REQUEST['login'])) {
+    require CON . 'loginController.php';
+} elseif (isset($_REQUEST['register'])) {
+    $_SESSION['controller'] = CON . 'registerController.php';
+    $_SESSION['view'] = VIEW . 'register.php';
+    require $_SESSION['controller'];
+} elseif (!isset($_SESSION['user'])) {
+    $_SESSION['view'] = VIEW . 'login.php';
+} elseif (isset($_REQUEST['logOut'])) {
     session_destroy();
     header('Location: ./index.php');
     exit;
-}
-else if(isset($_REQUEST['ir_home'])){
-    $_SESSION['vista'] = VIEW.'home.php';
-    $_SESSION['controlador'] = CON.'homeController.php';
-    require $_SESSION['controlador'];
-}else if(isset($_REQUEST['ver_usuario'])){
-    $_SESSION['vista'] = VIEW.'perfilUser.php';
-    $_SESSION['controlador'] = CON.'perfilController.php';
-    require $_SESSION['controlador'];
-}
-else{
-    require $_SESSION['controlador'];
+} elseif (isset($_REQUEST['goHome'])) {
+    $_SESSION['view'] = VIEW . 'home.php';
+    $_SESSION['controller'] = CON . 'homeController.php';
+    require $_SESSION['controller'];
+}else {
+    if (isset($_SESSION['controller'])) {
+        require $_SESSION['controller'];
+    }
 }
 
-
-require VIEW.'layout.php';
-
+require VIEW . 'layout.php';
 
 
 

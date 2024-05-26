@@ -1,37 +1,50 @@
 <?php
-    $errores = array();
-    if(validarFormulario($errores)){
-        
+$_SESSION['view'] = VIEW . 'home.php';
+$errors = array();
+$userCartsJson = get("cart?USER_ID=" . $_SESSION['user']['USER_ID']);
+$_SESSION['userCarts'] = json_decode($userCartsJson, true);  // Decodificar JSON a un arreglo asociativo
 
-        $datosTiposProducto = get("productType");
-        $datosTiposProducto = json_decode($datosTiposProducto, true);
-        $tiposProductos = $datosTiposProducto;
+$productTypeData = get("productType");
+$productTypeData = json_decode($productTypeData, true);
 
+if (isset($_REQUEST['addProductToCart'])) {
+    $PRODUCT_ID = $_REQUEST['PRODUCT_ID'];
+    $USER_ID = $_SESSION['user']['USER_ID'];
 
-        // 
-        //seria mas cuestion de hacer otra vista, y se cargasen tanto los productos con un boton de eliminar como un formulario al principio
-        //de la pagina para agregar uno
-        if(isset($_REQUEST['postProductType'])){
-            // $errores = array();
-            // if(validarProducto($errores)){}
-            $category = $_REQUEST['category'];
-            $name = $_REQUEST['name'];
-            $price = $_REQUEST['price'];
-            $brand = $_REQUEST['brand'];
-            $description = $_REQUEST['description'];
+    // Verificar si el usuario ya tiene un carrito con este PRODUCT_ID
+    $existingCart = null;
 
-            // Construir los datos en formato JSON
-            $productTypeData = array(
-                'PT_ID' => null,
-                'category' => $category,
-                'name' => $name,
-                'price' => $price,
-                'brand' => $brand,
-                'description' => $description
-            );
-
-            $response = post("productType", $productTypeData);
-            
+    // Verificar si $_SESSION['userCarts'] es un arreglo antes de usar foreach
+    if (is_array($_SESSION['userCarts'])) {
+        foreach ($_SESSION['userCarts'] as &$cart) {
+            if ($cart['PRODUCT_ID'] == $PRODUCT_ID) {
+                // Si existe un carrito con este PRODUCT_ID, aumentar la cantidad en uno
+                $cart['quantity']++;
+                $existingCart = $cart;
+                break;
+            }
         }
-        
+    } else {
+        $_SESSION['userCarts'] = array();  // Inicializar como arreglo si no lo es
     }
+
+    if (!$existingCart) {
+        // Si no existe un carrito con este PRODUCT_ID, agregar un nuevo carrito a la lista
+        $newCartData = array(
+            "quantity" => 1,
+            "USER_ID" => $USER_ID,
+            "PRODUCT_ID" => $PRODUCT_ID
+        );
+        $newCart = post("cart", $newCartData);
+        // Agregar el nuevo carrito a $_SESSION['userCarts']
+        $_SESSION['userCarts'][] = $newCart;
+    } else {
+        // Realizar un PUT del carrito existente para actualizar la cantidad
+        put("cart", $existingCart['CART_ID'], $existingCart);
+    }
+}
+
+if (isset($_REQUEST['viewCart'])) {
+    $_SESSION['controller'] = CON . 'cartController.php';
+}
+?>

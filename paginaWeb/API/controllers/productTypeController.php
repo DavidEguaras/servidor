@@ -43,7 +43,7 @@ class ProductTypeController extends BaseController
 
         // Realizar acciones segun los recursos y los filtros
         if (count($resources) == 2 && count($filters) == 0) {
-            self::getAllProductTypes();
+            self::getFirstProductForEachType();
         } elseif (count($resources) == 3 && count($filters) == 0) {
             self::getProductTypeByID($resources[2]);
         } elseif (count($resources) == 3 && $resources[2] == 'category' && isset($filters['name'])) {
@@ -54,6 +54,8 @@ class ProductTypeController extends BaseController
             self::sendOutput('Invalid endpoint or parameters', array('HTTP/1.1 404 Not Found'));
         }
     }
+
+
 
     private static function handlePostRequest()
     {
@@ -76,6 +78,16 @@ class ProductTypeController extends BaseController
     }
     //---------------------------------------------REQUEST HANDLERS---------------------------------------------
 
+    public static function getFirstProductForEachType()
+    {
+        try {
+            // Obtener el primer producto (el último agregado) para cada tipo de producto
+            $firstProducts = ProductTypeDAO::getFirstProductForEachType();
+            self::sendOutput(json_encode($firstProducts), array('HTTP/1.1 200 OK'));
+        } catch (Exception $e) {
+            self::sendOutput($e->getMessage(), array('HTTP/1.1 500 Internal Server Error'));
+        }
+    }
 
     public static function createProductType()
     {
